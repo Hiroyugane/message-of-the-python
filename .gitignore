@@ -1,0 +1,70 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Build and packaging output
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+wheels/
+*.whl
+*.pyz
+pip-wheel-metadata/
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# Local configuration (never commit a real machine's config)
+*.local.toml
+*.local.ini
+config.local.*
+configtest.ini
+.env
+.env.*
+!.env.example
+
+# Logs and runtime state
+logs/
+*.log
+*.pid
+/cache/
+
+# Test scratch
+testing_prepare-environment.py
+/tmp/
+/scratch/
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+*.swo
+*~
+.#*
+\#*#
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
