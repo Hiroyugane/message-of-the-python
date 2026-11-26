@@ -393,7 +393,11 @@ def install_hybrid() -> None:
     stage("install")
     done = sh("/usr/bin/python3", "-I", "-S", str(PYZ), "install")
     print(done.stdout, done.stderr, flush=True)
-    check("install_hybrid", done.returncode == 0, f"exit {done.returncode}")
+    if not check("install_hybrid", done.returncode == 0, f"exit {done.returncode}"):
+        # Why the first collector run failed (a sandbox systemd could not build, say).
+        log = sh("journalctl", "-u", "motp-collect.service", "-n", "30", "--no-pager")
+        for line in (log.stdout + log.stderr).splitlines():
+            print(f"  journal motp-collect.service: {line}", flush=True)
     hook = Path("/etc/profile.d/motp.sh")
     check("hook_installed", hook.is_file() and oct(hook.stat().st_mode)[-3:] == "644")
     uses_timeout = "--foreground" in hook.read_text()

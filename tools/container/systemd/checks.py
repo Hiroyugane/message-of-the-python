@@ -138,6 +138,14 @@ def refresh_package_lists() -> None:
     check("test_setup_package_lists", done.returncode == 0, done.stderr[-200:])
 
 
+def unit_log(unit: str, lines: int = 30) -> None:
+    """Print the end of a unit's journal, systemd's own messages included (why it did not
+    start, such as a sandbox it could not build), for a failed check."""
+    log = sh("journalctl", "-u", unit, "-n", str(lines), "-o", "short-monotonic", "--no-pager")
+    for line in (log.stdout + log.stderr).splitlines():
+        print(f"  journal {unit}: {line}", flush=True)
+
+
 def install(*extra: str) -> subprocess.CompletedProcess[str]:
     return sh("/usr/bin/python3", "-I", "-S", str(PYZ), "install", *extra)
 
@@ -188,7 +196,8 @@ def before() -> None:
     stage("install")
     done = install()
     print(done.stdout, done.stderr, flush=True)
-    check("install", done.returncode == 0, f"exit {done.returncode}")
+    if not check("install", done.returncode == 0, f"exit {done.returncode}"):
+        unit_log("motp-collect.service")
     config = Path("/etc/motp/config.toml").read_text()
     group = (
         "sudo"
@@ -248,7 +257,8 @@ def sandbox_check(label: str) -> None:
     ok = started.returncode == 0 and result.startswith("SANDBOX ok")
     if label == "hidepid":  # the cleanup must work although /proc shows nothing
         ok = ok and "hidden=True" in result and "seen_in_proc=0" in result
-    check(f"sandbox_{label}", ok, result)
+    if not check(f"sandbox_{label}", ok, result):
+        unit_log(CHECK_UNIT)
     Path(f"/etc/systemd/system/{CHECK_UNIT}").unlink()
     sh("systemctl", "daemon-reload")
     sh("journalctl", "--rotate")
@@ -285,7 +295,10 @@ def wait_for_cache() -> float:
 def after() -> None:
     stage("timer")
     up = wait_for_cache()
-    check("timer_writes_cache_within_two_minutes", up <= TIMER_LIMIT, f"{up:.0f} s after boot")
+    if not check(
+        "timer_writes_cache_within_two_minutes", up <= TIMER_LIMIT, f"{up:.0f} s after boot"
+    ):
+        unit_log("motp-collect.service")
     config = Path("/etc/motp/config.toml").read_text()
     group = "sudo" if 'admin_group = "sudo"' in config else "wheel"
     import grp

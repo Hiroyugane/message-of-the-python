@@ -58,6 +58,8 @@ DONE_MARKER = "CHECKS-DONE failures="
 CONTAINER_OPTIONS = (
     "--systemd=always", "--cap-add", "SYS_ADMIN", "--security-opt", "apparmor=unconfined",
 )  # fmt: skip
+LOG_LINES = 40  # of the container's own output, shown when it does not boot
+STATE_FORMAT = "{{.State.Status}} exit={{.State.ExitCode}}"
 
 
 def part_checks(lines: list[str], part: str) -> list[str]:
@@ -151,7 +153,27 @@ class Runner:
                 last = time.monotonic()
                 self.say(f"progress: st {image} stage=boot state={state or '-'}")
             time.sleep(1)
+        self.boot_report(name, image)
         return False
+
+    def boot_report(self, name: str, image: str) -> None:
+        """Why a container did not boot: its state and the end of its own output."""
+        status = subprocess.run(
+            [self.podman, "inspect", "--format", STATE_FORMAT, name],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.say(f"boot: {image} container {status.stdout.strip() or status.stderr.strip()}")
+        logs = subprocess.run(
+            [self.podman, "logs", "--tail", str(LOG_LINES), name],
+            capture_output=True,
+            text=True,
+            errors="replace",
+            check=False,
+        )
+        for line in (logs.stdout + logs.stderr).splitlines():
+            self.say(f"boot: {line}")
 
     def run_argv(self, name: str, tag: str, *extra: str) -> list[str]:
         """The ``podman run`` command of one test container."""
