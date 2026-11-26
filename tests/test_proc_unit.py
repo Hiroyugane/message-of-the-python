@@ -22,6 +22,9 @@ from .conftest import TEST_USER, account
 POSIX = pytest.mark.skipif(os.name != "posix", reason="needs POSIX")
 MOUNT = "25 30 0:23 / /proc rw,nosuid,nodev,noexec,relatime shared:12 - proc proc rw{}\n"
 PTRACE = 1 << proc.CAP_SYS_PTRACE
+# The unit's group must belong to root (a user's delegated tree is refused), and only root
+# can make a directory that belongs to root; the root CI containers run these.
+ROOT_OWNED = pytest.mark.needs_linux_owner
 
 
 def _view(tmp_path: Path, options: str, caps: int) -> bool:
@@ -81,7 +84,7 @@ def _cgroup(tmp_path: Path, line: str, make: bool = True) -> "str | None":
     return proc.service_cgroup_procs("motp-collect.service", str(me), str(root))
 
 
-@POSIX
+@ROOT_OWNED
 def test_the_unit_group_is_found(tmp_path: Path) -> None:
     found = _cgroup(tmp_path, "0::/system.slice/motp-collect.service\n")
     assert found is not None and found.endswith("/motp-collect.service/cgroup.procs")
@@ -106,7 +109,7 @@ def test_a_missing_procs_file_is_not_used(tmp_path: Path) -> None:
     assert _cgroup(tmp_path, "0::/system.slice/motp-collect.service\n", make=False) is None
 
 
-@POSIX
+@ROOT_OWNED
 def test_a_group_others_can_write_is_not_the_unit(tmp_path: Path) -> None:
     line = "0::/system.slice/motp-collect.service\n"
     assert _cgroup(tmp_path, line) is not None
