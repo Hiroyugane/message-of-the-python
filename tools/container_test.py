@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Run the unit tests inside a container image with Podman (blueprint 7.1 level 1, 10.1).
 
-Until the first CI run, container checks run locally with Podman as root inside the WSL
-Ubuntu. From Windows (the ``run ct`` command does this):
+Locally, container checks run with Podman as root inside the WSL Ubuntu; CI runs this same
+tool with ``--podman docker``, so both start the container with the same options. From
+Windows (the ``run ct`` command does this):
 
     wsl.exe -u root -- python3 <repo>/tools/container_test.py \
         docker.io/library/almalinux:9 [-- pytest arguments]
@@ -160,7 +161,9 @@ def main(argv: Optional[list[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="Run the unit tests in a Podman container.")
     parser.add_argument("image", help="container image, e.g. docker.io/library/almalinux:9")
     parser.add_argument("pytest_args", nargs="*", help="extra arguments for pytest (after --)")
-    parser.add_argument("--podman", default="podman", help="podman executable")
+    parser.add_argument(
+        "--podman", default="podman", help="podman executable (or docker, as CI uses)"
+    )
     parser.add_argument(
         "--script",
         default=INNER_SCRIPT,

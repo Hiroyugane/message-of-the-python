@@ -112,3 +112,19 @@ def test_ci_and_nightly_tokens_are_read_only(name: str) -> None:
     text = _text(ROOT / ".github" / "workflows" / name)
     assert re.search(r"^permissions:\n  contents: read$", text, re.MULTILINE)
     assert "write" not in text
+
+
+def _job(text: str, name: str) -> str:
+    """The text of one job of a workflow, up to the next job (two-space key)."""
+    m = re.search(rf"^  {re.escape(name)}:\n(?P<body>(?:(?:    .*)?\n)*)", text, re.MULTILINE)
+    assert m, f"no job {name}"
+    return m.group("body")
+
+
+def test_container_unit_tests_start_through_the_local_tool() -> None:
+    """The first CI run (2026-11-26): a hand-written ``docker run`` lacked ``--init``, so
+    pytest was PID 1 inside the container and the collector tests ran as PID 1 too. CI must
+    start the container with the options the local runs use, from one place."""
+    job = _job(_text(ROOT / ".github" / "workflows" / "ci.yml"), "test-container")
+    assert 'python3 tools/container_test.py --podman docker "$IMAGE"' in job
+    assert "unit_tests.sh" not in "".join(run_scripts(job))

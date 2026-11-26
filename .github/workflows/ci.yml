@@ -55,10 +55,11 @@ jobs:
       - run: python -m pytest -rP
 
   # Python 3.9 and 3.10 are what AlmaLinux 9 and Ubuntu 22.04 ship, so they run inside those
-  # images, as root. tools/container/unit_tests.sh is the same script the local Podman runs
-  # use: it copies the tree to the container's own filesystem, creates the test accounts,
-  # and sets MOTP_REQUIRE_ROOT_TESTS=1, so tests marked needs_linux_owner run and are never
-  # skipped.
+  # images, as root. tools/container_test.py is the same tool the local Podman runs use,
+  # here with Docker, so the container gets the same options (an init as PID 1 among them);
+  # tools/container/unit_tests.sh then copies the tree to the container's own filesystem,
+  # creates the test accounts, and sets MOTP_REQUIRE_ROOT_TESTS=1, so tests marked
+  # needs_linux_owner run and are never skipped.
   test-container:
     name: test (${{ matrix.image }})
     runs-on: ubuntu-24.04
@@ -74,7 +75,7 @@ jobs:
       - name: Run pytest inside ${{ matrix.image }}
         env:
           IMAGE: ${{ matrix.image }}
-        run: docker run --rm -v "$PWD":/src:ro "$IMAGE" /bin/sh /src/tools/container/unit_tests.sh -rP
+        run: python3 tools/container_test.py --podman docker "$IMAGE" -- -rP
 
   build:
     name: build (${{ matrix.runner }}, python ${{ matrix.python }})
