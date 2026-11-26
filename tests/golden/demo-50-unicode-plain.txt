@@ -1,0 +1,52 @@
+Attention
+  Firewall is not active [!!]
+      sudo ufw enable
+  /: 96% of 40 GiB, 1.6 GiB free [!!]
+      df -h
+  1 failed unit [!!]
+      systemctl --failed
+  12 updates, 3 security [!]
+      sudo apt upgrade
+  Reboot required [!]
+      sudo reboot
+  [plugin 50-backup-status] last run 30
+    (plugin) hours ago [!]
+      Plugin hint: Check the backup job on the
+          (hint) storage server
+  1 module failed, run `motp doctor` [!]
+Host
+  Hostname: web01.example.com
+  Operating system: Debian GNU/Linux 13
+  Kernel: 6.12.48-1-amd64
+  Local address: 192.0.2.10
+  DNS servers: 192.0.2.53, 192.0.2.54
+System
+  Uptime: 41 days 3 hours
+  Load: 0.42, 0.37, 0.31
+  Memory: 5.9 GiB of 7.9 GiB
+  Updates: 12 updates, 3 security [!]
+    Packages: openssl, curl, libc6
+  Reboot: required [!]
+  Support: until 2028-06-30
+Security
+  Firewall: not active [!!]
+  Auto updates: on
+  Failed logins: 37 in the last 24 hours
+  Fail2ban: module failed
+Login
+  Last login: 2 hours 3 minutes ago
+  Login from: 198.51.100.7
+  Sessions: 2
+Disks
+  /: 96% of 40 GiB, 1.6 GiB free [!!]
+  /home: 41% of 200 GiB, 118 GiB free
+  /var: 71% of 20 GiB, 5.8 GiB free
+Services
+  Failed units: 1 failed unit [!!]
+    nightly-report.service
+  nginx.service: active
+Containers
+  Containers: 3 running, 1 stopped
+Plugins
+  [plugin 50-backup-status] Backup: last run 30
+    (plugin) hours ago [!]

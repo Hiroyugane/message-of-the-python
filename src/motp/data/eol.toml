@@ -1,0 +1,69 @@
+# End of security support per release, read by the module os_eol. A release that is
+# missing here gets no row. SUPPORT_END in os-release, where a system sets it, wins over
+# this table.
+#
+# "date" is when the dates below were last checked; MOTP shows it with every date taken
+# from here. Change it whenever you check them again.
+#
+# Sources, checked on 2026-11-25:
+# - Debian: the end of long-term support (LTS) on https://wiki.debian.org/LTS, which
+#   https://www.debian.org/releases/ repeats; not the extended support sold by third
+#   parties.
+# - Ubuntu: the end of standard security maintenance on
+#   https://ubuntu.com/about/release-cycle, not of Ubuntu Pro. That page gives a month
+#   only; the day is Canonical's announced end-of-life day where one was announced, else
+#   the last day of that month. Interim releases it no longer lists keep their dates.
+# - AlmaLinux: the end of security support on https://wiki.almalinux.org/release-notes/.
+# - RHEL and Rocky Linux: the end of maintenance support of the major release (ten years
+#   after its release, as AlmaLinux). Red Hat's and Rocky's own pages could not be read
+#   by an automated client on the check date; the dates equal AlmaLinux's.
+# - Fedora: four weeks after the release N+2, from the Fedora schedules as published on
+#   https://endoflife.date; Fedora's own pages refused automated clients on the check
+#   date. Check them by hand before a release.
+date = "2026-11-25"
+
+[debian]
+"10" = "2024-06-30"
+"11" = "2026-08-31"
+"12" = "2028-06-30"
+"13" = "2030-06-30"
+
+[ubuntu]
+"18.04" = "2023-05-31"
+"20.04" = "2025-05-31"
+"22.04" = "2027-05-31"
+"22.10" = "2023-07-20"
+"23.04" = "2024-01-20"
+"23.10" = "2024-07-12"
+"24.04" = "2029-05-31"
+"24.10" = "2025-07-10"
+"25.04" = "2026-01-17"
+"25.10" = "2026-07-01"
+"26.04" = "2031-05-29"
+"26.10" = "2027-07-15"
+
+[almalinux]
+"8" = "2029-05-31"
+"9" = "2032-05-31"
+"10" = "2035-05-31"
+
+[rocky]
+"8" = "2029-05-31"
+"9" = "2032-05-31"
+"10" = "2035-05-31"
+
+[rhel]
+"8" = "2029-05-31"
+"9" = "2032-05-31"
+"10" = "2035-05-31"
+
+[fedora]
+"40" = "2025-05-13"
+"41" = "2025-12-15"
+"42" = "2026-05-27"
+"43" = "2026-12-01"
+# Fedora 44: four weeks after Fedora 46, whose schedule plans its release for
+# 2027-04-20 (https://fedorapeople.org/groups/schedule/f-46/f-46-key-tasks.html, read in
+# a browser on 2026-11-26; Fedora marks the date as one that may change).
+"44" = "2027-05-18"
+"45" = "2027-12-08"

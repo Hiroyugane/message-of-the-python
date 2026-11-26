@@ -1,0 +1,19 @@
+Firewall ist nicht aktiv [!!]
+    sudo ufw enable
+/: 96% von 40 GiB, 1.6... [!!]
+    df -h
+1 Unit fehlgeschlagen [!!]
+    systemctl --failed
+12 Updates, 3 sicherhei... [!]
+    sudo apt upgrade
+Neustart erforderlich [!]
+    sudo reboot
+[Plugin 50-backup-status]
+  (Plugin) letzter Lauf vor
+  (Plugin) 30 Stunden [!]
+      Hinweis des Plugins:
+          (Hinweis) Sicheru...
+          (Hinweis) auf dem
+          (Hinweis) Server
+          (Hinweis) pruefen
+1 Modul fehlgeschlagen,... [!]

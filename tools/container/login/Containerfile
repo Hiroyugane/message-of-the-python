@@ -1,0 +1,9 @@
+# Level-3 login test image (blueprint 7.1): the phase 7 systemd image plus sshd, the
+# ssh client, rsync, zsh and fish. Built and run only by tools/login_test.py, inside
+# Podman in WSL; nothing here touches the host. BASE is a localhost/motp-systemd image.
+ARG BASE=localhost/motp-systemd:debian12
+FROM ${BASE}
+COPY prepare.sh /usr/local/sbin/motp-prepare-login
+RUN sh /usr/local/sbin/motp-prepare-login && rm -f /usr/local/sbin/motp-prepare-login
+STOPSIGNAL SIGRTMIN+3
+CMD ["/sbin/init"]

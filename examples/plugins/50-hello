@@ -1,0 +1,3 @@
+#!/bin/sh
+# One line of text; the exit code is the status: 0 ok, 1 warning, 2 critical, 3 unknown.
+echo "Hello from a plugin"

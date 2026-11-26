@@ -1,0 +1,6 @@
+dnf-automatic.service
+dnf-automatic.timer
+dnf5-automatic.service
+dnf5-automatic.timer
+proc-sys-fs-binfmt_misc.automount
+systemd-sysupdate-auto-enable.service

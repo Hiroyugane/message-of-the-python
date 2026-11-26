@@ -1,0 +1,9 @@
+# Test image with systemd as the first process, for the phase 7 checks (blueprint 7.1,
+# 10.1). Built and run only by tools/systemd_test.py, inside Podman in WSL; nothing here
+# touches the host. BASE is one of the tier-1 images.
+ARG BASE=docker.io/library/debian:12
+FROM ${BASE}
+COPY prepare.sh /usr/local/sbin/motp-prepare-image
+RUN sh /usr/local/sbin/motp-prepare-image && rm -f /usr/local/sbin/motp-prepare-image
+STOPSIGNAL SIGRTMIN+3
+CMD ["/sbin/init"]

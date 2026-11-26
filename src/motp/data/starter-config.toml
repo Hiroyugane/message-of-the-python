@@ -1,0 +1,199 @@
+## MOTP, the message of the python: system-wide settings.
+##
+## Written by `motp config init`. Every setting is shown commented out with its default;
+## remove the "# " in front of a line to change it. Files in /etc/motp/conf.d/*.toml are
+## read after this one, in name order, and override it key by key.
+##
+## This file is readable by every user: never put a secret into it.
+## It is used only while it and every directory above it belong to root and are not
+## writable by group or others. Check it with `sudo motp config check`.
+
+[general]
+## hybrid: a timer collects, the login shell shows the result. static: the timer writes
+## /run/motd.d/10-motp and the system's own MOTD shows it.
+# mode = "hybrid"
+## "auto" follows each user's locale (LC_ALL, LC_MESSAGES, LANG); "en" or "de" forces
+## one language for everyone. In static mode "auto" is the system's locale.
+# language = "auto"
+
+[limits]
+## Longest time a login may spend showing the MOTD, in milliseconds (100 to 10000).
+# render_ms = 1000
+## Time limit for one probe, in seconds (0.5 to 30).
+# probe_timeout_s = 5
+## Time limit for a whole collector run, in seconds (10 to 80).
+# collect_total_s = 60
+
+[visibility]
+## The group that sees admin-only details, such as package names and failed logins.
+## "" means root only. The installer writes the group it found; "adm" is never accepted.
+# admin_group = ""
+
+[layout]
+## Sections in the order shown; leave one out to hide it.
+# sections = ["attention", "host", "system", "security", "login", "disks", "services", "containers", "plugins"]
+## hostname, text (shows header_text) or off.
+# header = "hostname"
+# header_text = ""
+## auto, ascii or unicode. In static mode "auto" means ascii.
+# charset = "auto"
+## auto, always or never. A user's NO_COLOR beats this setting, and their MOTP_COLOR
+## (always or never) beats both.
+# color = "auto"
+## A tip about MOTP below the message, a different one each day.
+# tips = false
+## The header text in capitals ("upper"), so it has one height, or "as-is".
+# header_case = "upper"
+## Header font on Unicode terminals: "auto" (the preset's), a bundled font (motp-block,
+## motp-block-small, big, small), or the name of a FIGfont file in /etc/motp/fonts/
+## without ".flf". A font file must belong to root and not be writable by group or others.
+# header_font = "auto"
+## Header font on ASCII terminals: "auto", big, small, or a font file of ASCII characters.
+# header_font_ascii = "auto"
+## left, center or right.
+# header_align = "left"
+## A colour for the header ("" keeps [theme.colors] header); colours are explained below.
+# header_color = ""
+## Draw the frame around the sections (the two widest layouts).
+# frame = true
+## How labels end: dots ("Hostname.....:"), colon ("Hostname:") or plain ("Hostname").
+# label_style = "dots"
+## Cells for a label with its dots, 8 to 32. 0 lets MOTP decide: at least 18 (14 from 60
+## to 79 columns), wider for longer labels while every value still fits beside them.
+## A number here fixes the column; from 60 to 79 columns it is never more than 14.
+# label_width = 0
+## Rows to hide, by item key (`motp modules --keys` lists every key; they look like
+## "os_host.kernel"). A hidden row still raises its alert in the attention block.
+# hide_rows = []
+
+## Own section titles, per section name.
+# [layout.section_titles]
+# host = "Machine"
+
+## Rows to show first inside a section, in this order; the others follow as before.
+# [layout.row_order]
+# host = ["net_addresses.local", "os_host.hostname"]
+
+[theme]
+## default: the standard look. classic: the look of the 2019 version (yellow values,
+## red and green meters, + - | frames, the FIGlet font Big).
+# preset = "default"
+
+## Colours per role. A colour is a name (black, red, green, yellow, blue, magenta, cyan,
+## white, or bright-red and so on, grey), a number from 0 to 255, "#rrggbb", or "default"
+## (the terminal's colour), each optionally with "bold", as in "bold #5fafff".
+## bar_used may also be "status": the status colour of its row (green, yellow, red).
+## bar_free must stand out on black (contrast 3:1), so a meter always shows what is free.
+## Values not set here come from the preset. Shown are the default preset's colours at
+## 16 colours; with 256 colours it uses finer shades of them (blue labels are #5fafff).
+## Escape sequences are not accepted: the colours are built by the program.
+[theme.colors]
+# frame = "blue"
+# title = "bold cyan"
+# header = "bold magenta"
+# label = "bright-blue"
+# value = "default"
+# muted = "bright-black"
+# ok = "green"
+# warn = "yellow"
+# crit = "bold red"
+# hint = "cyan"
+# bar_used = "status"
+## The two parts of a meter, used and free, also differ in their characters below.
+# bar_free = "white"
+
+## Characters for Unicode terminals; each is one printable character, one cell wide.
+## bar_open and bar_close may be "". bar_used and bar_free must differ.
+[theme.chars.unicode]
+# horizontal = "─"
+# vertical = "│"
+# top_left = "┌"
+# top_right = "┐"
+# bottom_left = "└"
+# bottom_right = "┘"
+# tee_left = "├"
+# tee_right = "┤"
+# title_open = "┤"
+# title_close = "├"
+# bar_used = "█"
+# bar_free = "▒"
+# bar_open = ""
+# bar_close = ""
+# leader = "."
+# separator = ":"
+
+## Characters for ASCII terminals: printable ASCII only.
+[theme.chars.ascii]
+# horizontal = "-"
+# vertical = "|"
+# top_left = "+"
+# top_right = "+"
+# bottom_left = "+"
+# bottom_right = "+"
+# tee_left = "+"
+# tee_right = "+"
+# title_open = "/"
+# title_close = "/"
+# bar_used = "#"
+# bar_free = "-"
+# bar_open = "["
+# bar_close = "]"
+# leader = "."
+# separator = ":"
+
+## Meters, such as disk usage.
+[theme.bar]
+## Cells of a bar; 0 lets the terminal width decide (40 or 20), or 4 to 60.
+# width = 0
+## below: a bar under the text; off: the text only.
+# style = "below"
+## What the text says: full ("41% of 200 GiB, 118 GiB free"), short ("41%, 118 GiB
+## free"), used ("41% of 200 GiB"), free ("118 GiB free") or percent ("41%"). On a narrow
+## terminal the text gets shorter before the bar goes.
+# text = "full"
+
+## Threshold rules: warn and crit are inclusive limits; direction says which way is
+## worse ("higher" or "lower"). A new rule without direction takes it from its limits.
+[thresholds.disk_used_percent]
+# warn = 80
+# crit = 90
+# direction = "higher"
+
+## Inodes are shown only from 50 percent used on, so a limit below 50 has no effect.
+[thresholds.inode_used_percent]
+# warn = 80
+# crit = 90
+# direction = "higher"
+
+[thresholds.load_per_core]
+# warn = 0.7
+# crit = 1.0
+# direction = "higher"
+
+## Built-in modules are used when the software they look at is found ("auto"). Set
+## enabled = false to switch one off, or true to report it as failed when it is missing.
+# [modules.sec_fail2ban]
+# enabled = "auto"
+# timeout_s = 5
+
+## Rows that watch a systemd unit.
+# [[rows.unit]]
+# name = "nginx.service"
+# label = "Web server"
+
+## Rows that watch the age of a file, for example a backup's success stamp.
+## Durations are a number and one of s, m, h, d. The file is looked at as the user
+## motp: one in a directory motp may not enter shows as "unreadable" (docs/plugins.md
+## has a root plugin that does the same). Label and age are shown to everyone.
+# [[rows.file_age]]
+# path = "/var/backups/last-success"
+# label = "Backup"
+# warn_after = "26h"
+# crit_after = "3d"
+
+## Exec plugins in /etc/motp/plugins.d/ run as the user motp-plugin and show their
+## rows to the admin group only. A table per plugin, named after its file, changes that.
+# [plugins."50-backup-status"]
+# run_as = "motp-plugin"
+# timeout_s = 5
+# visibility = "admin"

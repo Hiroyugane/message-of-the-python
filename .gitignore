@@ -14,6 +14,8 @@ coverage.xml
 htmlcov/
 
 # Build and packaging output
+# Compiled catalogues: built from the .po sources by tools/compile_catalogs.py
+src/motp/locale/*.mo
 build/
 dist/
 *.egg-info/
@@ -68,3 +70,6 @@ testing_prepare-environment.py
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Screenshots made by tools/demo_image.py --png: local review copies; the SVGs are tracked
+docs/images/*.png

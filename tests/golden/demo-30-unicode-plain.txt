@@ -1,0 +1,18 @@
+Firewall is not active [!!]
+    sudo ufw enable
+/: 96% of 40 GiB, 1.6 Gi… [!!]
+    df -h
+1 failed unit [!!]
+    systemctl --failed
+12 updates, 3 security [!]
+    sudo apt upgrade
+Reboot required [!]
+    sudo reboot
+[plugin 50-backup-status]
+  (plugin) last run 30
+  (plugin) hours ago [!]
+      Plugin hint: Check the
+          (hint) backup job on
+          (hint) the storage
+          (hint) server
+1 module failed, run `mot… [!]

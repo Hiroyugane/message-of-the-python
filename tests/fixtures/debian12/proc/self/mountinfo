@@ -1,0 +1,18 @@
+22 1 8:1 / / rw,relatime shared:1 - ext4 /dev/sda1 rw,errors=remount-ro
+23 22 0:21 / /proc rw,nosuid,nodev,noexec,relatime shared:12 - proc proc rw
+24 22 0:22 / /sys rw,nosuid,nodev,noexec,relatime shared:7 - sysfs sysfs rw
+25 22 0:5 / /dev rw,nosuid,relatime shared:2 - devtmpfs udev rw,size=4000000k
+26 22 8:2 / /home rw,relatime shared:30 - ext4 /dev/sda2 rw
+27 22 8:3 / /var rw,relatime shared:31 - xfs /dev/sda3 rw
+28 26 8:2 /data/shared /srv/shared rw,relatime - ext4 /dev/sda2 rw
+29 22 0:45 / /run rw,nosuid,nodev - tmpfs tmpfs rw
+30 29 0:50 / /run/user/1000 rw,nosuid,nodev - tmpfs tmpfs rw
+31 22 8:17 / /media/user1/USB\040STICK rw,nosuid - vfat /dev/sdb1 rw
+32 22 0:60 / /mnt/nfs rw,relatime - nfs4 192.0.2.5:/export rw
+33 26 0:61 / /home/user1/remote rw - fuse.sshfs remote:/ rw
+34 22 7:0 / /snap/core/1 ro,nodev - squashfs /dev/loop0 ro
+35 22 8:4 / /boot/efi rw,relatime - vfat /dev/sda4 rw
+36 22 8:1 /etc/hosts /etc/hosts rw,relatime - ext4 /dev/sda1 rw
+37 22 8:33 / /srv/usb rw,relatime - ext4 /dev/sdc1 rw
+38 22 8:48 / /data rw,relatime - xfs /dev/sdd rw
+broken line without separator

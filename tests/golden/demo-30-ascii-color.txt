@@ -1,0 +1,18 @@
+\e[1;31mFirewall is not active\e[0m [!!]
+    \e[36msudo ufw enable\e[0m
+\e[1;31m/: 96% of 40 GiB, 1.6...\e[0m [!!]
+    \e[36mdf -h\e[0m
+\e[1;31m1 failed unit\e[0m [!!]
+    \e[36msystemctl --failed\e[0m
+\e[33m12 updates, 3 security\e[0m [!]
+    \e[36msudo apt upgrade\e[0m
+\e[33mReboot required\e[0m [!]
+    \e[36msudo reboot\e[0m
+\e[90m[plugin 50-backup-status]\e[0m
+  \e[90m(plugin)\e[0m \e[33mlast run 30\e[0m
+  \e[90m(plugin)\e[0m \e[33mhours ago\e[0m [!]
+      \e[90mPlugin hint: Check the\e[0m
+          (hint) \e[90mbackup job on\e[0m
+          (hint) \e[90mthe storage\e[0m
+          (hint) \e[90mserver\e[0m
+\e[33m1 module failed, run `m...\e[0m [!]

@@ -1,0 +1,148 @@
+name: Release
+
+# Blueprint D13, 4.12, T15: a version tag builds motp.pyz, writes SHA256SUMS, creates a
+# GitHub build attestation, rebuilds on a second runner and compares the bytes, and attaches
+# the three artefacts to a DRAFT release. A person reads the draft and publishes it; nothing
+# here publishes on its own.
+#
+# Actions, each pinned by commit hash (Dependabot proposes updates, see dependabot.yml):
+#   actions/checkout v7.0.1                  official; the repository at the tag
+#   actions/setup-python v7.1.0              official; a fixed Python for the build
+#   actions/upload-artifact v7.0.2           official; hands the build to the next jobs
+#   actions/download-artifact v8.0.2         official
+#   actions/attest-build-provenance v4.2.2   official; Sigstore-signed provenance (D13, O9)
+# The release itself is made with the GitHub CLI that the runner image ships, using the
+# built-in token only; no third-party upload action and no other secret.
+
+on:
+  push:
+    tags: ["v*"]
+
+# Nothing by default; each job asks for what it needs.
+permissions: {}
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write # the OIDC token Sigstore signs the attestation with
+      attestations: write # store the attestation with the repository
+    outputs:
+      sha256: ${{ steps.sums.outputs.sha256 }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0 # the ancestry check below needs main's history
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.9" # the oldest supported; ci.yml's build job does the same
+      - name: The tag names the source version exactly
+        env:
+          TAG: ${{ github.ref_name }}
+        run: python tools/check_tag.py "$TAG"
+      - name: The tagged commit is on main
+        # A tag on a commit that never reached main must not release. This step lives in the
+        # file it guards, so a tag on an unreviewed commit could drop it: the tag ruleset for
+        # v* (docs/release.md) is what stops that; this step catches mistakes.
+        run: git merge-base --is-ancestor "$GITHUB_SHA" origin/main
+      - name: Build
+        run: python tools/build_pyz.py
+      - name: Checksums
+        id: sums
+        run: |
+          set -eu
+          cd dist
+          sha256sum motp.pyz > SHA256SUMS
+          cat SHA256SUMS
+          echo "sha256=$(cut -d' ' -f1 SHA256SUMS)" >> "$GITHUB_OUTPUT"
+      - name: Attest the build provenance
+        id: attest
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: dist/motp.pyz
+      - name: Keep the attestation bundle beside the archive
+        env:
+          BUNDLE: ${{ steps.attest.outputs.bundle-path }}
+        run: cp "$BUNDLE" dist/motp.pyz.sigstore.json
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: release
+          path: |
+            dist/motp.pyz
+            dist/SHA256SUMS
+            dist/motp.pyz.sigstore.json
+          if-no-files-found: error
+          retention-days: 7
+
+  # A second build on another architecture and Python version: the release goes ahead only
+  # when it is byte-identical (4.12). This shows the build is reproducible, not that the
+  # pipeline is honest (T15); anyone can repeat it with tools/repro_check.py.
+  rebuild:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    outputs:
+      sha256: ${{ steps.sum.outputs.sha256 }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.13" # the newest on arm64, as in ci.yml's build job
+      - run: python tools/build_pyz.py
+      - id: sum
+        run: echo "sha256=$(sha256sum dist/motp.pyz | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+
+  release:
+    needs: [build, rebuild]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write # create the draft release and upload its files
+      attestations: read # verify the attestation before attaching it
+    steps:
+      - name: The two builds are identical
+        env:
+          A: ${{ needs.build.outputs.sha256 }}
+          B: ${{ needs.rebuild.outputs.sha256 }}
+        run: |
+          set -eu
+          echo "x86_64: $A"
+          echo "arm64:  $B"
+          test -n "$A" && test "$A" = "$B"
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: release
+          path: dist
+      - name: Verify checksum and attestation
+        env:
+          GH_TOKEN: ${{ github.token }}
+          A: ${{ needs.build.outputs.sha256 }}
+        run: |
+          set -eu
+          cd dist
+          sha256sum --check SHA256SUMS
+          test "$(cut -d' ' -f1 SHA256SUMS)" = "$A"
+          gh attestation verify motp.pyz --repo "$GITHUB_REPOSITORY" \
+            --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/release.yml" \
+            --source-ref "$GITHUB_REF"
+      - name: Create the draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -eu
+          case "$TAG" in *rc*) pre="--prerelease" ;; *) pre="" ;; esac
+          gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --draft --verify-tag $pre \
+            --title "MOTP $TAG" \
+            --notes "See CHANGELOG.md. Verify the download as the README describes before installing." \
+            dist/motp.pyz dist/SHA256SUMS dist/motp.pyz.sigstore.json

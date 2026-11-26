@@ -1,0 +1,128 @@
+{
+ "answer": [
+  {
+   "AdjustCPUShares": false,
+   "Command": "sleep 600",
+   "Config": null,
+   "Created": 1795607059,
+   "Id": "5d4f8681af0dddfd1dcda05e571e180f4cbc78a2788d68ccf789088ba8c1d536",
+   "Image": "docker.io/library/debian:12",
+   "ImageID": "sha256:a36824f1b4c6892ddfeb448726ace7f338ee14b4113288ecc813e266370d5c90",
+   "Labels": {},
+   "Mounts": [],
+   "Name": "",
+   "Names": [
+    "/qzweb-frontend"
+   ],
+   "NetworkSettings": {
+    "Networks": {
+     "podman": {
+      "Aliases": [
+       "5d4f8681af0d"
+      ],
+      "DriverOpts": null,
+      "EndpointID": "",
+      "Gateway": "198.51.100.1",
+      "GlobalIPv6Address": "",
+      "GlobalIPv6PrefixLen": 0,
+      "IPAMConfig": null,
+      "IPAddress": "198.51.100.2",
+      "IPPrefixLen": 16,
+      "IPv6Gateway": "",
+      "Links": null,
+      "MacAddress": "02:00:00:00:00:01",
+      "NetworkID": "podman"
+     }
+    }
+   },
+   "NetworkingConfig": null,
+   "Platform": null,
+   "Ports": [],
+   "State": "running",
+   "Status": "Up 7 seconds"
+  },
+  {
+   "AdjustCPUShares": false,
+   "Command": "sleep 600",
+   "Config": null,
+   "Created": 1795607060,
+   "Id": "ec805506428a0b2b24b3e778210c354e125be07234e525e2058d09a4377091ea",
+   "Image": "docker.io/library/debian:12",
+   "ImageID": "sha256:a36824f1b4c6892ddfeb448726ace7f338ee14b4113288ecc813e266370d5c90",
+   "Labels": {},
+   "Mounts": [],
+   "Name": "",
+   "Names": [
+    "/qzdb-backend"
+   ],
+   "NetworkSettings": {
+    "Networks": {
+     "podman": {
+      "Aliases": [
+       "ec805506428a"
+      ],
+      "DriverOpts": null,
+      "EndpointID": "",
+      "Gateway": "198.51.100.1",
+      "GlobalIPv6Address": "",
+      "GlobalIPv6PrefixLen": 0,
+      "IPAMConfig": null,
+      "IPAddress": "198.51.100.3",
+      "IPPrefixLen": 16,
+      "IPv6Gateway": "",
+      "Links": null,
+      "MacAddress": "02:00:00:00:00:02",
+      "NetworkID": "podman"
+     }
+    }
+   },
+   "NetworkingConfig": null,
+   "Platform": null,
+   "Ports": [],
+   "State": "running",
+   "Status": "Up 6 seconds"
+  },
+  {
+   "AdjustCPUShares": false,
+   "Command": "true",
+   "Config": null,
+   "Created": 1795607061,
+   "Id": "e5bca1df38aa2c017aa1adb1a66535f62a58d4af8a041e357fbcb645b31e3751",
+   "Image": "docker.io/library/debian:12",
+   "ImageID": "sha256:a36824f1b4c6892ddfeb448726ace7f338ee14b4113288ecc813e266370d5c90",
+   "Labels": {},
+   "Mounts": [],
+   "Name": "",
+   "Names": [
+    "/qzold-job"
+   ],
+   "NetworkSettings": {
+    "Networks": {
+     "podman": {
+      "Aliases": [
+       "e5bca1df38aa"
+      ],
+      "DriverOpts": null,
+      "EndpointID": "",
+      "Gateway": "",
+      "GlobalIPv6Address": "",
+      "GlobalIPv6PrefixLen": 0,
+      "IPAMConfig": null,
+      "IPAddress": "",
+      "IPPrefixLen": 0,
+      "IPv6Gateway": "",
+      "Links": null,
+      "MacAddress": "",
+      "NetworkID": "podman"
+     }
+    }
+   },
+   "NetworkingConfig": null,
+   "Platform": null,
+   "Ports": [],
+   "State": "exited",
+   "Status": "Exited (0) 5 seconds ago"
+  }
+ ],
+ "source": "captured from podman version 4.9.3 on the WSL host, GET /containers/json?all=1 on its compat API; the container network's addresses and MAC addresses replaced by documentation values"
+}

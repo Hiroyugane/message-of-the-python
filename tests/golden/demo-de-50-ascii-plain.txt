@@ -1,0 +1,52 @@
+Achtung
+  Firewall ist nicht aktiv [!!]
+      sudo ufw enable
+  /: 96% von 40 GiB, 1.6 GiB frei [!!]
+      df -h
+  1 Unit fehlgeschlagen [!!]
+      systemctl --failed
+  12 Updates, 3 sicherheitsrelevant [!]
+      sudo apt upgrade
+  Neustart erforderlich [!]
+      sudo reboot
+  [Plugin 50-backup-status] letzter Lauf vor
+    (Plugin) 30 Stunden [!]
+      Hinweis des Plugins: Sicherungsauftrag auf
+          (Hinweis) dem Server pruefen
+  1 Modul fehlgeschlagen, siehe `motp doctor` [!]
+Rechner
+  Rechnername: web01.example.com
+  Betriebssystem: Debian GNU/Linux 13
+  Kernel: 6.12.48-1-amd64
+  Lokale Adresse: 192.0.2.10
+  DNS-Server: 192.0.2.53, 192.0.2.54
+System
+  Laufzeit: 41 Tage 3 Stunden
+  Auslastung: 0.42, 0.37, 0.31
+  Arbeitsspeicher: 5.9 GiB von 7.9 GiB
+  Updates: 12 Updates, 3 sicherheitsrelevant [!]
+    Pakete: openssl, curl, libc6
+  Neustart: erforderlich [!]
+  Support: bis 2028-06-30
+Sicherheit
+  Firewall: nicht aktiv [!!]
+  Auto-Updates: aktiv
+  Fehlanmeldungen: 37 in den letzten 24 Stunden
+  Fail2ban: Modul fehlgeschlagen
+Anmeldung
+  Letzte Anmeldung: vor 2 Stunden 3 Minuten
+  Anmeldung von: 198.51.100.7
+  Sitzungen: 2
+Datentraeger
+  /: 96% von 40 GiB, 1.6 GiB frei [!!]
+  /home: 41% von 200 GiB, 118 GiB frei
+  /var: 71% von 20 GiB, 5.8 GiB frei
+Dienste
+  Fehlerhafte Units: 1 Unit fehlgeschlagen [!!]
+    nightly-report.service
+  nginx.service: active
+Container
+  Container: 3 aktiv, 1 gestoppt (45 Minuten alt)
+Plugins
+  [Plugin 50-backup-status] Sicherung: letzter
+    (Plugin) Lauf vor 30 Stunden [!]
