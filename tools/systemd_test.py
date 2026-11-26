@@ -15,7 +15,10 @@ a container with ``--systemd=always``, runs ``tools/container/systemd/checks.py 
 restarts the container so the timer runs after a real boot, takes its network away, runs
 ``checks.py after``, and removes the container. ``CAP_SYS_ADMIN`` is added so the checks can
 remount ``/proc`` with
-``hidepid=2``. The summary lists every check per image; the exit code is 1 if any failed.
+``hidepid=2``. AppArmor is turned off for the container (``CONTAINER_OPTIONS``): its
+default profile for containers denies every ``mount``, so on a host that enforces it (the
+GitHub runners) systemd 257 does not boot and older ones cannot build the unit's sandbox.
+The summary lists every check per image; the exit code is 1 if any failed.
 
 A check script ends with ``CHECKS-DONE failures=<n>``. A part whose output lacks that line
 (the script crashed or was killed partway) counts as a failed check of its own, and so does
@@ -47,6 +50,14 @@ CHECKS = "/src/tools/container/systemd/checks.py"
 HEARTBEAT_SECONDS = 15.0
 BOOT_TIMEOUT = 120.0
 DONE_MARKER = "CHECKS-DONE failures="
+# How every systemd test container starts (login_test.py adds its own options). systemd
+# runs as the first process; CAP_SYS_ADMIN lets the checks remount /proc. The default
+# AppArmor profile for containers ("deny mount") is off: systemd needs mount to boot and to
+# build the unit's sandbox, and the sandbox is what these checks test. A host without
+# AppArmor (WSL) ignores the option. Seccomp and the capability set stay as they are.
+CONTAINER_OPTIONS = (
+    "--systemd=always", "--cap-add", "SYS_ADMIN", "--security-opt", "apparmor=unconfined",
+)  # fmt: skip
 
 
 def part_checks(lines: list[str], part: str) -> list[str]:
@@ -142,15 +153,19 @@ class Runner:
             time.sleep(1)
         return False
 
+    def run_argv(self, name: str, tag: str, *extra: str) -> list[str]:
+        """The ``podman run`` command of one test container."""
+        return [
+            self.podman, "run", "-d", *CONTAINER_OPTIONS, *extra,
+            "--name", name, "-v", f"{ROOT}:/src:ro", tag,
+        ]  # fmt: skip
+
     def one(self, image: str, rebuild: bool) -> list[str]:
         checks: list[str] = []
         if not self.build(image, rebuild):
             return ["CHECK image_build FAIL"]
         name = f"motp-p7-{tag_of(image).split(':')[1]}-{os.getpid()}"
-        run = [
-            self.podman, "run", "-d", "--systemd=always", "--cap-add", "SYS_ADMIN",
-            "--name", name, "-v", f"{ROOT}:/src:ro", tag_of(image),
-        ]  # fmt: skip
+        run = self.run_argv(name, tag_of(image))
         if subprocess.run(run, capture_output=True, check=False).returncode != 0:
             return ["CHECK container_start FAIL"]
         try:

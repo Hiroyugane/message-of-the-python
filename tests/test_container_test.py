@@ -108,3 +108,27 @@ def test_the_login_runner_needs_the_final_line_too() -> None:
     ]
     crashed = login_test.login_lines(["CHECK a ok", "NOTE n x"])
     assert any(c.startswith("CHECK checks_done_login FAIL") for c in crashed)
+
+
+# --- the level-3 containers: the same options on every host (first CI run) --------------
+
+
+def _option(cmd: "list[str]", flag: str) -> "list[str]":
+    return [cmd[i + 1] for i, word in enumerate(cmd[:-1]) if word == flag]
+
+
+def test_systemd_containers_boot_without_the_apparmor_mount_ban() -> None:
+    """GitHub's runners enforce AppArmor, whose container profile denies mount: systemd 257
+    did not boot and older ones could not build the collector's sandbox. WSL has no
+    AppArmor, so only the command can show that both runners turn the profile off."""
+    runner = systemd_test.Runner("podman", io.StringIO())
+    cmd = runner.run_argv("n", "localhost/motp-systemd:debian12")
+    assert cmd[:3] == ["podman", "run", "-d"] and cmd[-1] == "localhost/motp-systemd:debian12"
+    assert "--systemd=always" in cmd and _option(cmd, "--cap-add") == ["SYS_ADMIN"]
+    assert _option(cmd, "--security-opt") == ["apparmor=unconfined"]  # seccomp stays on
+    assert "--privileged" not in cmd and f"{ROOT}:/src:ro" in cmd
+
+    login = login_test.LoginRunner("podman", io.StringIO())
+    cmd = login.run_argv("n", "localhost/motp-login:debian12", "--cap-add", "NET_ADMIN")
+    assert _option(cmd, "--security-opt") == ["apparmor=unconfined"]
+    assert _option(cmd, "--cap-add") == ["SYS_ADMIN", "NET_ADMIN"]

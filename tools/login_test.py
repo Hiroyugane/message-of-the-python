@@ -14,8 +14,9 @@ For each image it makes sure the phase 7 image ``localhost/motp-systemd:<tag>`` 
 from ``tools/container/login/Containerfile`` (sshd, the ssh client, rsync, zsh, fish), boots
 a container with ``--systemd=always``, runs ``tools/container/login/login_checks.py`` in it
 and removes the container. Keys are made inside the container at test time and go away
-with it. ``CAP_SYS_ADMIN`` is added as in phase 7 (the unit's whole sandbox) and for the
-tmpfs mount of the admin-only fixture; ``CAP_NET_ADMIN`` for the container's own network
+with it. The container starts with ``systemd_test.CONTAINER_OPTIONS``: ``CAP_SYS_ADMIN``
+and no AppArmor as in phase 7 (the unit's whole sandbox), which the tmpfs mount of the
+admin-only fixture needs too; ``CAP_NET_ADMIN`` is added for the container's own network
 namespace (phase 11: a documentation address on its loopback device as the source of
 failed logins).
 
@@ -74,13 +75,11 @@ class LoginRunner(systemd_test.Runner):
             return ["CHECK image_build FAIL"]
         name = f"motp-p8-{tag_of(image).split(':')[1]}-{os.getpid()}"
         volume = name + "-fixture"
-        run = [
-            self.podman, "run", "-d", "--systemd=always", "--cap-add", "SYS_ADMIN",
-            "--cap-add", "NET_ADMIN",
-            "--hostname", "motp-login-test", "--name", name,
-            "-v", f"{systemd_test.ROOT}:/src:ro", "-v", f"{volume}:{FIXTURE_MOUNT}",
-            tag_of(image),
-        ]  # fmt: skip
+        run = self.run_argv(
+            name, tag_of(image),
+            "--cap-add", "NET_ADMIN", "--hostname", "motp-login-test",
+            "-v", f"{volume}:{FIXTURE_MOUNT}",
+        )  # fmt: skip
         if subprocess.run(run, capture_output=True, check=False).returncode != 0:
             subprocess.run([self.podman, "volume", "rm", "-f", volume], capture_output=True)
             return ["CHECK container_start FAIL"]
