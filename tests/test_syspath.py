@@ -4,6 +4,10 @@ The program is run once as the archive and once as an unpacked directory, which 
 installed form (D31). Each run prints its ``sys.path`` (visible with ``pytest -s``), and the
 test asserts the expected shape: the program first, then only the interpreter's own
 standard library; no site directory, no current directory, nothing a user can write to.
+
+The interpreter is one whose standard library only root can change (``trusted_python``):
+that last point is a property of the installation, not of ``-I -S``, and a CI toolcache
+Python in world-writable directories fails it, as it fails MOTP's own import path check.
 """
 
 import json
@@ -17,6 +21,7 @@ from typing import Any
 import pytest
 
 from .conftest import SRC, TOOLS
+from .support import trusted_python
 
 sys.path.insert(0, str(TOOLS))
 import build_pyz
@@ -34,13 +39,14 @@ print(json.dumps({
     "no_site": sys.flags.no_site,
     "motp_file": motp.__file__,
     "site_loaded": "site" in sys.modules,
+    "prefixes": [sys.base_prefix, sys.base_exec_prefix],
 }))
 """
 
 
 def _run(program: Path, cwd: Path) -> dict[str, Any]:
     result = subprocess.run(
-        [sys.executable, "-I", "-S", str(program)],
+        [trusted_python(), "-I", "-S", str(program)],
         capture_output=True,
         text=True,
         cwd=cwd,
@@ -63,7 +69,8 @@ def _check_shape(data: dict[str, Any], program: Path) -> None:
     assert Path(data["motp_file"]).as_posix().startswith(program.as_posix())
     rest = path[1:]
     assert rest, "the interpreter's standard library must follow the program"
-    prefixes = {os.path.realpath(p) for p in (sys.base_prefix, sys.base_exec_prefix)}
+    # The prefixes of the interpreter that ran the program, which may not be this one.
+    prefixes = {os.path.realpath(p) for p in data["prefixes"]}
     for entry in rest:
         real = os.path.realpath(entry)
         lowered = entry.replace("\\", "/").lower()

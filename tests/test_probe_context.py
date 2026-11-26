@@ -19,6 +19,8 @@ from motp.core.model import ContractError, HintRef, Item, Visibility, ref
 from motp.modules import registry
 from motp.modules.base import Context, Detection, parse_os_release
 
+from .support import trusted_python
+
 linux = pytest.mark.skipif(not sys.platform.startswith("linux"), reason="needs Linux")
 
 
@@ -55,19 +57,22 @@ def test_only_listed_programs_may_start(argv: "list[str]") -> None:
 @linux
 def test_a_listed_program_runs_through_proc() -> None:
     # The interpreter, not /bin/echo: on AlmaLinux that is a link to the coreutils
-    # multi-call program, which check_program refuses for root as a launcher.
-    ctx = ProbeContext(binaries=(sys.executable,))
-    assert ctx.run([sys.executable, "-I", "-S", "-c", "print('hi')"]) == b"hi\n"
+    # multi-call program, which check_program refuses for root as a launcher. Not
+    # always sys.executable: run() refuses one below a directory others can write.
+    python = trusted_python()
+    ctx = ProbeContext(binaries=(python,))
+    assert ctx.run([python, "-I", "-S", "-c", "print('hi')"]) == b"hi\n"
     _raises(
         "context.error.run_failed",
-        lambda: ctx.run([sys.executable, "-I", "-S", "-c", "raise SystemExit(1)"]),
+        lambda: ctx.run([python, "-I", "-S", "-c", "raise SystemExit(1)"]),
     )
 
 
 @linux
 def test_other_exit_codes_count_only_when_the_module_names_them() -> None:
-    ctx = ProbeContext(binaries=(sys.executable,))
-    argv = [sys.executable, "-I", "-S", "-c", "print('x'); raise SystemExit(100)"]
+    python = trusted_python()
+    ctx = ProbeContext(binaries=(python,))
+    argv = [python, "-I", "-S", "-c", "print('x'); raise SystemExit(100)"]
     assert ctx.run(argv, ok_codes=(0, 100)).rstrip() == b"x"
     _raises("context.error.run_failed", lambda: ctx.run(argv))
     _raises("context.error.run_failed", lambda: ctx.run(argv, ok_codes=(0, 1)))
@@ -75,16 +80,17 @@ def test_other_exit_codes_count_only_when_the_module_names_them() -> None:
 
 @linux
 def test_a_program_that_writes_too_much_is_rejected() -> None:
-    ctx = ProbeContext(binaries=(sys.executable,))
+    python = trusted_python()
+    ctx = ProbeContext(binaries=(python,))
     program = "import sys; sys.stdout.write('x' * {})"
-    fits = [sys.executable, "-I", "-S", "-c", program.format(RUN_STDOUT_CAP)]
+    fits = [python, "-I", "-S", "-c", program.format(RUN_STDOUT_CAP)]
     assert len(ctx.run(fits)) == RUN_STDOUT_CAP
-    more = [sys.executable, "-I", "-S", "-c", program.format(RUN_STDOUT_CAP + 1)]
+    more = [python, "-I", "-S", "-c", program.format(RUN_STDOUT_CAP + 1)]
     _raises("context.error.run_failed", lambda: ctx.run(more))
     code = (
         "import itertools, sys; any(sys.stdout.write('x' * 65536) < 0 for _ in itertools.count())"
     )
-    endless = [sys.executable, "-I", "-S", "-c", code]
+    endless = [python, "-I", "-S", "-c", code]
     _raises("context.error.run_failed", lambda: ctx.run(endless))
 
 

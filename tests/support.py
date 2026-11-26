@@ -1,19 +1,52 @@
 """Helpers shared by the phase 5 tests: a fixture context and a cache-directory builder."""
 
 import os
+import sys
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Optional
 
+import pytest
+
 from motp.collect.context import ProbeContext
-from motp.core import cache
+from motp.core import cache, importpath, safepath
 from motp.core.cache import Layout, RenderSettings
-from motp.core.model import ModuleResult
+from motp.core.model import ContractError, ModuleResult
 from motp.core.thresholds import Rule
 from motp.modules.base import Context, FsUsage, context_error
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 NOW = 1795600000
+SYSTEM_PYTHON = "/usr/bin/python3"
+
+
+def trusted_python() -> str:
+    """A Python interpreter that passes the rules MOTP applies before it starts one.
+
+    Those are ``safepath.check_program`` (as root with the stricter rules and the import
+    path check of ``core.importpath``, as the probe does) and, in every case, a standard
+    library that only root can change. ``sys.executable`` is used when it passes, else the
+    system's ``/usr/bin/python3``: a CI toolcache interpreter lives below a world-writable
+    ``/opt`` and fails the rules by design, and so does one a user installed in their home.
+    The test is skipped, with the reasons, only when no candidate passes. Outside POSIX the
+    rules do not apply and ``sys.executable`` is returned.
+    """
+    if os.name != "posix":
+        return sys.executable
+    as_root = os.geteuid() == 0
+    reasons = []
+    for candidate in dict.fromkeys((sys.executable, SYSTEM_PYTHON)):
+        try:
+            program = safepath.check_program(candidate, runs_as_root=as_root)
+            if as_root:
+                importpath.check_program(program)
+            importpath.check_interpreter(program.path, with_site=False)
+        except ContractError as exc:
+            params = dict(exc.message.params)
+            reasons.append(f"{candidate}: {exc.message.id} {params.get('path', '')}".strip())
+            continue
+        return candidate
+    pytest.skip("no interpreter passes the safety rules: " + "; ".join(reasons))
 
 
 class FixtureContext(Context):
