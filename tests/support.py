@@ -115,8 +115,11 @@ def write_cache(
     if settings is not None:
         (directory / "render.json").write_bytes(cache.encode_render_file(settings))
     if os.name == "posix":
-        for path in directory.iterdir():
-            path.chmod(0o644)
+        # Only the files written here: a folder made by the caller (``user/``) keeps its
+        # search bit. Root ignores a missing one, so only a run as a user would notice.
+        for name in ("public.json", "admin.json", "render.json"):
+            if (directory / name).exists():
+                (directory / name).chmod(0o644)
     return directory
 
 
