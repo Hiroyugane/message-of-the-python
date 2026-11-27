@@ -132,3 +132,14 @@ def test_systemd_containers_boot_without_the_apparmor_mount_ban() -> None:
     cmd = login.run_argv("n", "localhost/motp-login:debian12", "--cap-add", "NET_ADMIN")
     assert _option(cmd, "--security-opt") == ["apparmor=unconfined"]
     assert _option(cmd, "--cap-add") == ["SYS_ADMIN", "NET_ADMIN"]
+
+
+def test_the_admin_fixture_is_a_file_system_of_its_own() -> None:
+    """``hw_disks`` lists a file system once, under its shortest mount point. A plain
+    volume is a folder on the host's disk: on a CI runner the checkout at ``/src`` is on
+    that disk too, so the fixture row was ``/src`` and the admin-only checks failed. In
+    WSL the checkout is on another disk, so only the command can show the difference."""
+    image = Path("fixture.img")
+    cmd = login_test.fixture_argv("podman", "vol", image)
+    assert cmd[:3] == ["podman", "volume", "create"] and cmd[-1] == "vol"
+    assert _option(cmd, "--opt") == ["type=ext4", f"device={image}", "o=loop"]

@@ -187,9 +187,23 @@ def setup() -> None:
         else:
             rc_path.write_text("")
         sh("chown", "-R", f"{user}:{user}", str(home))
-    # login_test.py mounts a Podman volume (a local file system) there: a per-user mount.
-    mounts = Path("/proc/self/mountinfo").read_text()
-    check("admin_fixture_mounted", f" {ADMIN_MOUNT} " in mounts, str(ADMIN_MOUNT))
+    # login_test.py mounts a Podman volume on an ext4 image there: a per-user mount. It
+    # must be a file system of its own, because hw_disks lists one only once, under its
+    # shortest mount point (on a CI runner /src is on the same disk as a plain volume).
+    device = {}
+    for line in Path("/proc/self/mountinfo").read_text().splitlines():
+        fields = line.split()
+        if len(fields) > 4:
+            device[fields[4]] = fields[2]
+    own = device.get(str(ADMIN_MOUNT))
+    shared = sorted(
+        point for point, dev in device.items() if dev == own and point != str(ADMIN_MOUNT)
+    )
+    check(
+        "admin_fixture_mounted",
+        own is not None and not shared,
+        f"{ADMIN_MOUNT} device {own}" + (f", also mounted at {' '.join(shared)}" if shared else ""),
+    )
 
 
 def pending_update() -> None:

@@ -2,7 +2,8 @@
 """The level-3 login checks on the tier-1 images (blueprint 7.1, phase 8).
 
 Run as root inside the WSL Ubuntu, where Podman runs (blueprint 10.1); nothing here
-touches the host beyond Podman's own images and containers:
+touches the host beyond Podman's own images, containers and volumes and one image file of
+``FIXTURE_BYTES`` in a temporary folder, removed at the end:
 
     wsl.exe -u root -- python3 <repo>/tools/login_test.py \
         [debian:12 ubuntu:22.04 almalinux:9 fedora:45] [--rebuild] [--remove-images]
@@ -15,10 +16,15 @@ from ``tools/container/login/Containerfile`` (sshd, the ssh client, rsync, zsh, 
 a container with ``--systemd=always``, runs ``tools/container/login/login_checks.py`` in it
 and removes the container. Keys are made inside the container at test time and go away
 with it. The container starts with ``systemd_test.CONTAINER_OPTIONS``: ``CAP_SYS_ADMIN``
-and no AppArmor as in phase 7 (the unit's whole sandbox), which the tmpfs mount of the
-admin-only fixture needs too; ``CAP_NET_ADMIN`` is added for the container's own network
-namespace (phase 11: a documentation address on its loopback device as the source of
-failed logins).
+and no AppArmor as in phase 7 (the unit's whole sandbox); ``CAP_NET_ADMIN`` is added for
+the container's own network namespace (phase 11: a documentation address on its loopback
+device as the source of failed logins).
+
+The admin-only fixture is a Podman volume on an ext4 image file, which Podman mounts
+through a loop device while the container runs (``mkfs.ext4`` on the host makes it). It
+has to be a file system of its own: ``hw_disks`` lists a file system once, under its
+shortest mount point, so a plain volume on the host's disk is listed as ``/src`` wherever
+the checkout is on that disk too (a CI runner; in WSL the checkout is on another one).
 
 The summary lists every check and note per image; the exit code is 1 if any check failed.
 Output without the final ``CHECKS-DONE`` line (a crashed check script) is a failed check,
@@ -29,8 +35,10 @@ host-wide lock as ``container_test.py``.
 
 import argparse
 import os
+import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from typing import Optional
 
@@ -45,6 +53,8 @@ CONTEXT = TOOLS / "container" / "login"
 CHECKS = "/src/tools/container/login/login_checks.py"
 # A local file system below /media: a per-user mount, so admin tier only (5.4, T26).
 FIXTURE_MOUNT = "/media/q/QZADM"
+FIXTURE_BYTES = 16 * 1024 * 1024  # an empty ext4 needs little more than its journal
+MKFS = "mkfs.ext4"
 
 
 def login_lines(lines: list[str]) -> list[str]:
@@ -58,7 +68,33 @@ def tag_of(image: str) -> str:
     return systemd_test.tag_of(image).replace("motp-systemd", "motp-login")
 
 
+def fixture_argv(podman: str, volume: str, image_file: Path) -> list[str]:
+    """The command for the fixture volume: Podman mounts the image file through a loop
+    device when the container starts and unmounts it when the volume goes."""
+    return [
+        podman, "volume", "create",
+        "--opt", "type=ext4", "--opt", f"device={image_file}", "--opt", "o=loop", volume,
+    ]  # fmt: skip
+
+
 class LoginRunner(systemd_test.Runner):
+    def make_fixture(self, volume: str, image_file: Path) -> str:
+        """An empty ext4 image and the volume on it; the reason if that failed, else ''."""
+        with open(image_file, "wb") as handle:
+            handle.truncate(FIXTURE_BYTES)
+        mkfs = shutil.which(MKFS) or f"/usr/sbin/{MKFS}"
+        for argv in (
+            [mkfs, "-q", "-F", str(image_file)],
+            fixture_argv(self.podman, volume, image_file),
+        ):
+            try:
+                done = subprocess.run(argv, capture_output=True, text=True, check=False)
+            except OSError as exc:
+                return f"{argv[0]}: {exc.strerror}"
+            if done.returncode != 0:
+                return f"{argv[0]}: {' '.join((done.stderr or done.stdout).split())[:200]}"
+        return ""
+
     def build_login(self, image: str, rebuild: bool) -> bool:
         if not self.build(image, False):  # the phase 7 image underneath
             return False
@@ -75,15 +111,19 @@ class LoginRunner(systemd_test.Runner):
             return ["CHECK image_build FAIL"]
         name = f"motp-p8-{tag_of(image).split(':')[1]}-{os.getpid()}"
         volume = name + "-fixture"
-        run = self.run_argv(
-            name, tag_of(image),
-            "--cap-add", "NET_ADMIN", "--hostname", "motp-login-test",
-            "-v", f"{volume}:{FIXTURE_MOUNT}",
-        )  # fmt: skip
-        if subprocess.run(run, capture_output=True, check=False).returncode != 0:
-            subprocess.run([self.podman, "volume", "rm", "-f", volume], capture_output=True)
-            return ["CHECK container_start FAIL"]
+        folder = tempfile.mkdtemp(prefix="motp-fixture-")
         try:
+            reason = self.make_fixture(volume, Path(folder) / "fixture.img")
+            if reason:
+                return [f"CHECK fixture_volume FAIL {reason}"]
+            run = self.run_argv(
+                name, tag_of(image),
+                "--cap-add", "NET_ADMIN", "--hostname", "motp-login-test",
+                "-v", f"{volume}:{FIXTURE_MOUNT}",
+            )  # fmt: skip
+            started = subprocess.run(run, capture_output=True, text=True, check=False)
+            if started.returncode != 0:
+                return [f"CHECK container_start FAIL {' '.join(started.stderr.split())[:300]}"]
             if not self.wait_booted(name, image):
                 return ["CHECK boot FAIL"]
             argv = [self.podman, "exec", name, "/usr/bin/python3", "-I", CHECKS]
@@ -96,6 +136,7 @@ class LoginRunner(systemd_test.Runner):
             subprocess.run(
                 [self.podman, "volume", "rm", "-f", volume], capture_output=True, check=False
             )
+            shutil.rmtree(folder, ignore_errors=True)
 
 
 def main(argv: Optional[list[str]] = None) -> int:
