@@ -157,6 +157,9 @@ jobs:
   # its timer (tools/systemd_test.py, phase 7), then real SSH logins with every shell
   # (tools/login_test.py, phase 8). The same tools run locally under Podman in WSL; they
   # need root for Podman with systemd, hence sudo. Each image takes 5 to 10 minutes.
+  # The runner's AppArmor also confines programs inside a container whose path matches one
+  # of its profiles, which no local run in WSL shows: after a failure the kernel's denials
+  # are printed.
   systemd:
     name: systemd (${{ matrix.image }})
     runs-on: ubuntu-24.04
@@ -173,6 +176,9 @@ jobs:
         env:
           IMAGE: ${{ matrix.image }}
         run: sudo python3 tools/systemd_test.py "$IMAGE"
+      - name: AppArmor denials on the runner
+        if: failure()
+        run: sudo dmesg | grep 'apparmor="DENIED"' | tail -n 20 || true
 
   login:
     name: login (${{ matrix.image }})
@@ -190,3 +196,6 @@ jobs:
         env:
           IMAGE: ${{ matrix.image }}
         run: sudo python3 tools/login_test.py "$IMAGE"
+      - name: AppArmor denials on the runner
+        if: failure()
+        run: sudo dmesg | grep 'apparmor="DENIED"' | tail -n 20 || true
