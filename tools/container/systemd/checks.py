@@ -400,7 +400,14 @@ def fresh_collection() -> dict[str, dict[str, object]]:
     (STATE / "state.json").unlink(missing_ok=True)
     for name in ("public.json", "admin.json"):
         (CACHE / name).unlink(missing_ok=True)
-    sh("systemctl", "start", "motp-collect.service", timeout=200)
+    # systemd refuses a sixth start of a unit within ten seconds (its default start rate
+    # limit, counted for as long as the timer keeps the unit loaded). These checks start
+    # the collector more often than that on a fast machine: reset the counter first.
+    sh("systemctl", "reset-failed", "motp-collect.service")
+    done = sh("systemctl", "start", "motp-collect.service", timeout=200)
+    if done.returncode != 0:
+        print(f"  start motp-collect.service: exit {done.returncode} {done.stderr.strip()[:300]}")
+        unit_log("motp-collect.service")
     return json.loads((CACHE / "admin.json").read_text())["modules"]  # type: ignore[no-any-return]
 
 

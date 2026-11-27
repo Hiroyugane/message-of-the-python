@@ -87,6 +87,7 @@ ERROR_WORDS = ("Traceback", "rror", "No such file", "not found", "denied", "motp
 DELAY_LIMIT = 0.3  # seconds a robustness login may take beyond a normal one
 RUNS = 3
 REPORT_LINES = 8  # of a failed login's output
+COLLECT_UNIT = "motp-collect.service"
 SSH_OPTS = (
     "-i", str(KEY), "-o", "BatchMode=yes", "-o", "StrictHostKeyChecking=yes",
     "-o", f"UserKnownHostsFile={KNOWN}", "-o", "LogLevel=ERROR", "-o", "ConnectTimeout=10",
@@ -470,7 +471,7 @@ def install_hybrid() -> None:
     blocks = {str(p): "# BEGIN motp" in p.read_text() for p in zsh_files}
     note("o10_zprofile", json.dumps(blocks))
     add_rc_snippets()
-    ran = sh("systemctl", "start", "motp-collect.service", timeout=200)
+    ran = start_collector()
     check("collector_ran", ran.returncode == 0 and (CACHE / "public.json").exists())
 
 
@@ -625,7 +626,7 @@ def robustness(normal: dict[str, float]) -> None:
         (CACHE / name).unlink(missing_ok=True)
     scenario("cache_missing_shows_live_values", True)
 
-    sh("systemctl", "start", "motp-collect.service", timeout=200)
+    start_collector()
     for name in ("public.json", "render.json"):
         os.chmod(CACHE / name, 0o600)
     scenario("cache_unreadable", True)
@@ -634,7 +635,7 @@ def robustness(normal: dict[str, float]) -> None:
         os.chmod(CACHE / name, 0o644)
     scenario("cache_corrupt", True)
 
-    sh("systemctl", "start", "motp-collect.service", timeout=200)
+    start_collector()
     scenario("hostile_term", True, term="\x1b]0;pwned\x07xterm")
     # bash (and Fedora's sh) warn about the bogus locale themselves; only lines that a login
     # without MOTP does not print count against MOTP (seen on debian:13 and fedora:45).
@@ -693,7 +694,7 @@ def static_mode() -> None:
     score = re.search(r"Overall exposure level for \S+: ([0-9.]+)", sec)
     value = float(score.group(1)) if score else None
     check("static_exposure_score", value is not None and value <= 3.0, str(value))
-    ran = sh("systemctl", "start", "motp-collect.service", timeout=200)
+    ran = start_collector()
     data = MOTD_FILE.read_bytes() if MOTD_FILE.exists() else b""
     st = MOTD_FILE.stat() if MOTD_FILE.exists() else None
     check(
@@ -802,7 +803,7 @@ def plugins_over_ssh(normal: dict[str, float]) -> None:
     put_plugin("52-hang", f"#!/bin/sh\nsleep {HANG_SECONDS}\n")
     Path("/var/lib/motp/state.json").unlink(missing_ok=True)
     started = time.monotonic()
-    sh("systemctl", "start", "--no-block", "motp-collect.service")
+    start_collector("--no-block")
     last, median = logins("motp-user")
     limit = normal["motp-user"] + 0.5
     check(
@@ -889,9 +890,19 @@ def seconds_of(text: str) -> int:
     return sum(int(n) * SECONDS[unit] for n, unit in DURATION_PART.findall(text))
 
 
+def start_collector(*flags: str) -> subprocess.CompletedProcess[str]:
+    """One start of the collector unit. systemd refuses a sixth start of a unit within ten
+    seconds (its default start rate limit, counted for as long as the timer keeps the unit
+    loaded); on a fast machine these checks can start it that often, so the counter is
+    reset first."""
+    sh("systemctl", "reset-failed", COLLECT_UNIT)
+    return sh("systemctl", "start", *flags, COLLECT_UNIT, timeout=200)
+
+
 def collect_now() -> None:
     """One collector run with every module due (as after a timer period has passed)."""
     Path("/var/lib/motp/state.json").unlink(missing_ok=True)
+    sh("systemctl", "reset-failed", COLLECT_UNIT)  # the start rate limit, see start_collector
     done = sh("/opt/motp/bin/motp", "collect", timeout=200)
     note("collect", (done.stdout.strip().splitlines() or [""])[0][:100])
 
@@ -1131,7 +1142,7 @@ def security_modules() -> None:
     runtime = fake_runtime("hang")
     try:
         Path("/var/lib/motp/state.json").unlink(missing_ok=True)
-        sh("systemctl", "start", "--no-block", "motp-collect.service")
+        start_collector("--no-block")
         time.sleep(1)
         during, slow = logins("motp-user")
         running = sh("systemctl", "is-active", "motp-collect.service").stdout.strip()
