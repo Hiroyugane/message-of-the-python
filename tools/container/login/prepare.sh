@@ -44,6 +44,16 @@ fi
 for f in /etc/pam.d/sshd /etc/pam.d/login; do
     [ -f "$f" ] && sed -i 's/^\(session[[:space:]]*\)required\([[:space:]]*pam_loginuid\.so\)/\1optional\2/' "$f"
 done
+# The RHEL family keeps /etc/shadow at mode 0000 and lets root read it by capability. On
+# the CI runners every login into AlmaLinux 9 and 10 ended with "Access denied ... by PAM
+# account configuration", on AlmaLinux 9 next to "unix_chkpwd: could not obtain user info":
+# pam_unix has its helper read the file for the account check. The runners (Ubuntu 24.04)
+# have an AppArmor profile for unix_chkpwd that applies inside a container too, by the
+# program's path, and grants no capability to pass the mode. That link is inferred (WSL has
+# no AppArmor to try it with). With the owner's read bit root needs no capability.
+if [ "$(stat -c %a /etc/shadow)" = 0 ]; then
+    chmod 0400 /etc/shadow
+fi
 systemctl enable "$sshd_unit" >/dev/null 2>&1 || true
 command -v script zsh fish rsync sshd ssh >/dev/null || ls -l /usr/sbin/sshd
 fish --version
