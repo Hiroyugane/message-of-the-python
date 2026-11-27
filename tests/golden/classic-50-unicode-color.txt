@@ -1,0 +1,52 @@
+\e[35mAttention\e[0m
+  \e[1;91mFirewall is not active\e[0m [!!]
+      \e[36msudo ufw enable\e[0m
+  \e[1;91m/: 96% of 40 GiB, 1.6 GiB free\e[0m [!!]
+      \e[36mdf -h\e[0m
+  \e[1;91m1 failed unit\e[0m [!!]
+      \e[36msystemctl --failed\e[0m
+  \e[31m12 updates, 3 security\e[0m [!]
+      \e[36msudo apt upgrade\e[0m
+  \e[31mReboot required\e[0m [!]
+      \e[36msudo reboot\e[0m
+  \e[90m[plugin 50-backup-status]\e[0m \e[31mlast run 30\e[0m
+    \e[90m(plugin)\e[0m \e[31mhours ago\e[0m [!]
+      \e[90mPlugin hint: Check the backup job on the\e[0m
+          (hint) \e[90mstorage server\e[0m
+  \e[31m1 module failed, run `motp doctor`\e[0m [!]
+\e[35mHost\e[0m
+  \e[34mHostname:\e[0m \e[1;33mweb01.example.com\e[0m
+  \e[34mOperating system:\e[0m \e[1;33mDebian GNU/Linux 13\e[0m
+  \e[34mKernel:\e[0m \e[1;33m6.12.48-1-amd64\e[0m
+  \e[34mLocal address:\e[0m \e[1;33m192.0.2.10\e[0m
+  \e[34mDNS servers:\e[0m \e[1;33m192.0.2.53, 192.0.2.54\e[0m
+\e[35mSystem\e[0m
+  \e[34mUptime:\e[0m \e[1;33m41 days 3 hours\e[0m
+  \e[34mLoad:\e[0m \e[32m0.42, 0.37, 0.31\e[0m
+  \e[34mMemory:\e[0m \e[32m5.9 GiB of 7.9 GiB\e[0m
+  \e[34mUpdates:\e[0m \e[31m12 updates, 3 security\e[0m [!]
+    \e[34mPackages:\e[0m \e[1;33mopenssl, curl, libc6\e[0m
+  \e[34mReboot:\e[0m \e[31mrequired\e[0m [!]
+  \e[34mSupport:\e[0m \e[32muntil 2028-06-30\e[0m
+\e[35mSecurity\e[0m
+  \e[34mFirewall:\e[0m \e[1;91mnot active\e[0m [!!]
+  \e[34mAuto updates:\e[0m \e[32mon\e[0m
+  \e[34mFailed logins:\e[0m \e[32m37 in the last 24 hours\e[0m
+  \e[34mFail2ban:\e[0m \e[90mmodule failed\e[0m
+\e[35mLogin\e[0m
+  \e[34mLast login:\e[0m \e[1;33m2 hours 3 minutes ago\e[0m
+  \e[34mLogin from:\e[0m \e[1;33m198.51.100.7\e[0m
+  \e[34mSessions:\e[0m \e[1;33m2\e[0m
+\e[35mDisks\e[0m
+  \e[34m/:\e[0m \e[1;91m96% of 40 GiB, 1.6 GiB free\e[0m [!!]
+  \e[34m/home:\e[0m \e[32m41% of 200 GiB, 118 GiB free\e[0m
+  \e[34m/var:\e[0m \e[32m71% of 20 GiB, 5.8 GiB free\e[0m
+\e[35mServices\e[0m
+  \e[34mFailed units:\e[0m \e[1;91m1 failed unit\e[0m [!!]
+    \e[1;33mnightly-report.service\e[0m
+  \e[34mnginx.service:\e[0m \e[32mactive\e[0m
+\e[35mContainers\e[0m
+  \e[34mContainers:\e[0m \e[32m3 running, 1 stopped\e[0m
+\e[35mPlugins\e[0m
+  \e[90m[plugin 50-backup-status]\e[0m \e[34mBackup:\e[0m \e[31mlast run 30\e[0m
+    \e[90m(plugin)\e[0m \e[31mhours ago\e[0m [!]

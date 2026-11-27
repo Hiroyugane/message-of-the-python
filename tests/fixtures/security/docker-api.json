@@ -1,0 +1,65 @@
+{
+ "answer": [
+  {
+   "Command": "nginx -g 'daemon off;'",
+   "Created": 1795590000,
+   "HostConfig": {"NetworkMode": "default"},
+   "Id": "8dfafdbc3a40aa1111111111111111111111111111111111111111111111111111",
+   "Image": "example.com/qzimage-web:1.27",
+   "ImageID": "sha256:e216a057b1cb1efc11f8a9a2a1b0000000000000000000000000000000000000",
+   "Labels": {"com.example.vendor": "Example"},
+   "Mounts": [],
+   "Names": ["/qzweb-frontend"],
+   "NetworkSettings": {"Networks": {"bridge": {"Gateway": "192.0.2.1", "IPAddress": "192.0.2.2"}}},
+   "Ports": [{"PrivatePort": 80, "PublicPort": 8080, "Type": "tcp"}],
+   "State": "running",
+   "Status": "Up 2 hours (healthy)"
+  },
+  {
+   "Command": "postgres",
+   "Created": 1795596000,
+   "HostConfig": {"NetworkMode": "default"},
+   "Id": "9cd87474be90aa2222222222222222222222222222222222222222222222222222",
+   "Image": "sha256:3e2f21a89f8c0000000000000000000000000000000000000000000000000000",
+   "ImageID": "sha256:3e2f21a89f8c0000000000000000000000000000000000000000000000000000",
+   "Labels": {},
+   "Mounts": [],
+   "Names": ["/qzdb-backend"],
+   "NetworkSettings": {"Networks": {"bridge": {"Gateway": "192.0.2.1", "IPAddress": "192.0.2.3"}}},
+   "Ports": [],
+   "State": "running",
+   "Status": "Up 5 minutes (unhealthy)"
+  },
+  {
+   "Command": "worker",
+   "Created": 1795596500,
+   "HostConfig": {"NetworkMode": "default"},
+   "Id": "3176a2479c92aa3333333333333333333333333333333333333333333333333333",
+   "Image": "example.com/qzimage-worker:3",
+   "ImageID": "sha256:0d1b5e6d0c650000000000000000000000000000000000000000000000000000",
+   "Labels": {},
+   "Mounts": [],
+   "Names": ["/qzloop-worker"],
+   "NetworkSettings": {"Networks": {}},
+   "Ports": [],
+   "State": "restarting",
+   "Status": "Restarting (1) 3 seconds ago"
+  },
+  {
+   "Command": "true",
+   "Created": 1795500000,
+   "HostConfig": {"NetworkMode": "default"},
+   "Id": "4a5f2c0d2e11aa4444444444444444444444444444444444444444444444444444",
+   "Image": "example.com/qzimage-job:2",
+   "ImageID": "sha256:7c3b5e6d0c650000000000000000000000000000000000000000000000000000",
+   "Labels": {},
+   "Mounts": [],
+   "Names": ["/qzold-job"],
+   "NetworkSettings": {"Networks": {}},
+   "Ports": [],
+   "State": "exited",
+   "Status": "Exited (0) 2 days ago"
+  }
+ ],
+ "source": "built from the Docker Engine API reference (v1.41, GET /containers/json), not captured: Docker cannot run in the test containers"
+}

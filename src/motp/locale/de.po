@@ -1,0 +1,2216 @@
+# German message catalogue of MOTP, the message of the python.
+# Ids and order follow en.po. Style: plain German as an administrator writes it, the
+# infinitive instead of "Sie" or "du", and one word per thing (see docs/languages.md).
+# Commands, file names and setting names stay as they are.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# --- command line ---------------------------------------------------------------
+
+msgid "cli.description"
+msgstr "MOTP, message of the python: eine anpassbare MOTD für Linux."
+
+msgid "cli.commands"
+msgstr "BEFEHL"
+
+msgid "cli.version.help"
+msgstr "Version ausgeben und beenden"
+
+msgid "cli.version.output"
+msgstr "motp {version}"
+
+msgid "cli.show.help"
+msgstr "MOTD anzeigen (Standard)"
+
+msgid "cli.show.login_help"
+msgstr "als Anmelde-Hook ausführen: bei Fehlern nichts ausgeben, Exit-Code 0"
+
+msgid "cli.show.debug_help"
+msgstr "Fehler ausgeben und Gründe für ignorierte Dateien"
+
+# --- status words and fixed prefixes --------------------------------------------
+
+msgid "status.ok"
+msgstr "ok"
+
+msgid "status.warn"
+msgstr "Warnung"
+
+msgid "status.crit"
+msgstr "kritisch"
+
+msgid "status.unknown"
+msgstr "unbekannt"
+
+msgid "status.module_failed"
+msgstr "Modul fehlgeschlagen"
+
+msgid "plugin.prefix"
+msgstr "[Plugin {name}]"
+
+msgid "plugin.hint"
+msgstr "Hinweis des Plugins: {hint}"
+
+msgid "plugin.hint_more"
+msgstr "(Hinweis)"
+
+msgid "plugin.more"
+msgstr "(Plugin)"
+
+msgid "row.reboot.required"
+msgstr "erforderlich"
+
+msgid "row.eol.supported"
+msgstr "bis {date}"
+
+msgid "row.eol.supported_table"
+msgstr "bis {date} (Stand {data})"
+
+msgid "row.eol.ending"
+msgstr "endet am {date}"
+
+msgid "row.eol.ending_table"
+msgstr "endet {date} (Stand {data})"
+
+msgid "row.eol.ended"
+msgstr "endete am {date}"
+
+msgid "row.eol.ended_table"
+msgstr "endete {date} (Stand {data})"
+
+msgid "row.autoupdates.off"
+msgstr "aus"
+
+msgid "row.autoupdates.not_installed"
+msgstr "nicht installiert"
+
+msgid "row.autoupdates.download_only"
+msgstr "laden nur herunter"
+
+msgid "row.firewall.inactive"
+msgstr "nicht aktiv"
+
+msgid "row.firewall.failed"
+msgstr "{name}: Start fehlgeschlagen"
+
+msgid "row.fail2ban.not_running"
+msgstr "installiert, läuft nicht"
+
+msgid "modules.failed"
+msgid_plural "modules.failed"
+msgstr[0] "{count} Modul fehlgeschlagen, siehe `motp doctor`"
+msgstr[1] "{count} Module fehlgeschlagen, siehe `motp doctor`"
+
+msgid "config.ignored"
+msgid_plural "config.ignored"
+msgstr[0] "Konfiguration: {count} Datei ignoriert"
+msgstr[1] "Konfiguration: {count} Dateien ignoriert"
+
+# --- hints (core/hints.py); commands live in the table, never in these texts ----
+
+msgid "hint.updates.install"
+msgstr "Ausstehende Updates installieren"
+
+msgid "hint.updates.security"
+msgstr "Ausstehende Sicherheitsupdates installieren"
+
+msgid "hint.reboot.required"
+msgstr "Neu starten, um die Updates abzuschließen"
+
+msgid "hint.units.failed"
+msgstr "Fehlgeschlagene Units auflisten"
+
+msgid "hint.disk.space"
+msgstr "Prüfen, welches Dateisystem voll ist"
+
+msgid "hint.disk.inodes"
+msgstr "Prüfen, welchem Dateisystem die Inodes ausgehen"
+
+msgid "hint.autoupdates.enable"
+msgstr "Automatische Sicherheitsupdates einschalten"
+
+msgid "hint.autoupdates.unmask"
+msgstr "Maskierung des Update-Timers aufheben, dann einschalten"
+
+msgid "hint.autoupdates.periodic"
+msgstr "Die Zeile entfernen, die APT::Periodic::Enable auf 0 setzt"
+
+msgid "hint.autoupdates.install"
+msgstr "Automatische Sicherheitsupdates installieren"
+
+msgid "hint.autoupdates.apply"
+msgstr "dnf so einstellen, dass es geladene Updates auch installiert"
+
+msgid "hint.firewall.enable"
+msgstr "Firewall einschalten"
+
+msgid "hint.os.eol"
+msgstr "Nachlesen, was das Support-Ende für dieses System bedeutet"
+
+msgid "hint.modules.failed"
+msgstr "Herausfinden, warum Module fehlgeschlagen sind"
+
+msgid "hint.config.check"
+msgstr "Anzeigen, was an der Konfiguration falsch ist"
+
+msgid "hint.cache.stale"
+msgstr "Timer des Sammlers prüfen"
+
+msgid "hint.fail2ban.status"
+msgstr "Jails von fail2ban anzeigen"
+
+msgid "hint.import_path"
+msgstr "Anzeigen, welches Verzeichnis andere ändern können"
+
+# --- JSON input ------------------------------------------------------------------
+
+msgid "json.error.too_large"
+msgstr "die Eingabe ist größer als {limit} Bytes"
+
+msgid "json.error.empty"
+msgstr "die Eingabe ist leer"
+
+msgid "json.error.too_deep"
+msgstr "die Eingabe ist tiefer als {limit} Ebenen verschachtelt"
+
+msgid "json.error.not_finite"
+msgstr "die Eingabe enthält NaN oder eine unendliche Zahl"
+
+msgid "json.error.number_too_long"
+msgstr "die Eingabe enthält eine Zahl mit zu vielen Stellen"
+
+msgid "json.error.duplicate_key"
+msgstr "die Eingabe wiederholt den Schlüssel {field}"
+
+msgid "json.error.syntax"
+msgstr "die Eingabe ist kein gültiges JSON"
+
+# --- probe documents -------------------------------------------------------------
+
+msgid "probe.error.api"
+msgstr "nicht unterstützte Version des Abfrageprotokolls"
+
+msgid "probe.error.module_mismatch"
+msgstr "das Dokument nennt nicht das Modul {expected}"
+
+msgid "probe.error.missing_field"
+msgstr "das Pflichtfeld {field} fehlt"
+
+msgid "probe.error.unknown_field"
+msgstr "unbekanntes Feld {field}"
+
+msgid "probe.error.wrong_type"
+msgstr "das Feld {field} hat den falschen Typ"
+
+msgid "probe.error.bad_value"
+msgstr "das Feld {field} hat einen ungültigen Wert"
+
+msgid "probe.error.too_many"
+msgstr "das Feld {field} hat mehr als {limit} Einträge"
+
+msgid "probe.error.too_long"
+msgstr "das Feld {field} ist länger als {limit} Zeichen"
+
+msgid "probe.error.command"
+msgstr "das Feld {field} ist nicht erlaubt: Abfragen dürfen keine Befehle liefern"
+
+msgid "probe.error.unknown_message"
+msgstr "das Feld {field} nennt eine unbekannte Meldungs-ID"
+
+msgid "probe.error.unknown_hint"
+msgstr "das Feld {field} nennt eine unbekannte Hinweis-ID"
+
+msgid "probe.error.plugin_message_id"
+msgstr "das Feld {field} ist nicht erlaubt: Plugins dürfen keine Meldungs- oder Hinweis-IDs verwenden"
+
+msgid "probe.error.rule_and_status"
+msgstr "der Eintrag {field} setzt eine Regel und einen Status zugleich"
+
+msgid "probe.error.duplicate_item_key"
+msgstr "zwei Einträge haben denselben Schlüssel"
+
+msgid "probe.error.exit_code"
+msgstr "das Plugin endete mit Exit-Code {code}"
+
+# --- cache files -----------------------------------------------------------------
+
+msgid "cache.error.open"
+msgstr "die Cache-Datei kann nicht gelesen werden"
+
+msgid "cache.error.not_regular"
+msgstr "die Cache-Datei ist keine reguläre Datei"
+
+msgid "cache.error.owner"
+msgstr "die Cache-Datei hat den falschen Besitzer"
+
+msgid "cache.error.writable"
+msgstr "die Cache-Datei ist für Gruppe oder andere schreibbar"
+
+msgid "cache.error.too_large"
+msgstr "die Cache-Datei ist größer als {limit} Bytes"
+
+msgid "cache.error.schema_version"
+msgstr "die Cache-Datei hat eine unbekannte Schema-Version"
+
+msgid "cache.error.schema"
+msgstr "die Cache-Datei hat ein ungültiges Feld {field}"
+
+msgid "cache.error.tier"
+msgstr "die Cache-Datei gehört zu einem anderen Leserkreis"
+
+msgid "cache.error.module_too_large"
+msgstr "die Modulausgabe passte nicht in die Cache-Datei"
+
+msgid "cache.error.admin_in_public"
+msgstr "die öffentliche Cache-Datei enthält Admin-Daten in {field}"
+
+# --- threshold rules -------------------------------------------------------------
+
+msgid "rule.error.name"
+msgstr "eine Schwellwertregel hat einen ungültigen Namen"
+
+msgid "rule.error.limits"
+msgstr "die Schwellwertregel {rule} braucht Zahlen als Grenzen"
+
+msgid "rule.error.order"
+msgstr "die Grenzen der Schwellwertregel {rule} stehen in falscher Reihenfolge"
+
+msgid "rule.error.direction"
+msgstr "die Schwellwertregel {rule} hat gleiche Grenzen und braucht eine Richtung"
+
+# --- ownership checks (core/safepath.py); {path} is the file or directory at fault ---
+
+msgid "safepath.error.unsupported"
+msgstr "der Besitz von {path} kann auf diesem System nicht geprüft werden"
+
+msgid "safepath.error.not_absolute"
+msgstr "{path} ist kein absoluter Pfad"
+
+msgid "safepath.error.missing"
+msgstr "{path} existiert nicht"
+
+msgid "safepath.error.unreadable"
+msgstr "{path} kann nicht untersucht werden"
+
+msgid "safepath.error.owner"
+msgstr "{path} gehört nicht root"
+
+msgid "safepath.error.writable"
+msgstr "{path} ist für Gruppe oder andere schreibbar"
+
+msgid "safepath.error.link_owner"
+msgstr "der symbolische Link {path} gehört nicht root"
+
+msgid "safepath.error.too_many_links"
+msgstr "{path} führt über zu viele symbolische Links"
+
+msgid "safepath.error.not_directory"
+msgstr "{path} ist kein Verzeichnis"
+
+msgid "safepath.error.not_regular"
+msgstr "{path} ist keine reguläre Datei"
+
+msgid "safepath.error.not_executable"
+msgstr "{path} ist nicht ausführbar"
+
+msgid "safepath.error.changed"
+msgstr "{path} hat sich während der Prüfung geändert"
+
+msgid "safepath.error.too_large"
+msgstr "{path} ist zu groß"
+
+msgid "safepath.error.shebang_too_long"
+msgstr "die Interpreterzeile von {path} ist zu lang"
+
+msgid "safepath.error.shebang_empty"
+msgstr "die Interpreterzeile von {path} nennt kein Programm"
+
+msgid "safepath.error.shebang_encoding"
+msgstr "die Interpreterzeile von {path} ist kein gültiger Text"
+
+msgid "safepath.error.interpreter_depth"
+msgstr "{path} verschachtelt Interpreter zu tief"
+
+msgid "safepath.error.interpreter_relative"
+msgstr "der Interpreter von {path} ist kein absoluter Pfad"
+
+msgid "safepath.error.launcher_as_root"
+msgstr "{path} läuft als root und darf den Interpreter nicht über ein Programm starten, das PATH durchsucht, etwa env"
+
+msgid "safepath.error.shebang_argument"
+msgstr "{path}: das Argument in der #!-Zeile nennt einen Pfad oder eine Einstellung; erlaubt sind nur einfache Optionen wie -I"
+
+msgid "safepath.error.setid"
+msgstr "bei {path} ist das setuid- oder setgid-Bit gesetzt"
+
+msgid "safepath.error.unknown_format"
+msgstr "{path} läuft als root und muss ein ELF-Programm sein oder mit #! beginnen"
+
+msgid "safepath.error.too_long"
+msgstr "{path} ist für einen Pfad zu lang"
+
+msgid "safepath.error.import_path"
+msgstr "{path} liegt im Python-Importpfad eines Programms, das root starten würde, und jemand außer root kann es ändern"
+
+msgid "importpath.error.too_many"
+msgstr "{path} enthält mehr als {max} Dateien und Ordner zum Prüfen"
+
+# --- starting processes (core/proc.py) -------------------------------------------
+
+msgid "proc.error.argv"
+msgstr "die Argumentliste eines Prozesses ist fehlerhaft"
+
+msgid "proc.error.relative"
+msgstr "{program} ist kein absoluter, normalisierter Programmpfad"
+
+msgid "proc.error.timeout"
+msgstr "ein Prozess braucht ein Zeitlimit zwischen 0 und 600 Sekunden"
+
+msgid "proc.error.limits"
+msgstr "ein Prozesslimit ist ungültig"
+
+msgid "proc.error.env"
+msgstr "eine Prozessumgebung darf nur MOTP_-Variablen ergänzen"
+
+msgid "proc.error.drop"
+msgstr "ein Prozess darf nur zu Benutzer und Gruppe außer root wechseln"
+
+msgid "proc.error.start"
+msgstr "{program} konnte nicht gestartet werden"
+
+msgid "proc.error.cleanup_not_root"
+msgstr "nur root kann die Prozesse eines anderen Benutzers beenden"
+
+msgid "proc.error.subreaper"
+msgstr "der Sammler konnte die Prozesse seiner Abfragen nicht übernehmen"
+
+msgid "proc.error.no_account"
+msgstr "das Konto {name} existiert nicht"
+
+# --- configuration (core/config.py, motp config) ---------------------------------
+
+msgid "cli.config.help"
+msgstr "Konfiguration prüfen oder eine Startdatei schreiben"
+
+msgid "cli.config.check.help"
+msgstr "Konfiguration so prüfen, wie der Sammler sie liest, oder eine Datei"
+
+msgid "cli.config.check.path_help"
+msgstr "nur den Inhalt dieser Datei prüfen statt der Dateien unter /etc/motp"
+
+msgid "cli.config.init.help"
+msgstr "eine kommentierte Startkonfiguration schreiben; eine vorhandene Datei wird nie überschrieben"
+
+msgid "cli.config.init.path_help"
+msgstr "Ziel der Startdatei (Standard: /etc/motp/config.toml)"
+
+msgid "config.check.problem"
+msgstr "{file}: {reason}"
+
+msgid "config.check.problem_line"
+msgstr "{file}, Zeile {line}: {reason}"
+
+msgid "config.check.warning"
+msgstr "{file}: Warnung: {reason}"
+
+msgid "config.check.warning_line"
+msgstr "{file}, Zeile {line}: Warnung: {reason}"
+
+msgid "config.check.root_only"
+msgstr "Nur root kann {root} lesen; sudo motp config check ausführen."
+
+msgid "config.check.file_valid"
+msgstr "{file}: gültig (für sich geprüft, ergänzt um die Standardwerte)"
+
+msgid "config.check.file_used"
+msgstr "{file}: gültig; der Sammler verwendet die Datei"
+
+msgid "config.check.not_trusted"
+msgstr "{file}: Hinweis: an diesem Ort würde MOTP die Datei ignorieren: {reason}"
+
+msgid "config.check.invalid"
+msgstr "Dateien mit Fehlern werden ignoriert; Standardwerte und die übrigen Dateien gelten."
+
+msgid "config.check.valid"
+msgid_plural "config.check.valid"
+msgstr[0] "Die Konfiguration unter {root} ist gültig ({count} Datei verwendet)."
+msgstr[1] "Die Konfiguration unter {root} ist gültig ({count} Dateien verwendet)."
+
+msgid "config.check.warnings"
+msgid_plural "config.check.warnings"
+msgstr[0] "{count} Einstellung wirkt nicht; siehe die Warnung oben."
+msgstr[1] "{count} Einstellungen wirken nicht; siehe die Warnungen oben."
+
+msgid "config.init.written"
+msgstr "{file} geschrieben. Prüfen mit: motp config check"
+
+msgid "config.init.exists"
+msgstr "{file} existiert schon und blieb unverändert."
+
+msgid "config.init.no_directory"
+msgstr "{file} kann nicht angelegt werden: das Verzeichnis existiert nicht."
+
+msgid "config.init.failed"
+msgstr "{file} konnte nicht geschrieben werden."
+
+msgid "config.error.open"
+msgstr "die Datei kann nicht gelesen werden"
+
+msgid "config.error.not_regular"
+msgstr "keine reguläre Datei"
+
+msgid "config.error.too_large"
+msgstr "die Datei ist größer als {max} Bytes"
+
+msgid "config.error.encoding"
+msgstr "die Datei ist kein gültiges UTF-8"
+
+msgid "config.error.syntax"
+msgstr "TOML-Syntaxfehler in Zeile {line}, Spalte {column}"
+
+msgid "config.error.syntax_end"
+msgstr "TOML-Syntaxfehler am Dateiende (Zeichenkette, Tabelle oder Liste nicht geschlossen)"
+
+msgid "config.error.unreadable_value"
+msgstr "die Datei enthält einen nicht lesbaren Wert, etwa eine Zahl mit mehreren tausend Ziffern"
+
+msgid "config.error.too_deep"
+msgstr "die Datei verschachtelt Werte zu tief"
+
+msgid "config.error.unreadable"
+msgstr "das Verzeichnis kann nicht aufgelistet werden"
+
+msgid "config.error.too_many_files"
+msgstr "mehr als {max} Dateien; der Rest wird ignoriert"
+
+msgid "config.error.unknown_key"
+msgstr "{key} ist keine bekannte Einstellung"
+
+msgid "config.warning.module"
+msgstr "{key}: es gibt kein Modul {name}, die Einstellung wirkt also nicht (motp modules listet sie)"
+
+msgid "config.warning.module_like"
+msgstr "{key}: es gibt kein Modul {name}; war {suggestion} gemeint?"
+
+msgid "config.warning.threshold"
+msgstr "{key}: es gibt keinen Schwellwert {name}, die Einstellung wirkt also nicht"
+
+msgid "config.warning.threshold_like"
+msgstr "{key}: es gibt keinen Schwellwert {name}; war {suggestion} gemeint?"
+
+msgid "config.warning.item_key"
+msgstr "{key}: keine Zeile hat den Schlüssel {name}, er wirkt also nicht (motp modules --keys listet sie)"
+
+msgid "config.warning.item_key_like"
+msgstr "{key}: keine Zeile hat den Schlüssel {name}; war {suggestion} gemeint?"
+
+msgid "config.error.missing_key"
+msgstr "{key} fehlt"
+
+msgid "config.error.table"
+msgstr "{key} muss eine Tabelle sein"
+
+msgid "config.error.rows"
+msgstr "{key} muss eine Liste von Tabellen sein, geschrieben [[{key}]]"
+
+msgid "config.error.too_many"
+msgstr "{key} hat mehr als {max} Einträge"
+
+msgid "config.error.name"
+msgstr "{key}: ein Name darf hier nur aus Kleinbuchstaben, Ziffern und Unterstrichen bestehen"
+
+msgid "config.error.plugin_name"
+msgstr "{key}: ein Plugin-Name besteht aus zwei Ziffern, einem Bindestrich und Kleinbuchstaben, Ziffern, Bindestrichen oder Unterstrichen"
+
+msgid "config.error.choice"
+msgstr "{key} muss einer dieser Werte sein: {choices}"
+
+msgid "config.error.integer"
+msgstr "{key} muss eine ganze Zahl von {low} bis {high} sein"
+
+msgid "config.error.number"
+msgstr "{key} muss eine Zahl von {low} bis {high} sein"
+
+msgid "config.error.any_number"
+msgstr "{key} muss eine Zahl sein"
+
+msgid "config.error.bool_or_auto"
+msgstr "{key} muss true, false oder \"auto\" sein"
+
+msgid "config.error.language"
+msgstr "{key} muss \"auto\" oder ein Sprachkürzel wie \"de\" sein"
+
+msgid "config.error.group_name"
+msgstr "{key} muss ein Gruppenname sein, oder \"\" für nur root"
+
+msgid "config.error.group_adm"
+msgstr "{key} darf nicht \"adm\" sein: in dieser Gruppe sind Protokollleser und Dienstkonten"
+
+msgid "config.error.label"
+msgstr "{key} muss reiner Text mit höchstens {max} Zeichen sein"
+
+msgid "config.error.sections"
+msgstr "{key} muss eine Liste verschiedener Abschnittsnamen sein aus: {choices}"
+
+msgid "config.error.duration"
+msgstr "{key} muss eine Dauer sein wie \"90s\", \"30m\", \"26h\" oder \"3d\""
+
+msgid "config.error.absolute_path"
+msgstr "{key} muss ein absoluter Pfad ohne . oder .. sein, etwa \"/var/backups/last-success\""
+
+msgid "config.error.unit_name"
+msgstr "{key} muss der Name einer systemd-Unit sein, etwa \"nginx.service\""
+
+msgid "config.error.rule_limits"
+msgstr "{key} braucht warn und crit"
+
+msgid "config.error.age_order"
+msgstr "{key}: crit_after darf nicht kürzer als warn_after sein"
+
+msgid "config.error.bool"
+msgstr "{key} muss true oder false sein"
+
+msgid "config.error.zero_or"
+msgstr "{key} muss 0 sein (nach Breite gewählt) oder eine ganze Zahl von {low} bis {high}"
+
+msgid "config.error.color"
+msgstr "{key} muss eine Farbe sein: ein Name wie \"blue\" oder \"bright-red\", eine Zahl von 0 bis 255, \"#rrggbb\" oder \"default\", optional mit \"bold\""
+
+msgid "config.error.color_status"
+msgstr "{key} muss \"status\" oder eine Farbe sein: ein Name wie \"red\", eine Zahl von 0 bis 255, \"#rrggbb\" oder \"default\", optional mit \"bold\""
+
+msgid "config.error.bar_contrast"
+msgstr "{key} muss sich von schwarzem Hintergrund abheben (Kontrast mindestens 3:1), damit der freie Teil eines Balkens sichtbar bleibt"
+
+msgid "config.error.char"
+msgstr "{key} muss genau ein druckbares Zeichen sein, eine Zelle breit"
+
+msgid "config.error.char_ascii"
+msgstr "{key} muss genau ein druckbares ASCII-Zeichen sein"
+
+msgid "config.error.bar_chars"
+msgstr "{key}: bar_used und bar_free müssen sich unterscheiden, damit belegter und freier Teil eines Balkens erkennbar sind"
+
+msgid "config.error.font_name"
+msgstr "{key} muss \"auto\" sein, eine mitgelieferte Schrift (motp-block, motp-block-small, big, small) oder der Name einer Datei in /etc/motp/fonts/ ohne \".flf\""
+
+msgid "config.error.font_charset"
+msgstr "{key}: motp-block und motp-block-small zeichnen Blockzeichen für Unicode-Terminals; big, small oder eine Schrift aus ASCII-Zeichen verwenden"
+
+msgid "config.error.font_file"
+msgstr "{key}: diese Schrift wird nicht verwendet. Erwartet wird eine FIGfont-Datei bis {max} KiB, die root gehört und für Gruppe und andere nicht schreibbar ist"
+
+msgid "config.error.font_format"
+msgstr "{key}: diese Schrift wird nicht verwendet. Erwartet wird eine FIGfont-Datei mit druckbaren, eine Zelle breiten Zeichen, höchstens 16 Zeilen zu 64 Zellen"
+
+msgid "config.error.font_ascii"
+msgstr "{key}: diese Schrift wird nicht verwendet. Die ASCII-Kopfzeile braucht eine Schrift, die nur aus ASCII-Zeichen besteht"
+
+msgid "config.error.item_keys"
+msgstr "{key} muss eine Liste von höchstens {max} Eintragsschlüsseln wie \"os_host.kernel\" sein (siehe motp modules --keys)"
+
+msgid "proc.error.account"
+msgstr "{name} muss ein lokales Systemkonto mit eigener Benutzer-ID und einer anderen Gruppe als root sein"
+
+# --- renderer: section titles ---------------------------------------------------------
+
+msgid "section.attention"
+msgstr "Achtung"
+
+msgid "section.host"
+msgstr "Rechner"
+
+msgid "section.system"
+msgstr "System"
+
+msgid "section.security"
+msgstr "Sicherheit"
+
+msgid "section.login"
+msgstr "Anmeldung"
+
+msgid "section.disks"
+msgstr "Datenträger"
+
+msgid "section.services"
+msgstr "Dienste"
+
+msgid "section.containers"
+msgstr "Container"
+
+msgid "section.plugins"
+msgstr "Plugins"
+
+msgid "section.tip"
+msgstr "Tipp"
+
+# --- renderer: values and units -------------------------------------------------------
+
+msgid "value.yes"
+msgstr "ja"
+
+msgid "value.no"
+msgstr "nein"
+
+msgid "value.ago"
+msgstr "vor {duration}"
+
+msgid "value.age"
+msgstr "({age} alt)"
+
+msgid "value.labelled"
+msgstr "{label}: {value}"
+
+msgid "unit.b"
+msgstr "{n} B"
+
+msgid "unit.kib"
+msgstr "{n} KiB"
+
+msgid "unit.mib"
+msgstr "{n} MiB"
+
+msgid "unit.gib"
+msgstr "{n} GiB"
+
+msgid "unit.tib"
+msgstr "{n} TiB"
+
+msgid "unit.pib"
+msgstr "{n} PiB"
+
+msgid "unit.percent"
+msgstr "{n}%"
+
+msgid "unit.celsius"
+msgstr "{n} °C"
+
+msgid "unit.days"
+msgid_plural "unit.days"
+msgstr[0] "{count} Tag"
+msgstr[1] "{count} Tage"
+
+msgid "unit.days_ago"
+msgid_plural "unit.days_ago"
+msgstr[0] "{count} Tag"
+msgstr[1] "{count} Tagen"
+
+msgid "unit.hours"
+msgid_plural "unit.hours"
+msgstr[0] "{count} Stunde"
+msgstr[1] "{count} Stunden"
+
+msgid "unit.minutes"
+msgid_plural "unit.minutes"
+msgstr[0] "{count} Minute"
+msgstr[1] "{count} Minuten"
+
+msgid "unit.seconds"
+msgid_plural "unit.seconds"
+msgstr[0] "{count} Sekunde"
+msgstr[1] "{count} Sekunden"
+
+msgid "unit.pair"
+msgstr "{first} {second}"
+
+msgid "render.host_uptime"
+msgstr "{host}, Laufzeit {uptime}"
+
+msgid "render.cache_old"
+msgstr "Die gesammelten Daten sind {age} alt"
+
+msgid "render.no_cache"
+msgstr "Noch keine gesammelten Daten, nur Live-Werte"
+
+msgid "show.error"
+msgstr "motp show fehlgeschlagen: {error}"
+
+msgid "show.debug.ignored"
+msgstr "{file} ignoriert: {reason}"
+
+msgid "show.debug.module_failed"
+msgstr "Modul {module} fehlgeschlagen: {reason}"
+
+msgid "module.error.parse"
+msgstr "{module} konnte die Auskunft des Systems nicht lesen"
+
+msgid "context.error.run"
+msgstr "ein Live-Modul darf keine Programme starten"
+
+msgid "context.error.path"
+msgstr "ein Modul darf diesen Pfad nicht lesen"
+
+msgid "context.error.statvfs"
+msgstr "die Belegung dieses Dateisystems kann nicht gelesen werden"
+
+msgid "context.error.binary"
+msgstr "ein Modul darf nur die Programme starten, die es aufführt"
+
+msgid "context.error.run_failed"
+msgstr "ein vom Modul gestartetes Programm ist fehlgeschlagen"
+
+msgid "probe.error.unknown_module"
+msgstr "kein eingebautes Modul dieses Namens"
+
+msgid "context.error.missing"
+msgstr "die Datei existiert nicht"
+
+msgid "context.error.read"
+msgstr "die Datei kann nicht gelesen werden"
+
+msgid "context.error.socket"
+msgstr "der lokale Dienst gab keine brauchbare Antwort"
+
+# --- module labels and texts (used by the demo now, by the modules later) --------------
+
+msgid "label.hostname"
+msgstr "Rechnername"
+
+msgid "label.os"
+msgstr "Betriebssystem"
+
+msgid "label.kernel"
+msgstr "Kernel"
+
+msgid "label.address"
+msgstr "Lokale Adresse"
+
+msgid "label.dns"
+msgstr "DNS-Server"
+
+msgid "label.uptime"
+msgstr "Laufzeit"
+
+msgid "label.load"
+msgstr "Auslastung"
+
+msgid "label.memory"
+msgstr "Arbeitsspeicher"
+
+msgid "label.swap"
+msgstr "Swap"
+
+msgid "label.login_tty"
+msgstr "Anmeldeterminal"
+
+msgid "label.updates"
+msgstr "Updates"
+
+msgid "label.packages"
+msgstr "Pakete"
+
+msgid "label.package_lists"
+msgstr "Paketlisten"
+
+msgid "label.held_back"
+msgstr "Zurückgehalten"
+
+msgid "label.reboot"
+msgstr "Neustart"
+
+msgid "label.eol"
+msgstr "Support"
+
+msgid "label.firewall"
+msgstr "Firewall"
+
+msgid "label.autoupdates"
+msgstr "Auto-Updates"
+
+msgid "label.failed_logins"
+msgstr "Fehlanmeldungen"
+
+msgid "label.fail2ban"
+msgstr "Fail2ban"
+
+msgid "label.previous_login"
+msgstr "Letzte Anmeldung"
+
+msgid "label.login_from"
+msgstr "Anmeldung von"
+
+msgid "label.sessions"
+msgstr "Sitzungen"
+
+msgid "label.failed_units"
+msgstr "Fehlerhafte Units"
+
+msgid "label.containers"
+msgstr "Container"
+
+msgid "load.summary"
+msgstr "{one}, {five}, {fifteen}"
+
+msgid "memory.summary"
+msgstr "{used} von {total}"
+
+msgid "updates.summary"
+msgid_plural "updates.summary"
+msgstr[0] "{count} Update, {security} sicherheitsrelevant"
+msgstr[1] "{count} Updates, {security} sicherheitsrelevant"
+
+msgid "updates.plain"
+msgid_plural "updates.plain"
+msgstr[0] "{count} Update"
+msgstr[1] "{count} Updates"
+
+msgid "updates.none"
+msgstr "keine ausstehenden"
+
+msgid "updates.unsplit"
+msgid_plural "updates.unsplit"
+msgstr[0] "{count} Update, evtl. sicherheitsrelevant"
+msgstr[1] "{count} Updates, evtl. sicherheitsrelevant"
+
+msgid "updates.held_only"
+msgid_plural "updates.held_only"
+msgstr[0] "{count} Update zurückgehalten"
+msgstr[1] "{count} Updates zurückgehalten"
+
+msgid "updates.no_lists"
+msgstr "unbekannt, noch keine Paketlisten"
+
+msgid "reboot.required"
+msgstr "Neustart erforderlich"
+
+msgid "reboot.not_required"
+msgstr "nicht nötig"
+
+msgid "eol.supported"
+msgstr "Support bis {date}"
+
+msgid "eol.supported_table"
+msgstr "Support bis {date} (Stand {data})"
+
+msgid "eol.ending"
+msgstr "OS-Support endet am {date}"
+
+msgid "eol.ending_table"
+msgstr "OS-Support endet {date} (Stand {data})"
+
+msgid "eol.ended"
+msgstr "OS-Support endete am {date}"
+
+msgid "eol.ended_table"
+msgstr "OS-Support endete {date} (Stand {data})"
+
+msgid "firewall.inactive"
+msgstr "Firewall ist nicht aktiv"
+
+msgid "firewall.active"
+msgstr "{name} aktiv"
+
+msgid "firewall.active_zone"
+msgstr "{name} aktiv, Zone {zone}"
+
+msgid "firewall.failed"
+msgstr "Firewall {name}: Start fehlgeschlagen"
+
+msgid "autoupdates.on"
+msgstr "aktiv"
+
+msgid "autoupdates.off"
+msgstr "Auto-Updates sind aus"
+
+msgid "autoupdates.not_installed"
+msgstr "Auto-Updates sind nicht installiert"
+
+msgid "autoupdates.download_only"
+msgstr "Auto-Updates laden nur herunter"
+
+msgid "autoupdates.apply_off"
+msgstr "apply_updates = yes setzen"
+
+msgid "autoupdates.periodic_off"
+msgstr "APT::Periodic::Enable ist 0"
+
+msgid "logins.failed"
+msgid_plural "logins.failed"
+msgstr[0] "{count} in den letzten 24 Stunden"
+msgstr[1] "{count} in den letzten 24 Stunden"
+
+msgid "logins.failed_more"
+msgid_plural "logins.failed_more"
+msgstr[0] "über {count} in den letzten 24 Stunden"
+msgstr[1] "über {count} in den letzten 24 Stunden"
+
+msgid "records.not_recorded"
+msgstr "auf diesem System nicht erfasst"
+
+msgid "label.login_sources"
+msgstr "Von"
+
+msgid "fail2ban.banned"
+msgid_plural "fail2ban.banned"
+msgstr[0] "{count} Adresse gesperrt"
+msgstr[1] "{count} Adressen gesperrt"
+
+msgid "fail2ban.not_running"
+msgstr "fail2ban ist installiert, läuft aber nicht"
+
+msgid "fail2ban.not_checked"
+msgstr "nicht geprüft: Python-Importpfad unsicher"
+
+msgid "label.jail"
+msgstr "{jail}"
+
+msgid "disk.usage"
+msgstr "{percent} von {size}"
+
+msgid "disk.inode_usage"
+msgstr "{percent} von {total} Inodes"
+
+msgid "disk.usage_full"
+msgstr "{percent} von {size}, {free} frei"
+
+msgid "disk.usage_short"
+msgstr "{percent}, {free} frei"
+
+msgid "disk.usage_free"
+msgstr "{free} frei"
+
+msgid "disk.inode_full"
+msgstr "{percent} von {total} Inodes, {free} frei"
+
+msgid "disk.inode_short"
+msgstr "{percent}, {free} Inodes frei"
+
+msgid "disk.inode_free"
+msgstr "{free} Inodes frei"
+
+msgid "meter.percent"
+msgstr "{percent}"
+
+msgid "label.mount"
+msgstr "{mount}"
+
+msgid "label.mount_inodes"
+msgstr "{mount} Inodes"
+
+msgid "units.failed_count"
+msgid_plural "units.failed_count"
+msgstr[0] "{count} Unit fehlgeschlagen"
+msgstr[1] "{count} Units fehlgeschlagen"
+
+msgid "units.none"
+msgstr "keine"
+
+msgid "label.units"
+msgstr "Units"
+
+msgid "sessions.count"
+msgid_plural "sessions.count"
+msgstr[0] "{count} Sitzung"
+msgstr[1] "{count} Sitzungen"
+
+msgid "label.session_users"
+msgstr "Angemeldet"
+
+msgid "label.unit_row"
+msgstr "{label}"
+
+msgid "label.file_row"
+msgstr "{label}"
+
+msgid "file_age.missing"
+msgstr "Datei fehlt"
+
+msgid "file_age.unreadable"
+msgstr "für den Benutzer motp nicht lesbar"
+
+msgid "unit.state"
+msgstr "{state}"
+
+msgid "unit.state_sub"
+msgstr "{state} ({sub})"
+
+msgid "unit.not_found"
+msgstr "nicht gefunden"
+
+msgid "unit.masked"
+msgstr "maskiert"
+
+msgid "unit.unknown"
+msgstr "Zustand unbekannt"
+
+msgid "containers.summary"
+msgstr "{running} aktiv, {stopped} gestoppt"
+
+msgid "containers.summary_problems"
+msgstr "{running} aktiv ({unhealthy} ungesund), {restarting} im Neustart, {stopped} gestoppt"
+
+msgid "containers.not_running"
+msgstr "Dienst angehalten"
+
+msgid "containers.unreachable"
+msgstr "die Laufzeitumgebung antwortet nicht"
+
+msgid "label.docker"
+msgstr "Docker"
+
+msgid "label.podman"
+msgstr "Podman"
+
+msgid "label.running"
+msgstr "Aktiv"
+
+msgid "label.unhealthy"
+msgstr "Mit Problemen"
+
+# --- motp preview ---------------------------------------------------------------------
+
+msgid "cli.preview.help"
+msgstr "zeigen, wie die MOTD aussieht, mit Beispieldaten"
+
+msgid "cli.preview.demo_help"
+msgstr "die Beispieldaten anzeigen (der Standard; in dieser Version lassen sich nur sie vorschauen)"
+
+msgid "cli.preview.width_help"
+msgstr "für diese Spaltenzahl statt der Terminalbreite ausgeben"
+
+msgid "cli.preview.charset_help"
+msgstr "Rahmenzeichen: auto, ascii oder unicode"
+
+msgid "cli.preview.color_help"
+msgstr "Farbe: auto, always oder never"
+
+msgid "cli.preview.preset_help"
+msgstr "Theme-Vorlage der Beispielausgabe: default oder classic"
+
+msgid "cli.preview.bad_width"
+msgstr "die Breite muss zwischen {min} und {max} Spalten liegen"
+
+msgid "cli.examples"
+msgstr "Beispiele:"
+
+msgid "cli.exit.title"
+msgstr "Rückgabewerte:"
+
+msgid "cli.exit.ok"
+msgstr "Erfolg"
+
+msgid "cli.exit.failed"
+msgstr "eine Prüfung schlug fehl, ein Fehler wurde gefunden oder der Befehl scheiterte"
+
+msgid "cli.exit.usage"
+msgstr "falscher Aufruf: unbekannter Befehl, unbekannte Option oder unbekanntes Thema"
+
+msgid "cli.exit.login"
+msgstr "motp show --login endet immer mit 0, eine Anmeldung scheitert also nie."
+
+msgid "cli.exit.debug"
+msgstr "MOTP_DEBUG=1 zeigt statt der einzeiligen Fehlermeldung den Traceback."
+
+msgid "cli.exit.explain"
+msgstr "motp explain sagt, was jede Zeile und jede Warnung bedeutet."
+
+msgid "cli.example.show"
+msgstr "die Meldung jetzt zeigen"
+
+msgid "cli.example.show_debug"
+msgstr "auch sagen, warum Dateien ignoriert wurden"
+
+msgid "cli.example.collect"
+msgstr "die Sammler-Unit jetzt starten und das Ergebnis zeigen"
+
+msgid "cli.example.collect_direct"
+msgstr "direkt ausführen (Container ohne systemd)"
+
+msgid "cli.example.modules"
+msgstr "welche Module laufen, als wer, und warum nicht"
+
+msgid "cli.example.modules_keys"
+msgstr "die Zeilenschlüssel für hide_rows und row_order"
+
+msgid "cli.example.doctor"
+msgstr "als du selbst prüfen"
+
+msgid "cli.example.doctor_root"
+msgstr "alles prüfen, auch Konfiguration und Plugins"
+
+msgid "cli.example.dry_run"
+msgstr "prüfen und den Plan zeigen, nichts ändern"
+
+msgid "cli.example.install"
+msgstr "installieren oder aktualisieren"
+
+msgid "cli.example.static"
+msgstr "die Meldung für pam_motd schreiben statt für die Login-Shell"
+
+msgid "cli.example.uninstall"
+msgstr "entfernen, was install angelegt hat; die Konfiguration bleibt"
+
+msgid "cli.example.purge"
+msgstr "auch die Konfigurationsdateien des Installers entfernen, wenn unverändert"
+
+msgid "cli.example.shell_init"
+msgstr "die Meldung in jedem neuen eigenen Terminal zeigen"
+
+msgid "cli.example.check"
+msgstr "die Dateien, die der Sammler liest"
+
+msgid "cli.example.check_file"
+msgstr "ein Entwurf, auf den Standardwerten geprüft"
+
+msgid "cli.example.init"
+msgstr "die Startdatei nach /etc/motp/config.toml schreiben"
+
+msgid "cli.example.init_path"
+msgstr "sie zuerst woanders hinschreiben"
+
+msgid "cli.example.explain"
+msgstr "die Themen listen"
+
+msgid "cli.example.explain_topic"
+msgstr "was die Datenträger-Zeilen bedeuten"
+
+msgid "cli.example.explain_label"
+msgstr "auch die Beschriftung einer Zeile geht"
+
+msgid "cli.example.preview"
+msgstr "die Beispieldaten in Terminalbreite"
+
+msgid "cli.example.preview_narrow"
+msgstr "das kompakte Layout in ASCII"
+
+msgid "cli.example.preview_classic"
+msgstr "das Preset classic mit Farbe"
+
+msgid "cli.example.version"
+msgstr "die Version ausgeben"
+
+msgid "cli.config.check.exit"
+msgstr "Rückgabewert 0: gültig (Warnungen zu wirkungslosen Namen zählen nicht); 1: ein Fehler."
+
+msgid "cli.unexpected"
+msgstr "motp: unerwarteter Fehler ({detail}); MOTP_DEBUG=1 zeigt Einzelheiten"
+
+msgid "cli.modules.keys_help"
+msgstr "stattdessen den Schlüssel jeder Zeile listen, für [layout] hide_rows und row_order"
+
+msgid "modules.column.key"
+msgstr "SCHLÜSSEL"
+
+msgid "modules.column.row"
+msgstr "ZEILE"
+
+msgid "modules.keys.plugins"
+msgstr "Plugin-Zeilen: plugin.<Name des Plugins>.<Schlüssel, den das Plugin ausgibt>."
+
+msgid "keys.mount"
+msgstr "je Einhängepunkt: / heißt root, /var/log heißt var_log"
+
+msgid "keys.mount_inodes"
+msgstr "Inodes eines Einhängepunkts, wo sein Dateisystem welche hat"
+
+msgid "keys.rows_unit"
+msgstr "je [[rows.unit]], nach ihrer Unit benannt"
+
+msgid "keys.rows_file_age"
+msgstr "je [[rows.file_age]], nach ihrer Beschriftung benannt"
+
+# --- cache and state files (collect/store.py) ----------------------------------------
+
+msgid "collect.error.unsafe_dir"
+msgstr "{path} ist kein Verzeichnis, das nur root beschreiben kann"
+
+msgid "collect.error.write"
+msgstr "{path} konnte nicht geschrieben werden"
+
+msgid "collect.error.lock"
+msgstr "die Sperrdatei {path} ist keine Datei von root"
+
+# --- motp collect (collect/runner.py) -------------------------------------------------
+
+msgid "cli.collect.help"
+msgstr "den Sammler einmal ausführen (root)"
+
+msgid "cli.collect.no_sandbox_help"
+msgstr "direkt statt über die Sammler-Unit ausführen (Container, Fehlersuche)"
+
+msgid "collect.error.not_root"
+msgstr "motp collect muss als root laufen"
+
+msgid "collect.error.program"
+msgstr "dem Programm der Abfragen wird nicht vertraut: {path}"
+
+msgid "collect.error.budget"
+msgstr "das Zeitbudget des Sammlers war aufgebraucht, bevor die Abfrage fertig war"
+
+msgid "collect.error.timeout"
+msgstr "die Abfrage hat ihr Zeitlimit überschritten"
+
+msgid "collect.error.too_large"
+msgstr "die Abfrage gab mehr aus, als das Protokoll erlaubt"
+
+msgid "collect.error.exit"
+msgstr "die Abfrage endete mit Exit-Code {code}"
+
+msgid "collect.error.cleanup"
+msgstr "von der Abfrage zurückgelassene Prozesse ließen sich nicht beenden"
+
+msgid "collect.error.no_account"
+msgstr "das Konto {user} fehlt oder ist nicht brauchbar"
+
+msgid "collect.error.user_acl"
+msgstr "das Dateisystem von /run/motp lehnt POSIX-ACLs ab; es gibt keine Benutzerdateien und keine letzte Anmeldung"
+
+msgid "modules.reason.disabled"
+msgstr "enabled = false in der Konfiguration"
+
+msgid "collect.log.failed"
+msgstr "collect: abgebrochen: {reason}"
+
+msgid "collect.log.busy"
+msgstr "collect: ein anderer Lauf ist aktiv; nichts geschrieben"
+
+msgid "collect.log.config"
+msgstr "collect: {count} Konfigurationsfehler; siehe motp config check"
+
+msgid "collect.log.refused"
+msgstr "collect: keine Abfrage kann starten: {reason}"
+
+msgid "collect.log.no_group"
+msgstr "collect: Admin-Gruppe {group} lokal nicht gefunden; admin.json ist nur für root"
+
+msgid "collect.log.probe_group"
+msgstr "collect: Admin-Gruppe {group} ist die Gruppe von {user}; admin.json ist nur für root"
+
+msgid "collect.log.account"
+msgstr "collect: Abfragen von {user} können nicht starten: {reason}"
+
+msgid "collect.log.cleanup"
+msgstr "collect: {remaining} Prozesse von {user} ließen sich nicht beenden"
+
+msgid "collect.log.progress"
+msgstr "progress: collect done={done}/{total} failed={failed} elapsed={elapsed}s"
+
+msgid "collect.log.done"
+msgstr "collect: fertig, {ran} Abfragen ausgeführt, {modules} Module, {failed} fehlgeschlagen, {elapsed_ms} ms"
+
+msgid "collect.log.user_files"
+msgstr "collect: Benutzerdateien: {written} geschrieben, {failed} fehlgeschlagen, {removed} entfernt"
+
+msgid "collect.log.user_acl"
+msgstr "collect: keine Benutzerdateien, das Dateisystem lehnt POSIX-ACLs ab"
+
+msgid "collect.error.exit_high"
+msgstr "das Plugin endete mit Exit-Code {code} oder höher"
+
+msgid "collect.error.signal"
+msgstr "das Plugin wurde durch ein Signal beendet"
+
+msgid "collect.error.refused_in_unit"
+msgstr "das Plugin bestand die Besitzprüfung in seiner eigenen Unit nicht"
+
+msgid "collect.error.root_unit"
+msgstr "die eigene Unit des Plugins konnte es nicht ausführen (systemd-run Exit-Code {code})"
+
+msgid "collect.error.no_systemd_run"
+msgstr "ein Plugin braucht {path} für eine eigene Unit; das fehlt oder ist nicht vertrauenswürdig"
+
+msgid "collect.log.plugins"
+msgstr "collect: Plugins: {accepted} angenommen, {refused} abgelehnt, {ignored} ignoriert"
+
+msgid "collect.log.no_systemd_run"
+msgstr "collect: Plugins können nicht laufen: {reason}"
+
+msgid "plugin.error.too_many"
+msgstr "mehr als {max} Plugins; dieses läuft nicht"
+
+msgid "plugin.error.too_many_entries"
+msgstr "das Plugin-Verzeichnis hat mehr als {max} Einträge"
+
+msgid "plugin.error.unreadable_dir"
+msgstr "das Plugin-Verzeichnis kann nicht gelesen werden"
+
+msgid "plugin.error.changed"
+msgstr "das Plugin hat sich zwischen Prüfung und Start geändert"
+
+msgid "plugin.ignored.name"
+msgstr "der Name passt nicht zu NN-name (zwei Ziffern, Bindestrich, dann a-z, 0-9, - oder _)"
+
+# --- motp modules (collect/listing.py) -------------------------------------------------
+
+msgid "cli.modules.help"
+msgstr "Module, ihren Zustand und den Grund auflisten"
+
+msgid "modules.column.name"
+msgstr "MODUL"
+
+msgid "modules.column.state"
+msgstr "ZUSTAND"
+
+msgid "modules.column.user"
+msgstr "BENUTZER"
+
+msgid "modules.column.interval"
+msgstr "INTERVALL"
+
+msgid "modules.column.visibility"
+msgstr "SICHTBAR FÜR"
+
+msgid "modules.column.reason"
+msgstr "GRUND"
+
+msgid "modules.state.active"
+msgstr "aktiv"
+
+msgid "modules.state.not_detected"
+msgstr "nicht erkannt"
+
+msgid "modules.state.disabled"
+msgstr "abgeschaltet"
+
+msgid "modules.state.failed"
+msgstr "fehlgeschlagen"
+
+msgid "modules.interval.live"
+msgstr "live"
+
+msgid "modules.interval.seconds"
+msgstr "{seconds} s"
+
+msgid "modules.user.reader"
+msgstr "Leser"
+
+msgid "modules.visibility.public"
+msgstr "alle"
+
+msgid "modules.visibility.admin"
+msgstr "Admins"
+
+# --- motp collect through the unit (collect/viaunit.py), the stderr log -----------------
+
+msgid "collect.error.no_unit"
+msgstr "die Sammler-Unit ist nicht installiert oder systemd läuft nicht; motp collect --no-sandbox verwenden"
+
+msgid "collect.error.account_groups"
+msgstr "{user} ist Mitglied weiterer Gruppen, die jedes Plugin bekäme; Plugins werden abgelehnt, bis das nicht mehr so ist"
+
+msgid "doctor.plugin_groups"
+msgstr "motp-plugin ist Mitglied von {groups}: Plugins werden abgelehnt, bis das nicht mehr so ist (gpasswd -d motp-plugin GRUPPE)"
+
+msgid "collect.error.account_group"
+msgstr "die primäre Gruppe von {user} ist nicht die eigene Gruppe {user}"
+
+msgid "collect.log.hidden"
+msgstr "collect: /proc verbirgt die Prozesse von {user}; ihre Beendigung lässt sich nicht prüfen"
+
+msgid "collect.log.static"
+msgstr "collect: die statische MOTD-Datei konnte nicht geschrieben werden: {reason}"
+
+msgid "collect.log.static_crashed"
+msgstr "collect: die statische MOTD konnte nicht erzeugt werden ({kind}); die alte Datei wurde entfernt"
+
+msgid "collect.error.static_control"
+msgstr "der erzeugte Text enthält ein Steuerzeichen"
+
+msgid "collect.log.stderr_log"
+msgstr "collect: das Fehlerprotokoll der Abfragen konnte nicht geschrieben werden: {reason}"
+
+msgid "collect.unit.finished"
+msgstr "collect: die Sammler-Unit ist fertig: {result}"
+
+msgid "collect.unit.modules"
+msgstr "collect: {count} Module, {failed} fehlgeschlagen"
+
+msgid "collect.unit.failed_module"
+msgstr "  {module}: fehlgeschlagen: {reason}"
+
+msgid "collect.unit.no_cache"
+msgstr "collect: der Cache kann nicht gelesen werden: {reason}"
+
+# --- motp install and uninstall (install/) ------------------------------------------------
+
+msgid "cli.install.help"
+msgstr "MOTP aus diesem Archiv installieren oder den Bytecode neu erzeugen (root)"
+
+msgid "cli.uninstall.help"
+msgstr "entfernen, was motp install angelegt hat; die Konfiguration bleibt (root)"
+
+msgid "cli.dry_run_help"
+msgstr "prüfen und den Plan ausgeben; nichts ändern"
+
+msgid "cli.no_start_help"
+msgstr "alles einrichten, aber weder Timer noch Sammler starten"
+
+msgid "cli.install.mode_help"
+msgstr "hybrid: die Anmelde-Shell zeigt die MOTD; static: der Timer schreibt sie für pam_motd (Standard: Modus der Konfiguration)"
+
+msgid "cli.shell_init.help"
+msgstr "den Abschnitt für die eigene rc-Datei ausgeben, der die MOTD in jedem neuen Terminal zeigt"
+
+msgid "cli.shell_init.shell_help"
+msgstr "die Shell, deren rc-Datei den Abschnitt bekommt"
+
+msgid "cli.purge_help"
+msgstr "auch die vom Installer geschriebenen Konfigurationsdateien entfernen, wenn unverändert"
+
+msgid "install.error.mode"
+msgstr "unbekannter Modus {mode}"
+
+msgid "install.error.mode_differs"
+msgstr "{path} setzt den Modus {configured}; dort zuerst ändern, um den Modus {mode} zu installieren"
+
+msgid "install.plan.mode"
+msgstr "Modus: {mode}"
+
+msgid "install.plan.hook"
+msgstr "Anmelde-Hook für sh-artige Shells: {path}"
+
+msgid "install.plan.zsh_block"
+msgstr "Anmelde-Hook für zsh: ein markierter Block in {path}"
+
+msgid "install.plan.zsh_sourced"
+msgstr "Anmelde-Hook für zsh: nicht nötig, {path} führt /etc/profile aus"
+
+msgid "install.plan.zsh_none"
+msgstr "Anmelde-Hook für zsh: keiner, keine systemweite zprofile gefunden"
+
+msgid "install.plan.zsh_broken"
+msgstr "Anmelde-Hook für zsh: keiner, {path} enthält motp-Markierungen, die keinen ganzen Block bilden"
+
+msgid "install.plan.zsh_unsafe"
+msgstr "Anmelde-Hook für zsh: keiner, {path} ist keine Datei von root, die nur root beschreiben kann"
+
+msgid "install.plan.static"
+msgstr "statischer Modus: jeder Sammlerlauf schreibt {path} für pam_motd; kein Anmelde-Hook"
+
+msgid "install.done.hook"
+msgstr "Anmelde-Hook geschrieben: {path}"
+
+msgid "install.done.zsh_block"
+msgstr "zsh-Anmelde-Hook ergänzt in {path}"
+
+msgid "install.done.no_zsh"
+msgstr "zsh-Anmelde-Hook nicht ergänzt: {path} ist keine Datei von root, die nur root beschreiben kann"
+
+msgid "install.done.static"
+msgstr "statischer Modus: {path} wird bei jedem Sammlerlauf geschrieben"
+
+msgid "install.stopped"
+msgstr "install: vor jeder Änderung abgebrochen: {reason}"
+
+msgid "install.failed"
+msgstr "install: fehlgeschlagen: {reason}"
+
+msgid "install.dry_run"
+msgstr "Probelauf: nichts wurde geändert"
+
+msgid "install.left"
+msgstr "belassen: {path}: {reason}"
+
+msgid "install.error.flags"
+msgstr "so aufrufen: sudo /usr/bin/python3 -I -S motp.pyz install (oder uninstall); -I -S halten Umgebung und site-Verzeichnisse aus einem Programm heraus, das als root läuft"
+
+msgid "install.error.not_root"
+msgstr "dieser Befehl muss als root laufen"
+
+msgid "install.error.python"
+msgstr "Python 3.9 oder neuer ist nötig"
+
+msgid "install.error.source"
+msgstr "install läuft nur aus dem Release-Archiv motp.pyz oder aus dem installierten Verzeichnis"
+
+msgid "install.error.archive"
+msgstr "das Archiv ist beschädigt oder enthält eine unerwartete Datei"
+
+msgid "install.error.compile"
+msgstr "das System-Python konnte das installierte Verzeichnis nicht übersetzen"
+
+msgid "install.error.io"
+msgstr "eine Datei oder ein Verzeichnis konnte nicht geschrieben werden"
+
+msgid "install.error.manifest"
+msgstr "das Installationsverzeichnis ist unlesbar oder keine eigene Datei von root"
+
+msgid "install.error.no_tool"
+msgstr "das Programm {tool} wurde nicht gefunden"
+
+msgid "install.error.tool_failed"
+msgstr "{tool} endete mit Exit-Code {code}"
+
+msgid "install.error.units"
+msgstr "install: systemctl konnte die Units nicht laden, aktivieren oder starten"
+
+msgid "install.error.first_run"
+msgstr "install: der erste Sammlerlauf ist fehlgeschlagen; siehe motp doctor"
+
+msgid "install.error.account_files"
+msgstr "die Kontendatei {path} kann nicht gelesen werden"
+
+msgid "install.error.account_foreign"
+msgstr "ein Konto oder eine Gruppe namens {name} existiert und wurde nicht von MOTP angelegt"
+
+msgid "install.error.account_shape"
+msgstr "das Konto {name} ist nicht genau ein lokales Systemkonto mit eigener Gruppe"
+
+msgid "install.error.account_group"
+msgstr "die primäre Gruppe von {name} ist keine eigene Gruppe {name} ohne Mitglieder"
+
+msgid "install.error.account_shell"
+msgstr "das Konto {name} hat eine Anmelde-Shell"
+
+msgid "install.error.account_password"
+msgstr "das Passwort des Kontos {name} ist nicht gesperrt"
+
+msgid "install.plan.tree"
+msgstr "Plan: Programm in {path}"
+
+msgid "install.plan.account_new"
+msgstr "Plan: Systemkonto {name} anlegen"
+
+msgid "install.plan.account_keep"
+msgstr "Plan: Systemkonto {name} behalten"
+
+msgid "install.plan.admin_group"
+msgstr "Plan: Admin-Gruppe {group} (durch sudoers berechtigt)"
+
+msgid "install.plan.root_only"
+msgstr "Plan: sudoers berechtigt keine Admin-Gruppe; Admin-Details nur für root"
+
+msgid "install.plan.scheduler_systemd"
+msgstr "Plan: systemd-Timer und abgeschottete Sammler-Unit"
+
+msgid "install.plan.scheduler_cron"
+msgstr "Plan: Cron-Eintrag; ohne systemd läuft der Sammler ohne Sandbox"
+
+msgid "install.plan.scheduler_none"
+msgstr "Plan: weder systemd noch cron gefunden; nichts wird den Sammler ausführen"
+
+msgid "install.plan.link"
+msgstr "Plan: Link {path}"
+
+msgid "install.done.tree"
+msgstr "{path} installiert (Bytecode {tag})"
+
+msgid "install.done.account_new"
+msgstr "Systemkonto {name} angelegt"
+
+msgid "install.done.config_new"
+msgstr "Startkonfiguration {path} geschrieben"
+
+msgid "install.done.config_kept"
+msgstr "vorhandene Konfiguration {path} beibehalten"
+
+msgid "install.done.admin_group"
+msgstr "Admin-Gruppe: {group}"
+
+msgid "install.done.root_only"
+msgstr "Admin-Gruppe: keine; Admin-Details nur für root"
+
+msgid "install.done.admin_group_differs"
+msgstr "Admin-Gruppe: die Konfiguration nennt {configured}, sudoers berechtigt {found}; zum Ändern [visibility] admin_group anpassen"
+
+msgid "install.done.units"
+msgstr "Sammler-Unit und Timer geschrieben und aktiviert"
+
+msgid "install.done.cron"
+msgstr "Cron-Eintrag {path} geschrieben"
+
+msgid "install.done.no_scheduler"
+msgstr "kein Zeitplaner: motp collect --no-sandbox aus einem eigenen Zeitplaner aufrufen"
+
+msgid "install.done.no_link"
+msgstr "kein Link {path}: das Verzeichnis gehört nicht allein root oder der Name ist belegt"
+
+msgid "install.done.manifest"
+msgstr "{count} Pfade im Installationsverzeichnis vermerkt"
+
+msgid "install.done.first_run"
+msgstr "der erste Sammlerlauf ist fertig"
+
+msgid "install.left.outside"
+msgstr "außerhalb der Pfade des Installers"
+
+msgid "install.left.link_on_path"
+msgstr "ein Link oder Nicht-Verzeichnis liegt auf dem Weg"
+
+msgid "install.left.changed"
+msgstr "seit der Installation geändert"
+
+msgid "install.left.not_empty"
+msgstr "Verzeichnis nicht leer"
+
+msgid "install.left.failed"
+msgstr "konnte nicht entfernt werden"
+
+msgid "install.left.account"
+msgstr "das Konto {name} hat nicht mehr die vermerkten IDs"
+
+msgid "uninstall.not_installed"
+msgstr "kein Installationsverzeichnis in {path}; nichts zu entfernen"
+
+msgid "uninstall.would_remove"
+msgstr "würde {path} entfernen"
+
+msgid "uninstall.outside"
+msgstr "würde {path} belassen: außerhalb der Pfade des Installers"
+
+msgid "uninstall.would_remove_account"
+msgstr "würde das Konto {name} entfernen"
+
+msgid "uninstall.account_removed"
+msgstr "Konto {name} entfernt"
+
+msgid "uninstall.account_left"
+msgstr "Konto {name} belassen: {reason}"
+
+msgid "uninstall.done"
+msgstr "{count} Pfade entfernt, {left} belassen"
+
+msgid "uninstall.config_kept"
+msgstr "die Konfiguration in {path} bleibt; motp uninstall --purge entfernt die unveränderten Dateien des Installers"
+
+# --- motp doctor (install/doctor.py) ------------------------------------------------------
+
+msgid "cli.doctor.help"
+msgstr "Installation, Cache und Terminal prüfen"
+
+msgid "doctor.level.ok"
+msgstr "ok"
+
+msgid "doctor.level.info"
+msgstr "Info"
+
+msgid "doctor.level.warn"
+msgstr "Warnung"
+
+msgid "doctor.level.fail"
+msgstr "FEHLER"
+
+msgid "doctor.mode"
+msgstr "Modus: {mode}"
+
+msgid "doctor.hook"
+msgstr "Anmelde-Hook: {path}"
+
+msgid "doctor.hook_missing"
+msgstr "Anmelde-Hook fehlt oder gehört nicht allein root: {path}; motp install ausführen"
+
+msgid "doctor.other_mode_left"
+msgstr "{path} gehört zum anderen Modus und würde die MOTD doppelt zeigen; motp install ausführen"
+
+msgid "doctor.static_unit"
+msgstr "{path} kann /run/motd.d nicht beschreiben (statischer Modus); motp install --mode static ausführen"
+
+msgid "doctor.static_missing"
+msgstr "statische Datei fehlt oder gehört nicht allein root: {path}; sudo motp collect ausführen, dann erneut sudo motp doctor"
+
+msgid "doctor.static_file"
+msgstr "statische Datei: {path}, vor {age} s geschrieben"
+
+msgid "doctor.line"
+msgstr "[{level}] {text}"
+
+msgid "doctor.untrusted_fs"
+msgstr "{path} liegt auf einem {type}-Dateisystem, dessen Eigentümer die Eigentumsprüfung nicht trauen kann; auf einen lokalen Datenträger verlegen"
+
+msgid "doctor.static_gap"
+msgstr "Statischer Modus: nur Anmeldungen über pam_motd (SSH, die Konsole) zeigen die Meldung; su -, bash -l und tmux-Fenster zeigen keine (im Hybridmodus gibt es diese Lücke nicht)"
+
+msgid "doctor.zsh_block"
+msgstr "zsh-Hook: der Block in {path}"
+
+msgid "doctor.zsh_profile"
+msgstr "zsh-Hook: {path} führt /etc/profile aus, das den Anmelde-Hook ausführt"
+
+msgid "doctor.zsh_missing"
+msgstr "zsh-Hook fehlt in {path} (zsh nach MOTP installiert?); motp install erneut ausführen"
+
+msgid "doctor.zsh_broken"
+msgstr "Markierungen des zsh-Hooks in {path} sind beschädigt; motp-Zeilen von Hand entfernen, dann motp install ausführen"
+
+msgid "doctor.zsh_unsafe"
+msgstr "zsh-Hook: {path} ist keine normale Datei, die nur root schreiben kann; motp install lässt sie aus; die Datei root allein geben (sudo chmod go-w DATEI), dann sudo motp install"
+
+msgid "doctor.charset_line"
+msgstr "Zeichensatztest: {sample}"
+
+msgid "doctor.version"
+msgstr "motp {version}"
+
+msgid "doctor.not_installed"
+msgstr "nicht installiert: {path} fehlt; die README beschreibt die Installation"
+
+msgid "doctor.program"
+msgstr "Programm in {path}, gehört root, nur für root schreibbar"
+
+msgid "doctor.program_unsafe"
+msgstr "das installierte Programm ist nicht sicher: {reason}; aus einem geprüften Archiv neu installieren: sudo /usr/bin/python3 -I -S ./motp.pyz install"
+
+msgid "doctor.search_path"
+msgstr "Python-Suchpfad: {count} Einträge, alle nur für root schreibbar"
+
+msgid "doctor.search_path_bad"
+msgstr "Eintrag {entry} im Python-Suchpfad: {reason}; root allein geben und Gruppen-Schreibrecht entfernen (sudo chmod g-w,o-w VERZ)"
+
+msgid "doctor.root_program"
+msgstr "{program}: Root-Proben dürfen es starten"
+
+msgid "doctor.root_programs_as_root"
+msgstr "Programme, die Root-Proben starten: sudo motp doctor prüft ihren Python-Importpfad"
+
+msgid "doctor.root_program_bad"
+msgstr "{program} wird nicht als root gestartet: {reason}. Weiter: den Inhalt ansehen, ihn root allein geben (sudo chown -R root:root PFAD; sudo chmod -R go-w PFAD), dann sudo motp collect"
+
+msgid "doctor.error.relative"
+msgstr "das aktuelle Verzeichnis steht im Suchpfad"
+
+msgid "doctor.bytecode"
+msgstr "Bytecode für Python {version}: {total} Dateien aktuell"
+
+msgid "doctor.bytecode_stale"
+msgstr "Bytecode für Python {version}: {count} von {total} Dateien fehlen oder sind veraltet; motp install ausführen"
+
+msgid "doctor.bytecode_skipped"
+msgstr "Bytecode: nicht geprüft, dies ist nicht das installierte Programm"
+
+msgid "doctor.config"
+msgid_plural "doctor.config"
+msgstr[0] "Konfiguration: {count} Datei verwendet, keine Fehler"
+msgstr[1] "Konfiguration: {count} Dateien verwendet, keine Fehler"
+
+msgid "doctor.config_problems"
+msgid_plural "doctor.config_problems"
+msgstr[0] "Konfiguration: {count} Fehler; motp config check ausführen"
+msgstr[1] "Konfiguration: {count} Fehler; motp config check ausführen"
+
+msgid "doctor.config_warnings"
+msgid_plural "doctor.config_warnings"
+msgstr[0] "Konfiguration: {count} Einstellung wirkt nicht; motp config check ausführen"
+msgstr[1] "Konfiguration: {count} Einstellungen wirken nicht; motp config check ausführen"
+
+msgid "doctor.config_root_only"
+msgstr "Konfiguration: nur root kann {path} lesen; zum Prüfen sudo motp doctor ausführen"
+
+msgid "doctor.admin_group"
+msgstr "Admin-Gruppe: {group}"
+
+msgid "doctor.admin_root_only"
+msgstr "Admin-Gruppe: keine; Admin-Details kann nur root lesen; zum Teilen [visibility] admin_group in /etc/motp/config.toml setzen"
+
+msgid "doctor.admin_group_missing"
+msgstr "Admin-Gruppe {group} existiert lokal nicht; Admin-Details sind nur für root; die Gruppe anlegen oder [visibility] admin_group in /etc/motp/config.toml setzen, dann sudo motp collect"
+
+msgid "doctor.account"
+msgstr "Konto {name}: gesperrtes Systemkonto mit eigener Gruppe"
+
+msgid "doctor.account_bad"
+msgstr "Konto {name}: {reason}; sudo motp install legt es an oder prüft es erneut (ein fremdes Konto übernimmt es nie)"
+
+msgid "doctor.timer"
+msgstr "Sammler-Timer: {enabled}, {active}"
+
+msgid "doctor.timer_missing"
+msgstr "Sammler-Timer: die Unit-Dateien fehlen; motp install ausführen"
+
+msgid "doctor.cron_no_sandbox"
+msgstr "Sammler: von cron ausgeführt ({path}), ohne systemd-Sandbox; mit systemd nutzt sudo motp install stattdessen den abgeschirmten Timer"
+
+msgid "doctor.no_scheduler"
+msgstr "Sammler: weder ein systemd-Timer noch ein Cron-Eintrag führt ihn aus; sudo motp install richtet einen ein"
+
+msgid "doctor.hidepid"
+msgstr "/proc verbirgt fremde Prozesse; außerhalb der Unit kann der Sammler seine Aufräumarbeit nicht prüfen; nichts zu tun, solange systemd den Sammler startet"
+
+msgid "doctor.hidepid_unit"
+msgstr "/proc verbirgt fremde Prozesse; die Sammler-Unit räumt über ihre Control-Group auf"
+
+msgid "doctor.cache_missing"
+msgstr "Cache: {reason}; sudo motp collect ausführen (der Timer schreibt ihn alle 5 Minuten)"
+
+msgid "doctor.cache_age"
+msgstr "Cache: vor {age} s geschrieben, {failed} Module fehlgeschlagen"
+
+msgid "doctor.module_failed"
+msgstr "Modul {module} fehlgeschlagen: {reason}; sudo motp collect führt es erneut aus, motp modules zeigt seinen Zustand"
+
+msgid "doctor.plugin"
+msgstr "Plugin {name}: läuft als {user}; letzter Lauf: {last}"
+
+msgid "doctor.plugin_refused"
+msgstr "Plugin {name}: abgelehnt, es läuft nicht: {reason}; das Genannte beheben (docs/plugins.md), dann sudo motp collect"
+
+msgid "doctor.plugin_ignored"
+msgstr "plugins.d/{name}: ignoriert: {reason}"
+
+msgid "doctor.plugins_none"
+msgstr "Plugins: keine in {path}"
+
+msgid "doctor.plugins_root_only"
+msgstr "Plugins: motp doctor als root listet sie auf"
+
+msgid "doctor.plugin_last_none"
+msgstr "noch keiner"
+
+msgid "doctor.plugin_last_ok"
+msgstr "ok, vor {age} s"
+
+msgid "doctor.plugin_last_failed"
+msgstr "fehlgeschlagen: {reason}"
+
+msgid "doctor.terminal"
+msgstr "Terminal: tty {tty}, TERM {term}, Kodierung {encoding}, Zeichensatz {charset}, Farbstufe {colors}"
+
+msgid "collect.log.crashed"
+msgstr "collect: durch einen unerwarteten Fehler abgebrochen ({kind}); motp collect --no-sandbox als root zeigt ihn"
+
+msgid "install.error.source_writable"
+msgstr "das Archiv kann von anderen als seinem Besitzer geändert werden"
+
+msgid "install.error.own_dir"
+msgstr "{path} existiert, ist aber kein Verzeichnis von root, das nur root beschreiben kann"
+
+msgid "install.error.busy"
+msgstr "ein Sammlerlauf wurde nicht rechtzeitig fertig; erneut versuchen"
+
+msgid "install.waiting"
+msgstr "warte auf das Ende des laufenden Sammelns ({seconds} s)"
+
+msgid "doctor.error.not_isolated"
+msgstr "dieses Python läuft ohne -I -S; /opt/motp/bin/motp doctor ausführen"
+
+msgid "doctor.error.link"
+msgstr "{path} ist ein Link"
+
+# --- motp explain (explain.py) --------------------------------------------------------
+
+msgid "cli.explain.help"
+msgstr "eine Zeile oder Warnung der MOTD erklären"
+
+msgid "cli.explain.topic_help"
+msgstr "das Thema; ohne Angabe werden die Themen aufgelistet"
+
+msgid "explain.unknown_topic"
+msgstr "kein Thema namens {topic}; motp explain listet die Themen auf"
+
+msgid "explain.list.heading"
+msgstr "Themen (motp explain THEMA):"
+
+msgid "explain.heading.warn"
+msgstr "Warnungen"
+
+msgid "explain.heading.todo"
+msgstr "Was tun"
+
+msgid "explain.heading.commands"
+msgstr "Befehle, die die MOTD vorschlägt"
+
+msgid "explain.limits"
+msgstr "Grenzen hier: Warnung ab {warn}, kritisch ab {crit} (Einstellung thresholds.{rule})."
+
+msgid "explain.hostname.title"
+msgstr "Rechnername"
+
+msgid "explain.hostname.what"
+msgstr "Der Name, den sich dieser Rechner selbst gibt, so wie der Kernel ihn meldet. Die große Kopfzeile zeigt den Teil vor dem ersten Punkt."
+
+msgid "explain.os.title"
+msgstr "Betriebssystem"
+
+msgid "explain.os.what"
+msgstr "Distribution und Version, gelesen aus /etc/os-release."
+
+msgid "explain.kernel.title"
+msgstr "Kernel"
+
+msgid "explain.kernel.what"
+msgstr "Die Version des Linux-Kernels, der gerade läuft. Nach einem Kernel-Update läuft der alte weiter bis zum nächsten Neustart (siehe reboot)."
+
+msgid "explain.address.title"
+msgstr "Lokale Adresse"
+
+msgid "explain.address.what"
+msgstr "Die Adressen der eigenen Netzwerkschnittstellen, ohne Loopback- und Link-Local-Adressen; höchstens vier werden gezeigt. Das ist nicht die Adresse, die das Internet sieht: MOTP fragt keinen fremden Dienst."
+
+msgid "explain.dns.title"
+msgstr "DNS-Server"
+
+msgid "explain.dns.what"
+msgstr "Die Server, bei denen dieser Rechner Namen in Adressen auflöst, von systemd-resolved, wo es läuft, sonst aus /etc/resolv.conf."
+
+msgid "explain.uptime.title"
+msgstr "Laufzeit"
+
+msgid "explain.uptime.what"
+msgstr "Die Zeit seit dem Start des Rechners."
+
+msgid "explain.load.title"
+msgstr "Auslastung"
+
+msgid "explain.load.what"
+msgstr "Die mittlere Last der letzten 1, 5 und 15 Minuten: wie viele Prozesse liefen oder warteten. Entspricht die Last der Zahl der CPU-Kerne, war jeder Kern beschäftigt."
+
+msgid "explain.load.warn"
+msgstr "Der 5-Minuten-Wert, geteilt durch die Zahl der Kerne, hat eine Grenze erreicht. Kurze Spitzen sind bei Updates oder beim Kompilieren normal."
+
+msgid "explain.load.todo"
+msgstr "Den Prozess suchen, der die CPU belegt oder auf den Datenträger wartet, etwa mit top oder ps."
+
+msgid "explain.memory.title"
+msgstr "Arbeitsspeicher"
+
+msgid "explain.memory.what"
+msgstr "Wie viel vom Arbeitsspeicher belegt ist. Speicher, den der Kernel als Dateicache nutzt und sofort freigeben kann, zählt nicht als belegt."
+
+msgid "explain.memory.warn"
+msgstr "Es ist wenig Speicher frei. Das System beginnt dann womöglich auszulagern oder Prozesse zu beenden."
+
+msgid "explain.memory.todo"
+msgstr "Die größten Prozesse suchen, etwa mit top (Taste M), und Unnötiges beenden oder begrenzen."
+
+msgid "explain.swap.title"
+msgstr "Swap"
+
+msgid "explain.swap.what"
+msgstr "Platz auf einem Datenträger, der Speicherseiten aufnimmt, wenn der Arbeitsspeicher knapp wird. Die Zeile erscheint nur, wenn das System Swap hat."
+
+msgid "explain.swap.warn"
+msgstr "Ein großer Teil des Swaps ist belegt, ein Zeichen für knappen Arbeitsspeicher."
+
+msgid "explain.swap.todo"
+msgstr "Siehe memory. Seiten bleiben im Swap, bis sie wieder gebraucht werden; der Wert kann also hoch bleiben, auch wenn der Engpass vorbei ist."
+
+msgid "explain.updates.title"
+msgstr "Updates"
+
+msgid "explain.updates.what"
+msgstr "Updates, die auf die Installation warten, gezählt aus den Paketlisten, die dieses System heruntergeladen hat; MOTP aktualisiert sie nie selbst. Admins sehen auch die Paketnamen. Zeilen darunter nennen die Zahl zurückgehaltener Pakete und, wenn die Listen älter als sieben Tage sind, deren Alter."
+
+msgid "explain.updates.warn"
+msgstr "Sicherheitsupdates stehen aus, oder dieses System kann sie nicht von anderen unterscheiden, sodass jedes eines sein kann. \"unbekannt\" heißt, dass noch keine Paketlisten heruntergeladen wurden."
+
+msgid "explain.updates.todo"
+msgstr "Die Updates mit dem Befehl unten installieren. Alte oder fehlende Listen zuerst aktualisieren: sudo apt update unter Debian und Ubuntu, sudo dnf makecache unter Fedora und der RHEL-Familie."
+
+msgid "explain.reboot.title"
+msgstr "Neustart"
+
+msgid "explain.reboot.what"
+msgstr "Ob Updates auf einen Neustart warten: unter Debian und Ubuntu laut der Datei /run/reboot-required, unter Fedora und der RHEL-Familie, wenn der Kernel oder eine Kernbibliothek nach dem Start installiert wurde. Admins sehen die Pakete."
+
+msgid "explain.reboot.warn"
+msgstr "Ein Neustart ist nötig. Bis dahin laufen die alten Versionen weiter, mit den Fehlern, die das Update behebt."
+
+msgid "explain.reboot.todo"
+msgstr "Neu starten, sobald es für die Benutzer und Dienste des Rechners passt."
+
+msgid "explain.eol.title"
+msgstr "Support-Ende"
+
+msgid "explain.eol.what"
+msgstr "Der letzte Tag, an dem diese Version des Betriebssystems Sicherheitsupdates erhält. Das Datum stammt vom System selbst (SUPPORT_END) oder aus einer Tabelle, die MOTP mitbringt; \"Stand\" ist der Tag, an dem die Tabelle zuletzt geprüft wurde."
+
+msgid "explain.eol.warn"
+msgstr "Der Support endet innerhalb von 90 Tagen oder ist beendet. Danach werden neue Sicherheitslücken des Systems nicht mehr geschlossen."
+
+msgid "explain.eol.todo"
+msgstr "Daten sichern und den Umstieg auf eine neuere Version nach der Anleitung der Distribution planen. Manche Distributionen bieten verlängerten Support an, teils gegen Geld."
+
+msgid "explain.firewall.title"
+msgstr "Firewall"
+
+msgid "explain.firewall.what"
+msgstr "Ob ufw, firewalld oder nftables aktiv ist, beurteilt nach deren systemd-Units und Einstellungen. Anders geladene Regeln, etwa durch ein Skript oder eine Container-Laufzeit, werden nicht erkannt. Nur für Admins."
+
+msgid "explain.firewall.warn"
+msgstr "Keine Firewall ist aktiv, oder eine ist beim Start gescheitert, was kritisch ist. Ohne Firewall ist jeder Dienst erreichbar, der im Netz lauscht."
+
+msgid "explain.firewall.todo"
+msgstr "Eine Firewall einschalten. Vorher SSH erlauben, sonst sperrt man sich bei einem entfernten Rechner selbst aus. Ist eine gescheitert, nennen systemctl status und journalctl für ihre Unit den Grund."
+
+msgid "explain.autoupdates.title"
+msgstr "Automatische Updates"
+
+msgid "explain.autoupdates.what"
+msgstr "Ob Updates ohne Zutun installiert werden: unattended-upgrades unter Debian und Ubuntu, dnf-automatic unter Fedora und der RHEL-Familie. Nur herunterladen zählt nicht. Nur für Admins."
+
+msgid "explain.autoupdates.warn"
+msgstr "Auto-Updates sind aus, nicht installiert oder laden nur herunter. \"APT::Periodic::Enable ist 0\" heißt, eine Zeile in /etc/apt/apt.conf.d schaltet den ganzen Lauf ab; \"apply_updates = yes setzen\" heißt, der Timer läuft, aber dnf soll nicht installieren."
+
+msgid "explain.autoupdates.todo"
+msgstr "Den Befehl bei der Warnung verwenden. Bei APT::Periodic::Enable die gefundene Zeile entfernen. Bei apply_updates in der Datei, die der Befehl öffnet, unter [commands] apply_updates = yes setzen."
+
+msgid "explain.logins.title"
+msgstr "Fehlgeschlagene Anmeldungen"
+
+msgid "explain.logins.what"
+msgstr "Wie viele Anmeldeverbindungen in den letzten 24 Stunden scheiterten, laut /var/log/btmp; mehrere falsche Passwörter in einer Verbindung zählen einmal. \"Über\" heißt, die Zählung hörte an ihrer Grenze auf. Admins sehen die häufigsten Quellen; Benutzernamen werden nie gelesen. Systeme ohne btmp, etwa Debian 13, zeigen \"auf diesem System nicht erfasst\"; das Journal führt die Fehlversuche weiter (journalctl -u ssh)."
+
+msgid "explain.logins.todo"
+msgstr "Bei einem Rechner, der aus dem Internet erreichbar ist, sind ständige Versuche üblich. Für SSH nur Schlüssel zulassen und fail2ban erwägen."
+
+msgid "explain.fail2ban.title"
+msgstr "Fail2ban"
+
+msgid "explain.fail2ban.what"
+msgstr "Wie viele Adressen fail2ban gerade sperrt, über alle Jails (Regelsätze, je einer pro Dienst). Admins sehen Jail-Namen und Adressen."
+
+msgid "explain.fail2ban.warn"
+msgstr "fail2ban ist installiert, aber der Server läuft nicht; es wird also nichts gesperrt. \"Nicht geprüft\" heißt: MOTP hat den Client von fail2ban nicht als root gestartet, weil jemand außer root ein Verzeichnis ändern kann, aus dem sein Python importiert; sudo motp doctor nennt es."
+
+msgid "explain.fail2ban.todo"
+msgstr "Den Dienst starten (sudo systemctl enable --now fail2ban). Hält er wieder an, nennt journalctl -u fail2ban den Grund."
+
+msgid "explain.login.title"
+msgstr "Letzte Anmeldung"
+
+msgid "explain.login.what"
+msgstr "Die eigene vorige Anmeldung: wann sie war und, soweit bekannt, von welchem Rechner und Terminal sie kam. Sie erscheint nur beim Anmelden und nur für das eigene Konto."
+
+msgid "explain.login.todo"
+msgstr "Kommen Zeitpunkt oder Herkunft nicht bekannt vor, Passwort und SSH-Schlüssel ändern und den Admin informieren."
+
+msgid "explain.sessions.title"
+msgstr "Sitzungen"
+
+msgid "explain.sessions.what"
+msgstr "Wie viele Terminalsitzungen gerade angemeldet sind, gezählt wie beim Befehl who. Admins sehen, wer von wo. Systeme ohne /run/utmp, etwa Debian 13, zeigen \"auf diesem System nicht erfasst\"; dort listet loginctl die Sitzungen."
+
+msgid "explain.disks.title"
+msgstr "Speicherplatz"
+
+msgid "explain.disks.what"
+msgstr "Wie voll jedes lokale Dateisystem ist, gezählt wie bei df. Netzwerk- und temporäre Dateisysteme fehlen. Wechselmedien und Einhängepunkte einzelner Benutzer sehen nur Admins."
+
+msgid "explain.disks.warn"
+msgstr "Ein Dateisystem ist fast voll. Ist es voll, können Programme nicht mehr schreiben; betroffen sind zuerst Protokolle, Datenbanken und Updates."
+
+msgid "explain.disks.todo"
+msgstr "Herausfinden, was den Platz belegt, etwa mit sudo du -xh --max-depth=1 auf dem Einhängepunkt, und Unnötiges löschen oder verschieben."
+
+msgid "explain.inodes.title"
+msgstr "Inodes"
+
+msgid "explain.inodes.what"
+msgstr "Jede Datei und jedes Verzeichnis braucht einen Inode, und manche Dateisysteme haben nur eine feste Zahl davon. Die Zeile erscheint, sobald die Hälfte belegt ist."
+
+msgid "explain.inodes.warn"
+msgstr "Die Inodes gehen aus. Dann lässt sich keine neue Datei anlegen, obwohl noch Platz frei ist."
+
+msgid "explain.inodes.todo"
+msgstr "Verzeichnisse mit sehr vielen kleinen Dateien suchen, etwa Mail-Warteschlangen, Caches oder Sitzungsdaten, und aufräumen."
+
+msgid "explain.units.title"
+msgstr "Fehlgeschlagene Units"
+
+msgid "explain.units.what"
+msgstr "systemd-Units (Dienste, Einhängepunkte, Timer und so weiter) im Zustand failed. Die Zahl ist öffentlich, die Namen sehen nur Admins."
+
+msgid "explain.units.warn"
+msgstr "Mindestens eine Unit ist fehlgeschlagen: etwas, das laufen oder erfolgreich enden sollte, tat es nicht."
+
+msgid "explain.units.todo"
+msgstr "Auflisten, für jede journalctl -u NAME lesen, die Ursache beheben und die Unit neu starten. sudo systemctl reset-failed löscht den Zustand einer Unit, die nicht mehr wichtig ist."
+
+msgid "explain.services.title"
+msgstr "Überwachte Units"
+
+msgid "explain.services.what"
+msgstr "Zeilen, die der Admin mit [[rows.unit]] in der Konfiguration eingerichtet hat, je eine pro systemd-Unit. Der Wert ist der Zustand, den systemd meldet, unübersetzt."
+
+msgid "explain.services.warn"
+msgstr "Die Unit ist nicht aktiv: failed ist kritisch; inactive, activating, deactivating, maintenance, nicht gefunden oder maskiert sind eine Warnung. reloading und refreshing zählen als aktiv. \"Zustand unbekannt\" heißt, systemd gab keine verständliche Antwort."
+
+msgid "explain.services.todo"
+msgstr "systemctl status NAME zeigt, was nicht stimmt. Bei einer nicht gefundenen Unit den Namen in der Konfiguration prüfen."
+
+msgid "explain.files.title"
+msgstr "Überwachte Dateien"
+
+msgid "explain.files.what"
+msgstr "Zeilen, die der Admin mit [[rows.file_age]] eingerichtet hat: wie lange die letzte Änderung einer Datei her ist, etwa eines Stempels, den eine Sicherung nach Erfolg schreibt."
+
+msgid "explain.files.warn"
+msgstr "Die Datei ist älter als warn_after oder crit_after, oder sie fehlt. \"Nicht lesbar\" heißt, der Benutzer motp darf sie nicht ansehen."
+
+msgid "explain.files.todo"
+msgstr "Den Auftrag prüfen, der die Datei aktualisieren soll. Darf motp die Datei nicht lesen, den Zugriff erlauben oder ein Plugin verwenden, das als root läuft (docs/plugins.md)."
+
+msgid "explain.containers.title"
+msgstr "Container"
+
+msgid "explain.containers.what"
+msgstr "Container von Docker, und von Podman, wo podman.socket aktiviert ist, gezählt nach Zustand. Admins sehen Namen und Images."
+
+msgid "explain.containers.warn"
+msgstr "Ein Container ist ungesund oder startet immer wieder neu, oder die Laufzeitumgebung antwortet nicht. \"Dienst angehalten\" heißt, Docker läuft nicht; MOTP startet es nicht."
+
+msgid "explain.containers.todo"
+msgstr "docker ps -a listet die Container auf (für Podman podman ps -a); docker logs NAME zeigt die Ausgabe eines Containers."
+
+msgid "explain.plugins.title"
+msgstr "Plugins"
+
+msgid "explain.plugins.what"
+msgstr "Zeilen von Programmen, die der Admin in /etc/motp/plugins.d abgelegt hat. Jede beginnt mit [Plugin NAME]. Der Text stammt vom Plugin, nicht von MOTP, und ein Hinweis daraus ist nur Text, nie ein Befehl, für den MOTP bürgt."
+
+msgid "explain.plugins.todo"
+msgstr "motp doctor, als root ausgeführt, listet jedes Plugin auf, ob es laufen darf und wie der letzte Lauf endete. docs/plugins.md beschreibt, wie man eines schreibt."
+
+msgid "explain.collector.title"
+msgstr "Gesammelte Daten und Module"
+
+msgid "explain.collector.what"
+msgstr "Ein Timer startet den Sammler, der die meisten Werte im Voraus ermittelt; beim Anmelden liest MOTP sie nur. Laufzeit, Auslastung und Speicher werden live gelesen."
+
+msgid "explain.collector.warn"
+msgstr "\"Die gesammelten Daten sind alt\": der Sammler hat seit drei seiner Abstände nichts geschrieben. \"Noch keine gesammelten Daten\": er lief noch nie, oder seine Dateien sind nicht lesbar. \"Modul fehlgeschlagen\": ein Teil ließ sich nicht ermitteln; seine letzten Werte werden womöglich noch gezeigt. \"Konfiguration: 1 Datei ignoriert\" (nur für Admins): eine Konfigurationsdatei enthält einen Fehler, also nimmt der Sammler die Standardwerte und die übrigen Dateien; sudo motp config check nennt Datei, Zeile und Einstellung."
+
+msgid "explain.collector.todo"
+msgstr "motp doctor ausführen (als root für alle Details) und den Timer mit dem Befehl unten prüfen."
+
+msgid "explain.status.title"
+msgstr "Warnungen und Markierungen"
+
+msgid "explain.status.what"
+msgstr "Werte sind nach Status eingefärbt: ok, Warnung oder kritisch. Ohne Farbe ist eine Warnung mit [!] markiert und ein kritischer Wert mit [!!]. Der Block oben sammelt sie, das Schlimmste zuerst, mit einem Befehl, wo einer hilft."
+
+msgid "explain.status.warn"
+msgstr "Ein Alter in Klammern, etwa (45 Minuten alt), heißt, dass der Wert länger nicht erneuert wurde. \"unbekannt\" heißt, dass MOTP keinen verlässlichen Wert hat, etwa weil die Daten zu alt sind."
+
+msgid "explain.status.todo"
+msgstr "motp explain THEMA erklärt eine einzelne Zeile. Die Grenzen für Warnungen lassen sich unter [thresholds] in /etc/motp/config.toml ändern."
+
+# --- tips (core/tips.py) --------------------------------------------------------------
+
+msgid "tip.explain"
+msgstr "motp explain THEMA sagt, was eine Zeile oder Warnung bedeutet."
+
+msgid "tip.doctor"
+msgstr "motp doctor prüft die Installation und sagt, was nicht stimmt."
+
+msgid "tip.modules"
+msgstr "motp modules zeigt, welche Module laufen und warum andere nicht."
+
+msgid "tip.preview"
+msgstr "motp preview --demo zeigt die MOTD mit Beispieldaten."
+
+msgid "tip.plugins"
+msgstr "Ein kleines Programm in /etc/motp/plugins.d ergänzt eigene Zeilen."
+
+msgid "tip.unit_rows"
+msgstr "Ein Eintrag [[rows.unit]] in der Konfiguration überwacht einen Dienst."
+
+msgid "tip.file_rows"
+msgstr "Ein Eintrag [[rows.file_age]] warnt, wenn die letzte Sicherung alt wird."
+
+msgid "tip.config_check"
+msgstr "Nach Änderungen unter /etc/motp: sudo motp config check ausführen."
+
+msgid "tip.no_color"
+msgstr "NO_COLOR=1 in der eigenen Umgebung zeigt MOTP ohne Farben."
+
+msgid "tip.shell_init"
+msgstr "motp shell-init bash zeigt, was MOTP auch in neue Terminals bringt."
+
+msgid "tip.classic"
+msgstr "preset = \"classic\" unter [theme] bringt das Aussehen von 2019 zurück."
+
+msgid "tip.off"
+msgstr "Die Einstellung tips unter [layout] schaltet diese Tipps ein und aus."

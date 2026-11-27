@@ -5,6 +5,10 @@
 *.md text eol=lf
 *.json text eol=lf
 *.txt text eol=lf
+*.po text eol=lf
 tests/fixtures/** text eol=lf
+tests/golden/** text eol=lf
+*.flf text eol=lf
 *.pyz binary
+*.mo binary
 *.png binary

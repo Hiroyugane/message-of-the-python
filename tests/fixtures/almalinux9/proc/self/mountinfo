@@ -1,0 +1,7 @@
+500 400 0:52 / / rw,relatime - overlay overlay rw,lowerdir=/l,upperdir=/u,workdir=/w
+501 500 0:56 / /proc rw,nosuid,nodev,noexec,relatime - proc proc rw
+502 500 0:57 / /dev rw,nosuid - tmpfs tmpfs rw,size=65536k
+503 500 8:32 /containers/hosts /etc/hosts rw,relatime - ext4 /dev/sdc rw
+504 500 8:32 /containers/hostname /etc/hostname rw,relatime - ext4 /dev/sdc rw
+505 500 0:58 / /run/.containerenv rw - tmpfs tmpfs rw
+506 500 0:59 / /var/lib/containers/storage/overlay/x/merged rw - overlay overlay rw

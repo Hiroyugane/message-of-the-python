@@ -1,0 +1,39 @@
+#!/usr/bin/python3 -I
+"""Message of the Python, example plugin in the JSON form (docs/plugins.md).
+
+Compares the 1-minute load with the 15-minute load and says whether it is rising. It
+reads /proc/loadavg only, which every user may read, so it runs as motp-plugin as is.
+"""
+
+import json
+import os
+import sys
+
+
+def main() -> int:
+    with open("/proc/loadavg", encoding="ascii") as fh:
+        one, _five, fifteen = (float(x) for x in fh.read().split()[:3])
+    cores = os.cpu_count() or 1
+    rising = one > fifteen * 1.5 and one / cores > 0.7
+    item = {
+        "key": "trend",
+        "label": {"text": "Load trend", "i18n": {"de": "Lasttrend"}},
+        "value": round(one / cores, 2),
+        "unit": "ratio",
+        "status": "warn" if rising else "ok",
+        "text": {
+            "text": "rising" if rising else "steady",
+            "i18n": {"de": "steigend" if rising else "gleichbleibend"},
+        },
+        "hint": {
+            "text": "See which processes keep the machine busy (top).",
+            "i18n": {"de": "Nachsehen, welche Prozesse die Maschine auslasten (top)."},
+        },
+        "detail": [{"key": "fifteen", "label": "15 min", "value": fifteen, "unit": "ratio"}],
+    }
+    json.dump({"api": 1, "items": [item]}, sys.stdout)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

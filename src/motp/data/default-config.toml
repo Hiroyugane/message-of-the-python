@@ -1,0 +1,60 @@
+# Defaults of MOTP, the message of the python. Part of the program: do not edit.
+# Settings go into /etc/motp/config.toml and /etc/motp/conf.d/*.toml, which override these
+# key by key. `motp config init` writes a commented starter file.
+
+[general]
+mode = "hybrid"
+language = "auto"
+
+[limits]
+render_ms = 1000
+probe_timeout_s = 5
+collect_total_s = 60
+
+[visibility]
+admin_group = ""
+
+[layout]
+sections = ["attention", "host", "system", "security", "login", "disks", "services", "containers", "plugins"]
+header = "hostname"
+header_text = ""
+charset = "auto"
+color = "auto"
+tips = false
+
+# The look (D35). Every other [theme] and [layout] key is optional; a key that is not set
+# takes the preset's value (see `motp config init` for the list).
+[theme]
+preset = "default"
+
+# Threshold rules (blueprint 4.5). Limits are inclusive. The direction is stated, so a
+# file that only moves one limit cannot turn a rule around.
+[thresholds.disk_used_percent]
+warn = 80
+crit = 90
+direction = "higher"
+
+[thresholds.inode_used_percent]
+warn = 80
+crit = 90
+direction = "higher"
+
+[thresholds.load_per_core]
+warn = 0.7
+crit = 1.0
+direction = "higher"
+
+[thresholds.memory_used_percent]
+warn = 90
+crit = 95
+direction = "higher"
+
+[thresholds.swap_used_percent]
+warn = 50
+crit = 80
+direction = "higher"
+
+[thresholds.cert_days_left]
+warn = 21
+crit = 7
+direction = "lower"

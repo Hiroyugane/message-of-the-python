@@ -1,0 +1,201 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Read-only token for every job; no job needs more.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  # Pinned by commit hash below: actions/checkout v7.0.1, actions/setup-python v7.1.0,
+  # actions/upload-artifact v7.0.2, actions/download-artifact v8.0.2.
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - run: python -m pip install ruff==0.17.6 mypy==2.4.1 pytest==9.2.0
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: mypy
+      # Invariant 3: no foreign address, e-mail address or leftover string in tracked files.
+      - run: python tools/scan_repo.py
+
+  test:
+    name: test (python ${{ matrix.python }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install pytest==9.2.0
+      - run: python -m pytest -rP
+
+  # Python 3.9 and 3.10 are what AlmaLinux 9 and Ubuntu 22.04 ship, so they run inside those
+  # images, as root. tools/container_test.py is the same tool the local Podman runs use,
+  # here with Docker, so the container gets the same options (an init as PID 1 among them);
+  # tools/container/unit_tests.sh then copies the tree to the container's own filesystem,
+  # creates the test accounts, and sets MOTP_REQUIRE_ROOT_TESTS=1, so tests marked
+  # needs_linux_owner run and are never skipped.
+  test-container:
+    name: test (${{ matrix.image }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        image: ["almalinux:9", "almalinux:10", "ubuntu:22.04", "debian:12", "debian:13", "fedora:45"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Run pytest inside ${{ matrix.image }}
+        env:
+          IMAGE: ${{ matrix.image }}
+        run: python3 tools/container_test.py --podman docker "$IMAGE" -- -rP
+
+  build:
+    name: build (${{ matrix.runner }}, python ${{ matrix.python }})
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Different machines, architectures and Python versions on purpose: the archive
+          # must come out byte-identical anyway.
+          - runner: ubuntu-24.04
+            python: "3.9"
+            artifact: build-x86_64
+          - runner: ubuntu-24.04-arm
+            python: "3.13"
+            artifact: build-arm64
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python tools/build_pyz.py
+      - run: cd dist && sha256sum motp.pyz | tee motp.pyz.sha256
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ${{ matrix.artifact }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+
+  compare-builds:
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: build-*
+          path: artifacts
+      - name: Compare hashes of the two builds
+        run: |
+          set -eu
+          a=$(cut -d' ' -f1 artifacts/build-x86_64/motp.pyz.sha256)
+          b=$(cut -d' ' -f1 artifacts/build-arm64/motp.pyz.sha256)
+          echo "x86_64: $a"
+          echo "arm64:  $b"
+          test "$a" = "$b"
+          cmp artifacts/build-x86_64/motp.pyz artifacts/build-arm64/motp.pyz
+
+  # Level 2 (blueprint 7.1): the built archive under `python3 -I -S` on every tier-1 image,
+  # with the same script the nightly tier-2 jobs use.
+  smoke:
+    name: smoke (${{ matrix.image }})
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        image: ["debian:12", "debian:13", "ubuntu:22.04", "almalinux:9", "almalinux:10", "fedora:45"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: build-x86_64
+          path: dist
+      - run: cp tools/container/smoke.sh dist/
+      - name: Smoke inside ${{ matrix.image }}
+        env:
+          IMAGE: ${{ matrix.image }}
+        run: docker run --rm -v "$PWD/dist":/dist:ro "$IMAGE" sh /dist/smoke.sh
+
+  # Level 3 (blueprint 7.1): systemd as the first process in Podman, the sandboxed unit and
+  # its timer (tools/systemd_test.py, phase 7), then real SSH logins with every shell
+  # (tools/login_test.py, phase 8). The same tools run locally under Podman in WSL; they
+  # need root for Podman with systemd, hence sudo. Each image takes 5 to 10 minutes.
+  # The runner's AppArmor also confines programs inside a container whose path matches one
+  # of its profiles, which no local run in WSL shows: after a failure the kernel's denials
+  # are printed.
+  systemd:
+    name: systemd (${{ matrix.image }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        image: ["debian:12", "debian:13", "ubuntu:22.04", "almalinux:9", "almalinux:10", "fedora:45"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: systemd checks in ${{ matrix.image }}
+        env:
+          IMAGE: ${{ matrix.image }}
+        run: sudo python3 tools/systemd_test.py "$IMAGE"
+      - name: AppArmor denials on the runner
+        if: failure()
+        run: sudo dmesg | grep 'apparmor="DENIED"' | tail -n 20 || true
+
+  login:
+    name: login (${{ matrix.image }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      matrix:
+        image: ["debian:12", "debian:13", "ubuntu:22.04", "almalinux:9", "almalinux:10", "fedora:45"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: SSH login checks in ${{ matrix.image }}
+        env:
+          IMAGE: ${{ matrix.image }}
+        run: sudo python3 tools/login_test.py "$IMAGE"
+      - name: AppArmor denials on the runner
+        if: failure()
+        run: sudo dmesg | grep 'apparmor="DENIED"' | tail -n 20 || true

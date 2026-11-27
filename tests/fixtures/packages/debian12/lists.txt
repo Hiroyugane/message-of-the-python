@@ -1,0 +1,9 @@
+auxfiles
+deb.debian.org_debian-security_dists_bookworm-security_InRelease
+deb.debian.org_debian-security_dists_bookworm-security_main_binary-amd64_Packages.lz4
+deb.debian.org_debian_dists_bookworm-updates_InRelease
+deb.debian.org_debian_dists_bookworm-updates_main_binary-amd64_Packages.lz4
+deb.debian.org_debian_dists_bookworm_InRelease
+deb.debian.org_debian_dists_bookworm_main_binary-amd64_Packages.lz4
+lock
+partial

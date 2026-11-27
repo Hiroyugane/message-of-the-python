@@ -6,6 +6,7 @@ Checks tracked files (git ls-files) or, outside a git repo, all files under the 
   * e-mail addresses outside example.com and users.noreply.github.com
   * strings from the old fork's hygiene findings (blueprint section 1)
 """
+
 import ipaddress
 import re
 import subprocess
@@ -17,24 +18,34 @@ SELF = Path(__file__).resolve()
 IPV4 = re.compile(r"(?<![\w.])(\d{1,3}(?:\.\d{1,3}){3})(?![\w.]*\d)")
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@([A-Za-z0-9.-]+\.[A-Za-z]{2,})")
 OK_DOMAINS = ("example.com", "users.noreply.github.com")
-ALLOWED_NETS = [ipaddress.ip_network(n) for n in ("192.0.2.0/24", "198.51.100.0/24", "203.0.113.0/24", "127.0.0.0/8")]
-# Hygiene strings (section 1): file names of the old fork's leaky artefacts and the field that held an address.
+ALLOWED_NETS = [
+    ipaddress.ip_network(n)
+    for n in ("192.0.2.0/24", "198.51.100.0/24", "203.0.113.0/24", "127.0.0.0/8")
+]
+# Hygiene strings (section 1): file names of the old fork's leaky artefacts and the
+# field that held an address.
 HYGIENE = ("__email__", "original.png", "roadmap-preview.png", "docs/help/documentation.md")
 
 
-def files():
+def files() -> list[Path]:
     try:
-        out = subprocess.run(["git", "-C", str(ROOT), "ls-files"], capture_output=True, text=True, check=True).stdout.split("\n")
+        out = subprocess.run(
+            ["git", "-C", str(ROOT), "ls-files"], capture_output=True, text=True, check=True
+        ).stdout.split("\n")
         names = [n for n in out if n]
     except (OSError, subprocess.CalledProcessError):
         names = []
     if not names:
-        names = [str(p.relative_to(ROOT)) for p in ROOT.rglob("*") if p.is_file() and ".git" not in p.parts]
+        names = [
+            str(p.relative_to(ROOT))
+            for p in ROOT.rglob("*")
+            if p.is_file() and ".git" not in p.parts
+        ]
     return [ROOT / n for n in names]
 
 
-def scan():
-    hits = []
+def scan() -> list[str]:
+    hits: list[str] = []
     for path in files():
         if path.resolve() == SELF or not path.is_file():
             continue
@@ -57,7 +68,7 @@ def scan():
                 if not any(dom == d or dom.endswith("." + d) for d in OK_DOMAINS):
                     hits.append(f"{rel}:{no}: e-mail address at {dom}")
             for s in HYGIENE:
-                if s in line and rel != "plans/motp-blueprint.md" and rel != "docs/notes/chat-log.md":
+                if s in line:
                     hits.append(f"{rel}:{no}: hygiene string {s}")
     return hits
 

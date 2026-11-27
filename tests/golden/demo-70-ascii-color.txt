@@ -1,0 +1,48 @@
+\e[34m+---/ \e[0m\e[1;36mAttention\e[0m\e[34m /----------------------------------------------------+\e[0m
+\e[34m|\e[0m  \e[1;31mFirewall is not active\e[0m [!!] \e[90m.....................\e[0m \e[36msudo ufw enable\e[0m \e[34m|\e[0m
+\e[34m|\e[0m  \e[1;31m/: 96% of 40 GiB, 1.6 GiB free\e[0m [!!] \e[90m.......................\e[0m \e[36mdf -h\e[0m \e[34m|\e[0m
+\e[34m|\e[0m  \e[1;31m1 failed unit\e[0m [!!] \e[90m...........................\e[0m \e[36msystemctl --failed\e[0m \e[34m|\e[0m
+\e[34m|\e[0m  \e[33m12 updates, 3 security\e[0m [!] \e[90m.....................\e[0m \e[36msudo apt upgrade\e[0m \e[34m|\e[0m
+\e[34m|\e[0m  \e[33mReboot required\e[0m [!] \e[90m.................................\e[0m \e[36msudo reboot\e[0m \e[34m|\e[0m
+\e[34m|\e[0m  \e[90m[plugin 50-backup-status]\e[0m \e[33mlast run 30 hours ago\e[0m [!]               \e[34m|\e[0m
+\e[34m|\e[0m      \e[90mPlugin hint: Check the backup job on the storage server\e[0m       \e[34m|\e[0m
+\e[34m|\e[0m  \e[33m1 module failed, run `motp doctor`\e[0m [!]                            \e[34m|\e[0m
+\e[34m+---/ \e[0m\e[1;36mHost\e[0m\e[34m /---------------------------------------------------------+\e[0m
+\e[34m|\e[0m  \e[94mHostname.........:\e[0m  web01.example.com                             \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mOperating system.:\e[0m  Debian GNU/Linux 13                           \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mKernel...........:\e[0m  6.12.48-1-amd64                               \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mLocal address....:\e[0m  192.0.2.10                                    \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mDNS servers......:\e[0m  192.0.2.53, 192.0.2.54                        \e[34m|\e[0m
+\e[34m+---/ \e[0m\e[1;36mSystem\e[0m\e[34m /-------------------------------------------------------+\e[0m
+\e[34m|\e[0m  \e[94mUptime...........:\e[0m  41 days 3 hours                               \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mLoad.............:\e[0m  \e[32m0.42, 0.37, 0.31\e[0m                              \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mMemory...........:\e[0m  \e[32m5.9 GiB of 7.9 GiB\e[0m                            \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mUpdates..........:\e[0m  \e[33m12 updates, 3 security\e[0m [!]                    \e[34m|\e[0m
+\e[34m|\e[0m    \e[94mPackages.......:\e[0m  openssl, curl, libc6                          \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mReboot...........:\e[0m  \e[33mrequired\e[0m [!]                                  \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mSupport..........:\e[0m  \e[32muntil 2028-06-30\e[0m                              \e[34m|\e[0m
+\e[34m+---/ \e[0m\e[1;36mSecurity\e[0m\e[34m /-----------------------------------------------------+\e[0m
+\e[34m|\e[0m  \e[94mFirewall.........:\e[0m  \e[1;31mnot active\e[0m [!!]                               \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mAuto updates.....:\e[0m  \e[32mon\e[0m                                            \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mFailed logins....:\e[0m  \e[32m37 in the last 24 hours\e[0m                       \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mFail2ban.........:\e[0m  \e[90mmodule failed\e[0m                                 \e[34m|\e[0m
+\e[34m+---/ \e[0m\e[1;36mLogin\e[0m\e[34m /--------------------------------------------------------+\e[0m
+\e[34m|\e[0m  \e[94mLast login.......:\e[0m  2 hours 3 minutes ago                         \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mLogin from.......:\e[0m  198.51.100.7                                  \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mSessions.........:\e[0m  2                                             \e[34m|\e[0m
+\e[34m+---/ \e[0m\e[1;36mDisks\e[0m\e[34m /--------------------------------------------------------+\e[0m
+\e[34m|\e[0m  \e[94m/................:\e[0m  \e[1;31m96% of 40 GiB, 1.6 GiB free\e[0m [!!]              \e[34m|\e[0m
+\e[34m|\e[0m                      \e[34m[\e[0m\e[1;31m#################\e[0m\e[37m-\e[0m\e[34m]\e[0m                          \e[34m|\e[0m
+\e[34m|\e[0m  \e[94m/home............:\e[0m  \e[32m41% of 200 GiB, 118 GiB free\e[0m                  \e[34m|\e[0m
+\e[34m|\e[0m                      \e[34m[\e[0m\e[32m#######\e[0m\e[37m-----------\e[0m\e[34m]\e[0m                          \e[34m|\e[0m
+\e[34m|\e[0m  \e[94m/var.............:\e[0m  \e[32m71% of 20 GiB, 5.8 GiB free\e[0m                   \e[34m|\e[0m
+\e[34m|\e[0m                      \e[34m[\e[0m\e[32m#############\e[0m\e[37m-----\e[0m\e[34m]\e[0m                          \e[34m|\e[0m
+\e[34m+---/ \e[0m\e[1;36mServices\e[0m\e[34m /-----------------------------------------------------+\e[0m
+\e[34m|\e[0m  \e[94mFailed units.....:\e[0m  \e[1;31m1 failed unit\e[0m [!!]                            \e[34m|\e[0m
+\e[34m|\e[0m                      nightly-report.service                        \e[34m|\e[0m
+\e[34m|\e[0m  \e[94mnginx.service....:\e[0m  \e[32mactive\e[0m                                        \e[34m|\e[0m
+\e[34m+---/ \e[0m\e[1;36mContainers\e[0m\e[34m /---------------------------------------------------+\e[0m
+\e[34m|\e[0m  \e[94mContainers.......:\e[0m  \e[32m3 running, 1 stopped\e[0m \e[90m(45 minutes old)\e[0m         \e[34m|\e[0m
+\e[34m+---/ \e[0m\e[1;36mPlugins\e[0m\e[34m /------------------------------------------------------+\e[0m
+\e[34m|\e[0m  \e[90m[plugin 50-backup-status]\e[0m \e[94mBackup:\e[0m \e[33mlast run 30 hours ago\e[0m [!]       \e[34m|\e[0m
+\e[34m+--------------------------------------------------------------------+\e[0m

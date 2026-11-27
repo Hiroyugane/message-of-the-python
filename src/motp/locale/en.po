@@ -1,0 +1,2231 @@
+# English message catalogue of MOTP, the message of the python.
+# Message ids are symbolic; this file holds the English text for each id.
+# Templates may use {name} placeholders only; {{ and }} give literal braces.
+# Compile with: python tools/compile_catalogs.py
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# --- command line ---------------------------------------------------------------
+
+msgid "cli.description"
+msgstr "MOTP, the message of the python: a customisable message of the day."
+
+msgid "cli.commands"
+msgstr "COMMAND"
+
+msgid "cli.version.help"
+msgstr "print the version and exit"
+
+msgid "cli.version.output"
+msgstr "motp {version}"
+
+msgid "cli.show.help"
+msgstr "show the message of the day (the default)"
+
+msgid "cli.show.login_help"
+msgstr "run as a login hook: on any error, print nothing and exit 0"
+
+msgid "cli.show.debug_help"
+msgstr "print errors and the reasons why files were ignored"
+
+# --- status words and fixed prefixes --------------------------------------------
+
+msgid "status.ok"
+msgstr "ok"
+
+msgid "status.warn"
+msgstr "warning"
+
+msgid "status.crit"
+msgstr "critical"
+
+msgid "status.unknown"
+msgstr "unknown"
+
+msgid "status.module_failed"
+msgstr "module failed"
+
+msgid "plugin.prefix"
+msgstr "[plugin {name}]"
+
+msgid "plugin.hint"
+msgstr "Plugin hint: {hint}"
+
+msgid "plugin.hint_more"
+msgstr "(hint)"
+
+msgid "plugin.more"
+msgstr "(plugin)"
+
+msgid "row.reboot.required"
+msgstr "required"
+
+msgid "row.eol.supported"
+msgstr "until {date}"
+
+msgid "row.eol.supported_table"
+msgstr "until {date} (as of {data})"
+
+msgid "row.eol.ending"
+msgstr "ends {date}"
+
+msgid "row.eol.ending_table"
+msgstr "ends {date} (as of {data})"
+
+msgid "row.eol.ended"
+msgstr "ended {date}"
+
+msgid "row.eol.ended_table"
+msgstr "ended {date} (as of {data})"
+
+msgid "row.autoupdates.off"
+msgstr "off"
+
+msgid "row.autoupdates.not_installed"
+msgstr "not installed"
+
+msgid "row.autoupdates.download_only"
+msgstr "download only"
+
+msgid "row.firewall.inactive"
+msgstr "not active"
+
+msgid "row.firewall.failed"
+msgstr "{name} failed to start"
+
+msgid "row.fail2ban.not_running"
+msgstr "installed, not running"
+
+msgid "modules.failed"
+msgid_plural "modules.failed"
+msgstr[0] "{count} module failed, run `motp doctor`"
+msgstr[1] "{count} modules failed, run `motp doctor`"
+
+msgid "config.ignored"
+msgid_plural "config.ignored"
+msgstr[0] "Config: {count} file ignored"
+msgstr[1] "Config: {count} files ignored"
+
+# --- hints (core/hints.py); commands live in the table, never in these texts ----
+
+msgid "hint.updates.install"
+msgstr "Install the pending updates"
+
+msgid "hint.updates.security"
+msgstr "Install the pending security updates"
+
+msgid "hint.reboot.required"
+msgstr "Restart to finish the updates"
+
+msgid "hint.units.failed"
+msgstr "List the failed services"
+
+msgid "hint.disk.space"
+msgstr "Check which filesystem is full"
+
+msgid "hint.disk.inodes"
+msgstr "Check which filesystem has no free inodes"
+
+msgid "hint.autoupdates.enable"
+msgstr "Turn on automatic security updates"
+
+msgid "hint.autoupdates.unmask"
+msgstr "Unmask the update timer, then turn it on"
+
+msgid "hint.autoupdates.periodic"
+msgstr "Remove the line that sets APT::Periodic::Enable to 0"
+
+msgid "hint.autoupdates.install"
+msgstr "Install automatic security updates"
+
+msgid "hint.autoupdates.apply"
+msgstr "Let dnf install the updates it downloads"
+
+msgid "hint.firewall.enable"
+msgstr "Turn on the firewall"
+
+msgid "hint.os.eol"
+msgstr "Read what end of life means for this system"
+
+msgid "hint.modules.failed"
+msgstr "Find out why modules failed"
+
+msgid "hint.config.check"
+msgstr "Show what is wrong in the config"
+
+msgid "hint.cache.stale"
+msgstr "Check the collector timer"
+
+msgid "hint.fail2ban.status"
+msgstr "Show the fail2ban jails"
+
+msgid "hint.import_path"
+msgstr "See which directory others can change"
+
+# --- JSON input ------------------------------------------------------------------
+
+msgid "json.error.too_large"
+msgstr "input is larger than {limit} bytes"
+
+msgid "json.error.empty"
+msgstr "input is empty"
+
+msgid "json.error.too_deep"
+msgstr "input is nested deeper than {limit} levels"
+
+msgid "json.error.not_finite"
+msgstr "input contains NaN or an infinite number"
+
+msgid "json.error.number_too_long"
+msgstr "input contains a number with too many digits"
+
+msgid "json.error.duplicate_key"
+msgstr "input repeats the key {field}"
+
+msgid "json.error.syntax"
+msgstr "input is not valid JSON"
+
+# --- probe documents -------------------------------------------------------------
+
+msgid "probe.error.api"
+msgstr "unsupported probe protocol version"
+
+msgid "probe.error.module_mismatch"
+msgstr "document does not name the module {expected}"
+
+msgid "probe.error.missing_field"
+msgstr "required field {field} is missing"
+
+msgid "probe.error.unknown_field"
+msgstr "unknown field {field}"
+
+msgid "probe.error.wrong_type"
+msgstr "field {field} has the wrong type"
+
+msgid "probe.error.bad_value"
+msgstr "field {field} has an invalid value"
+
+msgid "probe.error.too_many"
+msgstr "field {field} has more than {limit} entries"
+
+msgid "probe.error.too_long"
+msgstr "field {field} is longer than {limit} characters"
+
+msgid "probe.error.command"
+msgstr "field {field} is not allowed: probes cannot supply commands"
+
+msgid "probe.error.unknown_message"
+msgstr "field {field} names an unknown message id"
+
+msgid "probe.error.unknown_hint"
+msgstr "field {field} names an unknown hint id"
+
+msgid "probe.error.plugin_message_id"
+msgstr "field {field} is not allowed: plugins cannot use message or hint ids"
+
+msgid "probe.error.rule_and_status"
+msgstr "item {field} sets both a rule and a status"
+
+msgid "probe.error.duplicate_item_key"
+msgstr "two items have the same key"
+
+msgid "probe.error.exit_code"
+msgstr "plugin exited with code {code}"
+
+# --- cache files -----------------------------------------------------------------
+
+msgid "cache.error.open"
+msgstr "cache file cannot be read"
+
+msgid "cache.error.not_regular"
+msgstr "cache file is not a regular file"
+
+msgid "cache.error.owner"
+msgstr "cache file has the wrong owner"
+
+msgid "cache.error.writable"
+msgstr "cache file is writable by group or others"
+
+msgid "cache.error.too_large"
+msgstr "cache file is larger than {limit} bytes"
+
+msgid "cache.error.schema_version"
+msgstr "cache file has an unknown schema version"
+
+msgid "cache.error.schema"
+msgstr "cache file has an invalid field {field}"
+
+msgid "cache.error.tier"
+msgstr "cache file belongs to another audience"
+
+msgid "cache.error.module_too_large"
+msgstr "module output did not fit into the cache file"
+
+msgid "cache.error.admin_in_public"
+msgstr "public cache file contains admin-only data in {field}"
+
+# --- threshold rules -------------------------------------------------------------
+
+msgid "rule.error.name"
+msgstr "threshold rule has an invalid name"
+
+msgid "rule.error.limits"
+msgstr "threshold rule {rule} needs numbers as limits"
+
+msgid "rule.error.order"
+msgstr "threshold rule {rule} has its limits in the wrong order"
+
+msgid "rule.error.direction"
+msgstr "threshold rule {rule} has equal limits and needs a direction"
+
+# --- ownership checks (core/safepath.py); {path} is the file or directory at fault ---
+
+msgid "safepath.error.unsupported"
+msgstr "ownership of {path} cannot be checked on this system"
+
+msgid "safepath.error.not_absolute"
+msgstr "{path} is not an absolute path"
+
+msgid "safepath.error.missing"
+msgstr "{path} does not exist"
+
+msgid "safepath.error.unreadable"
+msgstr "{path} cannot be examined"
+
+msgid "safepath.error.owner"
+msgstr "{path} does not belong to root"
+
+msgid "safepath.error.writable"
+msgstr "{path} is writable by group or others"
+
+msgid "safepath.error.link_owner"
+msgstr "symbolic link {path} does not belong to root"
+
+msgid "safepath.error.too_many_links"
+msgstr "{path} goes through too many symbolic links"
+
+msgid "safepath.error.not_directory"
+msgstr "{path} is not a directory"
+
+msgid "safepath.error.not_regular"
+msgstr "{path} is not a regular file"
+
+msgid "safepath.error.not_executable"
+msgstr "{path} is not executable"
+
+msgid "safepath.error.changed"
+msgstr "{path} changed while it was checked"
+
+msgid "safepath.error.too_large"
+msgstr "{path} is too large"
+
+msgid "safepath.error.shebang_too_long"
+msgstr "the interpreter line of {path} is too long"
+
+msgid "safepath.error.shebang_empty"
+msgstr "the interpreter line of {path} names no program"
+
+msgid "safepath.error.shebang_encoding"
+msgstr "the interpreter line of {path} is not valid text"
+
+msgid "safepath.error.interpreter_depth"
+msgstr "{path} nests interpreters too deeply"
+
+msgid "safepath.error.interpreter_relative"
+msgstr "the interpreter of {path} is not an absolute path"
+
+msgid "safepath.error.launcher_as_root"
+msgstr "{path} runs as root and may not start its interpreter through a program that searches PATH, such as env"
+
+msgid "safepath.error.shebang_argument"
+msgstr "{path}: the argument on its #! line names a path or a setting; only plain options such as -I are allowed"
+
+msgid "safepath.error.setid"
+msgstr "{path} has the setuid or setgid bit"
+
+msgid "safepath.error.unknown_format"
+msgstr "{path} runs as root and must be an ELF program or start with #!"
+
+msgid "safepath.error.too_long"
+msgstr "{path} is too long for a path"
+
+msgid "safepath.error.import_path"
+msgstr "{path} is on the Python import path of a program root would start, and someone other than root can change it"
+
+msgid "importpath.error.too_many"
+msgstr "{path} holds more than {max} files and folders to check"
+
+# --- starting processes (core/proc.py) -------------------------------------------
+
+msgid "proc.error.argv"
+msgstr "the argument list of a process is malformed"
+
+msgid "proc.error.relative"
+msgstr "{program} is not an absolute, normalised program path"
+
+msgid "proc.error.timeout"
+msgstr "a process needs a time limit between 0 and 600 seconds"
+
+msgid "proc.error.limits"
+msgstr "a process limit is invalid"
+
+msgid "proc.error.env"
+msgstr "a process environment may only add MOTP_ variables"
+
+msgid "proc.error.drop"
+msgstr "a process may only drop to a user and group other than root"
+
+msgid "proc.error.start"
+msgstr "{program} could not be started"
+
+msgid "proc.error.cleanup_not_root"
+msgstr "only root can end the processes of another user"
+
+msgid "proc.error.subreaper"
+msgstr "the collector could not become the reaper of its probes' processes"
+
+msgid "proc.error.no_account"
+msgstr "the account {name} does not exist"
+
+# --- configuration (core/config.py, motp config) ---------------------------------
+
+msgid "cli.config.help"
+msgstr "check the configuration or write a starter file"
+
+msgid "cli.config.check.help"
+msgstr "check the configuration as the collector reads it, or one file"
+
+msgid "cli.config.check.path_help"
+msgstr "check only this file's content instead of the files under /etc/motp"
+
+msgid "cli.config.init.help"
+msgstr "write a commented starter configuration; an existing file is never overwritten"
+
+msgid "cli.config.init.path_help"
+msgstr "where to write the starter file (default: /etc/motp/config.toml)"
+
+msgid "config.check.problem"
+msgstr "{file}: {reason}"
+
+msgid "config.check.problem_line"
+msgstr "{file}, line {line}: {reason}"
+
+msgid "config.check.warning"
+msgstr "{file}: warning: {reason}"
+
+msgid "config.check.warning_line"
+msgstr "{file}, line {line}: warning: {reason}"
+
+msgid "config.check.root_only"
+msgstr "Only root can read {root}; run sudo motp config check."
+
+msgid "config.check.file_valid"
+msgstr "{file}: valid (checked on its own, on top of the defaults)"
+
+msgid "config.check.file_used"
+msgstr "{file}: valid; the collector uses it"
+
+msgid "config.check.not_trusted"
+msgstr "{file}: note: MOTP would ignore this file where it is now: {reason}"
+
+msgid "config.check.invalid"
+msgstr "Files with problems are ignored; defaults and the other files apply."
+
+msgid "config.check.valid"
+msgid_plural "config.check.valid"
+msgstr[0] "The configuration under {root} is valid ({count} file used)."
+msgstr[1] "The configuration under {root} is valid ({count} files used)."
+
+msgid "config.check.warnings"
+msgid_plural "config.check.warnings"
+msgstr[0] "{count} setting has no effect; see the warning above."
+msgstr[1] "{count} settings have no effect; see the warnings above."
+
+msgid "config.init.written"
+msgstr "Wrote {file}. Check it with: motp config check"
+
+msgid "config.init.exists"
+msgstr "{file} already exists and was left unchanged."
+
+msgid "config.init.no_directory"
+msgstr "{file} cannot be created: its directory does not exist."
+
+msgid "config.init.failed"
+msgstr "{file} could not be written."
+
+msgid "config.error.open"
+msgstr "the file cannot be read"
+
+msgid "config.error.not_regular"
+msgstr "not a regular file"
+
+msgid "config.error.too_large"
+msgstr "the file is larger than {max} bytes"
+
+msgid "config.error.encoding"
+msgstr "the file is not valid UTF-8"
+
+msgid "config.error.syntax"
+msgstr "TOML syntax error at line {line}, column {column}"
+
+msgid "config.error.syntax_end"
+msgstr "TOML syntax error at the end of the file (an unclosed string, table or list)"
+
+msgid "config.error.unreadable_value"
+msgstr "the file holds a value that cannot be read, such as a number with thousands of digits"
+
+msgid "config.error.too_deep"
+msgstr "the file nests values too deeply"
+
+msgid "config.error.unreadable"
+msgstr "the directory cannot be listed"
+
+msgid "config.error.too_many_files"
+msgstr "more than {max} files; the rest are ignored"
+
+msgid "config.error.unknown_key"
+msgstr "{key} is not a known setting"
+
+msgid "config.warning.module"
+msgstr "{key}: no module is called {name}, so this has no effect (motp modules lists them)"
+
+msgid "config.warning.module_like"
+msgstr "{key}: no module is called {name}; did you mean {suggestion}?"
+
+msgid "config.warning.threshold"
+msgstr "{key}: no threshold is called {name}, so this has no effect"
+
+msgid "config.warning.threshold_like"
+msgstr "{key}: no threshold is called {name}; did you mean {suggestion}?"
+
+msgid "config.warning.item_key"
+msgstr "{key}: no row has the key {name}, so it has no effect (motp modules --keys lists them)"
+
+msgid "config.warning.item_key_like"
+msgstr "{key}: no row has the key {name}; did you mean {suggestion}?"
+
+msgid "config.error.missing_key"
+msgstr "{key} is missing"
+
+msgid "config.error.table"
+msgstr "{key} must be a table"
+
+msgid "config.error.rows"
+msgstr "{key} must be a list of tables, written [[{key}]]"
+
+msgid "config.error.too_many"
+msgstr "{key} has more than {max} entries"
+
+msgid "config.error.name"
+msgstr "{key}: a name here must be lower-case letters, digits and underscores"
+
+msgid "config.error.plugin_name"
+msgstr "{key}: a plugin name must be two digits, a dash, and lower-case letters, digits, dashes or underscores"
+
+msgid "config.error.choice"
+msgstr "{key} must be one of: {choices}"
+
+msgid "config.error.integer"
+msgstr "{key} must be a whole number from {low} to {high}"
+
+msgid "config.error.number"
+msgstr "{key} must be a number from {low} to {high}"
+
+msgid "config.error.any_number"
+msgstr "{key} must be a number"
+
+msgid "config.error.bool_or_auto"
+msgstr "{key} must be true, false or \"auto\""
+
+msgid "config.error.language"
+msgstr "{key} must be \"auto\" or a language code such as \"en\""
+
+msgid "config.error.group_name"
+msgstr "{key} must be a group name, or \"\" for root only"
+
+msgid "config.error.group_adm"
+msgstr "{key} may not be \"adm\": that group holds log readers and service accounts"
+
+msgid "config.error.label"
+msgstr "{key} must be plain text of at most {max} characters"
+
+msgid "config.error.sections"
+msgstr "{key} must be a list of different section names from: {choices}"
+
+msgid "config.error.duration"
+msgstr "{key} must be a duration such as \"90s\", \"30m\", \"26h\" or \"3d\""
+
+msgid "config.error.absolute_path"
+msgstr "{key} must be an absolute path without . or .. parts, such as \"/var/backups/last-success\""
+
+msgid "config.error.unit_name"
+msgstr "{key} must be a systemd unit name such as \"nginx.service\""
+
+msgid "config.error.rule_limits"
+msgstr "{key} needs both warn and crit"
+
+msgid "config.error.age_order"
+msgstr "{key}: crit_after must not be shorter than warn_after"
+
+msgid "config.error.bool"
+msgstr "{key} must be true or false"
+
+msgid "config.error.zero_or"
+msgstr "{key} must be 0 (chosen by the width) or a whole number from {low} to {high}"
+
+msgid "config.error.color"
+msgstr "{key} must be a colour: a name such as \"blue\" or \"bright-red\", a number from 0 to 255, \"#rrggbb\" or \"default\", optionally with \"bold\""
+
+msgid "config.error.color_status"
+msgstr "{key} must be \"status\" or a colour: a name such as \"red\", a number from 0 to 255, \"#rrggbb\" or \"default\", optionally with \"bold\""
+
+msgid "config.error.bar_contrast"
+msgstr "{key} must stand out on a black background (contrast of at least 3:1), so the free part of a meter stays visible"
+
+msgid "config.error.char"
+msgstr "{key} must be exactly one printable character, one cell wide"
+
+msgid "config.error.char_ascii"
+msgstr "{key} must be exactly one printable ASCII character"
+
+msgid "config.error.bar_chars"
+msgstr "{key}: bar_used and bar_free must differ, so the used and the free part of a meter can be told apart"
+
+msgid "config.error.font_name"
+msgstr "{key} must be \"auto\", a bundled font (motp-block, motp-block-small, big, small) or the name of a file in /etc/motp/fonts/ without \".flf\""
+
+msgid "config.error.font_charset"
+msgstr "{key}: motp-block and motp-block-small draw block characters for Unicode terminals; use big, small or a font of ASCII characters"
+
+msgid "config.error.font_file"
+msgstr "{key}: this font is not used. Expected a FIGfont file of at most {max} KiB that belongs to root and is not writable by group or others"
+
+msgid "config.error.font_format"
+msgstr "{key}: this font is not used. Expected a FIGfont file whose characters are printable and one cell wide, at most 16 rows of 64 cells"
+
+msgid "config.error.font_ascii"
+msgstr "{key}: this font is not used. The ASCII header needs a font drawn with ASCII characters only"
+
+msgid "config.error.item_keys"
+msgstr "{key} must be a list of at most {max} item keys such as \"os_host.kernel\" (see motp modules --keys)"
+
+msgid "proc.error.account"
+msgstr "{name} must be a local system account with its own user id and a group other than root"
+
+# --- renderer: section titles ---------------------------------------------------------
+
+msgid "section.attention"
+msgstr "Attention"
+
+msgid "section.host"
+msgstr "Host"
+
+msgid "section.system"
+msgstr "System"
+
+msgid "section.security"
+msgstr "Security"
+
+msgid "section.login"
+msgstr "Login"
+
+msgid "section.disks"
+msgstr "Disks"
+
+msgid "section.services"
+msgstr "Services"
+
+msgid "section.containers"
+msgstr "Containers"
+
+msgid "section.plugins"
+msgstr "Plugins"
+
+msgid "section.tip"
+msgstr "Tip"
+
+# --- renderer: values and units -------------------------------------------------------
+
+msgid "value.yes"
+msgstr "yes"
+
+msgid "value.no"
+msgstr "no"
+
+msgid "value.ago"
+msgstr "{duration} ago"
+
+msgid "value.age"
+msgstr "({age} old)"
+
+msgid "value.labelled"
+msgstr "{label}: {value}"
+
+msgid "unit.b"
+msgstr "{n} B"
+
+msgid "unit.kib"
+msgstr "{n} KiB"
+
+msgid "unit.mib"
+msgstr "{n} MiB"
+
+msgid "unit.gib"
+msgstr "{n} GiB"
+
+msgid "unit.tib"
+msgstr "{n} TiB"
+
+msgid "unit.pib"
+msgstr "{n} PiB"
+
+msgid "unit.percent"
+msgstr "{n}%"
+
+msgid "unit.celsius"
+msgstr "{n} °C"
+
+msgid "unit.days"
+msgid_plural "unit.days"
+msgstr[0] "{count} day"
+msgstr[1] "{count} days"
+
+# The days inside value.ago: languages with cases need another form there.
+msgid "unit.days_ago"
+msgid_plural "unit.days_ago"
+msgstr[0] "{count} day"
+msgstr[1] "{count} days"
+
+msgid "unit.hours"
+msgid_plural "unit.hours"
+msgstr[0] "{count} hour"
+msgstr[1] "{count} hours"
+
+msgid "unit.minutes"
+msgid_plural "unit.minutes"
+msgstr[0] "{count} minute"
+msgstr[1] "{count} minutes"
+
+msgid "unit.seconds"
+msgid_plural "unit.seconds"
+msgstr[0] "{count} second"
+msgstr[1] "{count} seconds"
+
+msgid "unit.pair"
+msgstr "{first} {second}"
+
+msgid "render.host_uptime"
+msgstr "{host}, up {uptime}"
+
+msgid "render.cache_old"
+msgstr "The collected data is {age} old"
+
+msgid "render.no_cache"
+msgstr "No collected data found, showing live values only"
+
+msgid "show.error"
+msgstr "motp show failed: {error}"
+
+msgid "show.debug.ignored"
+msgstr "ignored {file}: {reason}"
+
+msgid "show.debug.module_failed"
+msgstr "module {module} failed: {reason}"
+
+msgid "module.error.parse"
+msgstr "{module} could not read what the system reported"
+
+msgid "context.error.run"
+msgstr "a live module may not start programs"
+
+msgid "context.error.path"
+msgstr "a module may not read this path"
+
+msgid "context.error.statvfs"
+msgstr "the usage of this file system cannot be read"
+
+msgid "context.error.binary"
+msgstr "a module may only start the programs it lists"
+
+msgid "context.error.run_failed"
+msgstr "a program the module started failed"
+
+msgid "probe.error.unknown_module"
+msgstr "no built-in module of that name"
+
+msgid "context.error.missing"
+msgstr "the file does not exist"
+
+msgid "context.error.read"
+msgstr "the file cannot be read"
+
+msgid "context.error.socket"
+msgstr "the local service did not give a usable answer"
+
+# --- module labels and texts (used by the demo now, by the modules later) --------------
+
+msgid "label.hostname"
+msgstr "Hostname"
+
+msgid "label.os"
+msgstr "Operating system"
+
+msgid "label.kernel"
+msgstr "Kernel"
+
+msgid "label.address"
+msgstr "Local address"
+
+msgid "label.dns"
+msgstr "DNS servers"
+
+msgid "label.uptime"
+msgstr "Uptime"
+
+msgid "label.load"
+msgstr "Load"
+
+msgid "label.memory"
+msgstr "Memory"
+
+msgid "label.swap"
+msgstr "Swap"
+
+msgid "label.login_tty"
+msgstr "Login terminal"
+
+msgid "label.updates"
+msgstr "Updates"
+
+msgid "label.packages"
+msgstr "Packages"
+
+msgid "label.package_lists"
+msgstr "Package lists"
+
+msgid "label.held_back"
+msgstr "Held back"
+
+msgid "label.reboot"
+msgstr "Reboot"
+
+msgid "label.eol"
+msgstr "Support"
+
+msgid "label.firewall"
+msgstr "Firewall"
+
+msgid "label.autoupdates"
+msgstr "Auto updates"
+
+msgid "label.failed_logins"
+msgstr "Failed logins"
+
+msgid "label.fail2ban"
+msgstr "Fail2ban"
+
+msgid "label.previous_login"
+msgstr "Last login"
+
+msgid "label.login_from"
+msgstr "Login from"
+
+msgid "label.sessions"
+msgstr "Sessions"
+
+msgid "label.failed_units"
+msgstr "Failed units"
+
+msgid "label.containers"
+msgstr "Containers"
+
+msgid "load.summary"
+msgstr "{one}, {five}, {fifteen}"
+
+msgid "memory.summary"
+msgstr "{used} of {total}"
+
+msgid "updates.summary"
+msgid_plural "updates.summary"
+msgstr[0] "{count} update, {security} security"
+msgstr[1] "{count} updates, {security} security"
+
+msgid "updates.plain"
+msgid_plural "updates.plain"
+msgstr[0] "{count} update"
+msgstr[1] "{count} updates"
+
+msgid "updates.none"
+msgstr "none pending"
+
+# Where security updates cannot be told apart, any update may be one.
+msgid "updates.unsplit"
+msgid_plural "updates.unsplit"
+msgstr[0] "{count} update, may include security fixes"
+msgstr[1] "{count} updates, may include security fixes"
+
+msgid "updates.held_only"
+msgid_plural "updates.held_only"
+msgstr[0] "{count} update held back"
+msgstr[1] "{count} updates held back"
+
+msgid "updates.no_lists"
+msgstr "unknown, no package lists yet"
+
+msgid "reboot.required"
+msgstr "Reboot required"
+
+msgid "reboot.not_required"
+msgstr "not required"
+
+# The end-of-life texts stand alone in the attention block, so a warning names the OS.
+# The _table forms show the date of the bundled table.
+msgid "eol.supported"
+msgstr "supported until {date}"
+
+msgid "eol.supported_table"
+msgstr "supported until {date} (as of {data})"
+
+msgid "eol.ending"
+msgstr "OS support ends {date}"
+
+msgid "eol.ending_table"
+msgstr "OS support ends {date} (as of {data})"
+
+msgid "eol.ended"
+msgstr "OS support ended {date}"
+
+msgid "eol.ended_table"
+msgstr "OS support ended {date} (as of {data})"
+
+msgid "firewall.inactive"
+msgstr "Firewall is not active"
+
+msgid "firewall.active"
+msgstr "{name} active"
+
+msgid "firewall.active_zone"
+msgstr "{name} active, zone {zone}"
+
+msgid "firewall.failed"
+msgstr "Firewall {name} failed to start"
+
+msgid "autoupdates.on"
+msgstr "on"
+
+msgid "autoupdates.off"
+msgstr "Automatic updates are off"
+
+msgid "autoupdates.not_installed"
+msgstr "Automatic updates are not installed"
+
+msgid "autoupdates.download_only"
+msgstr "Automatic updates only download"
+
+# These two name the edit: the alert shows its command, not the hint sentence.
+msgid "autoupdates.apply_off"
+msgstr "Set apply_updates = yes"
+
+msgid "autoupdates.periodic_off"
+msgstr "APT::Periodic::Enable is 0"
+
+msgid "logins.failed"
+msgid_plural "logins.failed"
+msgstr[0] "{count} in the last 24 hours"
+msgstr[1] "{count} in the last 24 hours"
+
+# The read stopped at its limit: the real number is higher.
+msgid "logins.failed_more"
+msgid_plural "logins.failed_more"
+msgstr[0] "more than {count} in the last 24 hours"
+msgstr[1] "more than {count} in the last 24 hours"
+
+# The system keeps no such record (Debian 13 writes no btmp and has no utmp).
+msgid "records.not_recorded"
+msgstr "not recorded on this system"
+
+msgid "label.login_sources"
+msgstr "From"
+
+msgid "fail2ban.banned"
+msgid_plural "fail2ban.banned"
+msgstr[0] "{count} address banned"
+msgstr[1] "{count} addresses banned"
+
+msgid "fail2ban.not_running"
+msgstr "fail2ban is installed but not running"
+
+msgid "fail2ban.not_checked"
+msgstr "not checked: its Python import path is unsafe"
+
+msgid "label.jail"
+msgstr "{jail}"
+
+msgid "disk.usage"
+msgstr "{percent} of {size}"
+
+msgid "disk.inode_usage"
+msgstr "{percent} of {total} inodes"
+
+# Meter texts (D36): [theme.bar] text picks one; shorter forms follow when room is short.
+msgid "disk.usage_full"
+msgstr "{percent} of {size}, {free} free"
+
+msgid "disk.usage_short"
+msgstr "{percent}, {free} free"
+
+msgid "disk.usage_free"
+msgstr "{free} free"
+
+msgid "disk.inode_full"
+msgstr "{percent} of {total} inodes, {free} free"
+
+msgid "disk.inode_short"
+msgstr "{percent}, {free} inodes free"
+
+msgid "disk.inode_free"
+msgstr "{free} inodes free"
+
+msgid "meter.percent"
+msgstr "{percent}"
+
+msgid "label.mount"
+msgstr "{mount}"
+
+msgid "label.mount_inodes"
+msgstr "{mount} inodes"
+
+msgid "units.failed_count"
+msgid_plural "units.failed_count"
+msgstr[0] "{count} failed unit"
+msgstr[1] "{count} failed units"
+
+msgid "units.none"
+msgstr "none"
+
+msgid "label.units"
+msgstr "Units"
+
+msgid "sessions.count"
+msgid_plural "sessions.count"
+msgstr[0] "{count} session"
+msgstr[1] "{count} sessions"
+
+msgid "label.session_users"
+msgstr "Logged in"
+
+msgid "label.unit_row"
+msgstr "{label}"
+
+# [[rows.file_age]] (phase 12): the label is the admin's own text; the age is the value.
+msgid "label.file_row"
+msgstr "{label}"
+
+msgid "file_age.missing"
+msgstr "file missing"
+
+msgid "file_age.unreadable"
+msgstr "unreadable for the user motp"
+
+msgid "unit.state"
+msgstr "{state}"
+
+msgid "unit.state_sub"
+msgstr "{state} ({sub})"
+
+msgid "unit.not_found"
+msgstr "not found"
+
+msgid "unit.masked"
+msgstr "masked"
+
+msgid "unit.unknown"
+msgstr "state unknown"
+
+msgid "containers.summary"
+msgstr "{running} running, {stopped} stopped"
+
+# Unhealthy containers are among the running ones; the counts add up to all containers.
+msgid "containers.summary_problems"
+msgstr "{running} running ({unhealthy} unhealthy), {restarting} restarting, {stopped} stopped"
+
+msgid "containers.not_running"
+msgstr "service stopped"
+
+msgid "containers.unreachable"
+msgstr "the runtime did not answer"
+
+msgid "label.docker"
+msgstr "Docker"
+
+msgid "label.podman"
+msgstr "Podman"
+
+msgid "label.running"
+msgstr "Running"
+
+msgid "label.unhealthy"
+msgstr "Unhealthy"
+
+# --- motp preview ---------------------------------------------------------------------
+
+msgid "cli.preview.help"
+msgstr "show what the message of the day looks like, with demo data"
+
+msgid "cli.preview.demo_help"
+msgstr "render the demo data (the default; only the demo can be previewed in this version)"
+
+msgid "cli.preview.width_help"
+msgstr "render for this many columns instead of the terminal's width"
+
+msgid "cli.preview.charset_help"
+msgstr "frame characters: auto, ascii or unicode"
+
+msgid "cli.preview.color_help"
+msgstr "colour: auto, always or never"
+
+msgid "cli.preview.preset_help"
+msgstr "theme preset for the demo: default or classic"
+
+msgid "cli.preview.bad_width"
+msgstr "the width must be between {min} and {max} columns"
+
+msgid "cli.examples"
+msgstr "Examples:"
+
+msgid "cli.exit.title"
+msgstr "Exit codes:"
+
+msgid "cli.exit.ok"
+msgstr "success"
+
+msgid "cli.exit.failed"
+msgstr "a check failed, a problem was found, or the command failed"
+
+msgid "cli.exit.usage"
+msgstr "wrong usage: an unknown command, option or topic"
+
+msgid "cli.exit.login"
+msgstr "motp show --login always exits 0, so a login never fails."
+
+msgid "cli.exit.debug"
+msgstr "Set MOTP_DEBUG=1 to see a traceback instead of the one-line error."
+
+msgid "cli.exit.explain"
+msgstr "motp explain says what each row and warning means."
+
+msgid "cli.example.show"
+msgstr "show the message now"
+
+msgid "cli.example.show_debug"
+msgstr "also say why files were ignored"
+
+msgid "cli.example.collect"
+msgstr "start the collector unit now and print the result"
+
+msgid "cli.example.collect_direct"
+msgstr "run it directly (containers without systemd)"
+
+msgid "cli.example.modules"
+msgstr "which modules run, as whom, and why not"
+
+msgid "cli.example.modules_keys"
+msgstr "the row keys that hide_rows and row_order take"
+
+msgid "cli.example.doctor"
+msgstr "check as yourself"
+
+msgid "cli.example.doctor_root"
+msgstr "check everything, the config and the plugins included"
+
+msgid "cli.example.dry_run"
+msgstr "check and print the plan, change nothing"
+
+msgid "cli.example.install"
+msgstr "install or upgrade"
+
+msgid "cli.example.static"
+msgstr "write the message for pam_motd instead of the login shell"
+
+msgid "cli.example.uninstall"
+msgstr "remove what install created; the config stays"
+
+msgid "cli.example.purge"
+msgstr "also remove the config files the installer wrote, if unchanged"
+
+msgid "cli.example.shell_init"
+msgstr "show the message in every new terminal of yours"
+
+msgid "cli.example.check"
+msgstr "the files the collector reads"
+
+msgid "cli.example.check_file"
+msgstr "a draft, checked on top of the defaults"
+
+msgid "cli.example.init"
+msgstr "write the starter file to /etc/motp/config.toml"
+
+msgid "cli.example.init_path"
+msgstr "write it elsewhere first"
+
+msgid "cli.example.explain"
+msgstr "list the topics"
+
+msgid "cli.example.explain_topic"
+msgstr "what the disk rows mean"
+
+msgid "cli.example.explain_label"
+msgstr "a row's label works too"
+
+msgid "cli.example.preview"
+msgstr "the demo, as wide as the terminal"
+
+msgid "cli.example.preview_narrow"
+msgstr "the compact layout in ASCII"
+
+msgid "cli.example.preview_classic"
+msgstr "the classic preset with colour"
+
+msgid "cli.example.version"
+msgstr "print the version"
+
+msgid "cli.config.check.exit"
+msgstr "Exit code 0: valid (warnings about names without effect do not count); 1: a problem."
+
+msgid "cli.unexpected"
+msgstr "motp: unexpected error ({detail}); MOTP_DEBUG=1 shows the details"
+
+msgid "cli.modules.keys_help"
+msgstr "list the key of every row instead, for [layout] hide_rows and row_order"
+
+msgid "modules.column.key"
+msgstr "KEY"
+
+msgid "modules.column.row"
+msgstr "ROW"
+
+msgid "modules.keys.plugins"
+msgstr "Plugin rows: plugin.<plugin name>.<key the plugin prints>."
+
+msgid "keys.mount"
+msgstr "one per mount point: / is root, /var/log is var_log"
+
+msgid "keys.mount_inodes"
+msgstr "inodes of a mount point, where its file system has them"
+
+msgid "keys.rows_unit"
+msgstr "one per [[rows.unit]], named after its unit"
+
+msgid "keys.rows_file_age"
+msgstr "one per [[rows.file_age]], named after its label"
+
+# --- cache and state files (collect/store.py) ----------------------------------------
+
+msgid "collect.error.unsafe_dir"
+msgstr "{path} is not a directory that only root can write"
+
+msgid "collect.error.write"
+msgstr "{path} could not be written"
+
+msgid "collect.error.lock"
+msgstr "the lock file {path} is not a file of root"
+
+# --- motp collect (collect/runner.py) -------------------------------------------------
+
+msgid "cli.collect.help"
+msgstr "run the collector once (root)"
+
+msgid "cli.collect.no_sandbox_help"
+msgstr "run directly instead of through the collector unit (containers, debugging)"
+
+
+msgid "collect.error.not_root"
+msgstr "motp collect must run as root"
+
+msgid "collect.error.program"
+msgstr "the program the probes run is not trusted: {path}"
+
+msgid "collect.error.budget"
+msgstr "the collector's time budget ran out before the probe could finish"
+
+msgid "collect.error.timeout"
+msgstr "the probe took longer than its time limit"
+
+msgid "collect.error.too_large"
+msgstr "the probe printed more than the protocol allows"
+
+msgid "collect.error.exit"
+msgstr "the probe ended with exit code {code}"
+
+msgid "collect.error.cleanup"
+msgstr "processes the probe left behind could not be ended"
+
+msgid "collect.error.no_account"
+msgstr "the account {user} is missing or not usable"
+
+msgid "collect.error.user_acl"
+msgstr "the file system of /run/motp refuses POSIX ACLs, so no per-user file is written and no previous login is shown"
+
+msgid "modules.reason.disabled"
+msgstr "enabled = false in the config"
+
+msgid "collect.log.failed"
+msgstr "collect: stopped: {reason}"
+
+msgid "collect.log.busy"
+msgstr "collect: another run is active; nothing written"
+
+msgid "collect.log.config"
+msgstr "collect: {count} config problems; run motp config check"
+
+msgid "collect.log.refused"
+msgstr "collect: no probe can start: {reason}"
+
+msgid "collect.log.no_group"
+msgstr "collect: admin group {group} not found locally; admin.json is for root only"
+
+msgid "collect.log.probe_group"
+msgstr "collect: admin group {group} is the group of {user}; admin.json is for root only"
+
+msgid "collect.log.account"
+msgstr "collect: probes of {user} cannot start: {reason}"
+
+msgid "collect.log.cleanup"
+msgstr "collect: {remaining} processes of {user} could not be ended"
+
+
+
+msgid "collect.log.progress"
+msgstr "progress: collect done={done}/{total} failed={failed} elapsed={elapsed}s"
+
+msgid "collect.log.done"
+msgstr "collect: done, {ran} probes run, {modules} modules, {failed} failed, {elapsed_ms} ms"
+
+msgid "collect.log.user_files"
+msgstr "collect: per-user files: {written} written, {failed} failed, {removed} removed"
+
+msgid "collect.log.user_acl"
+msgstr "collect: no per-user files, the file system refuses POSIX ACLs"
+
+# Exec plugins (collect/plugins.py, phase 12). Plugin names are admin-tier (5.4): the log
+# lines carry counts only (T11).
+msgid "collect.error.exit_high"
+msgstr "the plugin ended with exit code {code} or higher"
+
+msgid "collect.error.signal"
+msgstr "the plugin was ended by a signal"
+
+msgid "collect.error.refused_in_unit"
+msgstr "the plugin failed the ownership check inside its own unit"
+
+msgid "collect.error.root_unit"
+msgstr "the plugin's own unit could not run it (systemd-run exit code {code})"
+
+msgid "collect.error.no_systemd_run"
+msgstr "a plugin needs {path} to run in a unit of its own; it is missing or not trusted"
+
+msgid "collect.log.plugins"
+msgstr "collect: plugins: {accepted} accepted, {refused} refused, {ignored} ignored"
+
+msgid "collect.log.no_systemd_run"
+msgstr "collect: plugins cannot run: {reason}"
+
+msgid "plugin.error.too_many"
+msgstr "more than {max} plugins; this one does not run"
+
+msgid "plugin.error.too_many_entries"
+msgstr "the plugin directory holds more than {max} entries"
+
+msgid "plugin.error.unreadable_dir"
+msgstr "the plugin directory cannot be read"
+
+msgid "plugin.error.changed"
+msgstr "the plugin changed between the check and its start"
+
+msgid "plugin.ignored.name"
+msgstr "the name does not match NN-name (two digits, a dash, then a-z, 0-9, - or _)"
+
+# --- motp modules (collect/listing.py) -------------------------------------------------
+
+msgid "cli.modules.help"
+msgstr "list the modules, their state and why"
+
+msgid "modules.column.name"
+msgstr "MODULE"
+
+msgid "modules.column.state"
+msgstr "STATE"
+
+msgid "modules.column.user"
+msgstr "USER"
+
+msgid "modules.column.interval"
+msgstr "INTERVAL"
+
+msgid "modules.column.visibility"
+msgstr "VISIBLE TO"
+
+msgid "modules.column.reason"
+msgstr "REASON"
+
+msgid "modules.state.active"
+msgstr "active"
+
+msgid "modules.state.not_detected"
+msgstr "not detected"
+
+msgid "modules.state.disabled"
+msgstr "disabled"
+
+msgid "modules.state.failed"
+msgstr "failed"
+
+msgid "modules.interval.live"
+msgstr "live"
+
+msgid "modules.interval.seconds"
+msgstr "{seconds} s"
+
+msgid "modules.user.reader"
+msgstr "reader"
+
+msgid "modules.visibility.public"
+msgstr "everyone"
+
+msgid "modules.visibility.admin"
+msgstr "admins"
+
+# --- motp collect through the unit (collect/viaunit.py), the stderr log -----------------
+
+msgid "collect.error.no_unit"
+msgstr "the collector unit is not installed or systemd is not running; run motp collect --no-sandbox"
+
+msgid "collect.error.account_groups"
+msgstr "{user} is a member of other groups, which every plugin would get; plugins are refused until it is not"
+
+msgid "doctor.plugin_groups"
+msgstr "motp-plugin is a member of {groups}: plugins are refused until it is not (gpasswd -d motp-plugin GROUP)"
+
+msgid "collect.error.account_group"
+msgstr "the primary group of {user} is not its own group {user}"
+
+msgid "collect.log.hidden"
+msgstr "collect: /proc hides the processes of {user}; their cleanup cannot be checked"
+
+msgid "collect.log.static"
+msgstr "collect: the static MOTD file could not be written: {reason}"
+
+msgid "collect.log.static_crashed"
+msgstr "collect: the static MOTD could not be rendered ({kind}); the old file was removed"
+
+msgid "collect.error.static_control"
+msgstr "the rendered text holds a control character"
+
+msgid "collect.log.stderr_log"
+msgstr "collect: the probe stderr log could not be written: {reason}"
+
+msgid "collect.unit.finished"
+msgstr "collect: the collector unit finished: {result}"
+
+msgid "collect.unit.modules"
+msgstr "collect: {count} modules, {failed} failed"
+
+msgid "collect.unit.failed_module"
+msgstr "  {module}: failed: {reason}"
+
+msgid "collect.unit.no_cache"
+msgstr "collect: the cache cannot be read: {reason}"
+
+# --- motp install and uninstall (install/) ------------------------------------------------
+
+msgid "cli.install.help"
+msgstr "install MOTP from this archive, or rebuild the installed bytecode (root)"
+
+msgid "cli.uninstall.help"
+msgstr "remove what motp install created; the config stays (root)"
+
+msgid "cli.dry_run_help"
+msgstr "check and print the plan; change nothing"
+
+msgid "cli.no_start_help"
+msgstr "set everything up but start neither the timer nor the collector"
+
+msgid "cli.install.mode_help"
+msgstr "hybrid: the login shell shows the MOTD; static: the timer writes it for pam_motd (default: the config's mode)"
+
+msgid "cli.shell_init.help"
+msgstr "print the snippet that shows the MOTD in every new terminal, for your own rc file"
+
+msgid "cli.shell_init.shell_help"
+msgstr "the shell whose rc file gets the snippet"
+
+msgid "cli.purge_help"
+msgstr "also remove the config files the installer wrote, if unchanged"
+
+msgid "install.error.mode"
+msgstr "unknown mode {mode}"
+
+msgid "install.error.mode_differs"
+msgstr "{path} sets mode {configured}; change it there first to install mode {mode}"
+
+msgid "install.plan.mode"
+msgstr "mode: {mode}"
+
+msgid "install.plan.hook"
+msgstr "login hook for sh-style shells: {path}"
+
+msgid "install.plan.zsh_block"
+msgstr "login hook for zsh: a marked block in {path}"
+
+msgid "install.plan.zsh_sourced"
+msgstr "login hook for zsh: none needed, {path} runs /etc/profile"
+
+msgid "install.plan.zsh_none"
+msgstr "login hook for zsh: none, no system zprofile found"
+
+msgid "install.plan.zsh_broken"
+msgstr "login hook for zsh: none, {path} holds motp marker lines that are not one whole block"
+
+msgid "install.plan.zsh_unsafe"
+msgstr "login hook for zsh: none, {path} is not a root-owned file only root can write"
+
+msgid "install.plan.static"
+msgstr "static mode: every collector run writes {path} for pam_motd; no login hook"
+
+msgid "install.done.hook"
+msgstr "login hook written: {path}"
+
+msgid "install.done.zsh_block"
+msgstr "zsh login hook added to {path}"
+
+msgid "install.done.no_zsh"
+msgstr "zsh login hook not added: {path} is not a root-owned file only root can write"
+
+msgid "install.done.static"
+msgstr "static mode: {path} is written by every collector run"
+
+msgid "install.stopped"
+msgstr "install: stopped before any change: {reason}"
+
+msgid "install.failed"
+msgstr "install: failed: {reason}"
+
+msgid "install.dry_run"
+msgstr "dry run: nothing was changed"
+
+msgid "install.left"
+msgstr "left in place: {path}: {reason}"
+
+msgid "install.error.flags"
+msgstr "run it as: sudo /usr/bin/python3 -I -S motp.pyz install (or uninstall); -I -S keep the environment and site directories out of a program that runs as root"
+
+msgid "install.error.not_root"
+msgstr "this command must run as root"
+
+msgid "install.error.python"
+msgstr "Python 3.9 or newer is needed"
+
+msgid "install.error.source"
+msgstr "install runs from the release archive motp.pyz or from the installed tree"
+
+msgid "install.error.archive"
+msgstr "the archive is damaged or holds an unexpected file"
+
+msgid "install.error.compile"
+msgstr "the system Python could not compile the installed tree"
+
+msgid "install.error.io"
+msgstr "a file or directory could not be written"
+
+msgid "install.error.manifest"
+msgstr "the install manifest is unreadable or not root's own file"
+
+msgid "install.error.no_tool"
+msgstr "the program {tool} was not found"
+
+msgid "install.error.tool_failed"
+msgstr "{tool} ended with exit code {code}"
+
+msgid "install.error.units"
+msgstr "install: systemctl could not load, enable or start the units"
+
+msgid "install.error.first_run"
+msgstr "install: the first collector run failed; see motp doctor"
+
+msgid "install.error.account_files"
+msgstr "the account file {path} cannot be read"
+
+msgid "install.error.account_foreign"
+msgstr "an account or group named {name} exists and was not created by MOTP"
+
+msgid "install.error.account_shape"
+msgstr "the account {name} is not one local system account with a group of its own"
+
+msgid "install.error.account_group"
+msgstr "the primary group of {name} is not a group {name} of its own without members"
+
+msgid "install.error.account_shell"
+msgstr "the account {name} has a login shell"
+
+msgid "install.error.account_password"
+msgstr "the password of the account {name} is not locked"
+
+msgid "install.plan.tree"
+msgstr "plan: program in {path}"
+
+msgid "install.plan.account_new"
+msgstr "plan: create the system account {name}"
+
+msgid "install.plan.account_keep"
+msgstr "plan: keep the system account {name}"
+
+msgid "install.plan.admin_group"
+msgstr "plan: admin group {group} (granted by sudoers)"
+
+msgid "install.plan.root_only"
+msgstr "plan: no admin group is granted by sudoers; admin details for root only"
+
+msgid "install.plan.scheduler_systemd"
+msgstr "plan: systemd timer and sandboxed collector unit"
+
+msgid "install.plan.scheduler_cron"
+msgstr "plan: cron entry; without systemd the collector has no sandbox"
+
+msgid "install.plan.scheduler_none"
+msgstr "plan: neither systemd nor cron found; nothing will run the collector"
+
+msgid "install.plan.link"
+msgstr "plan: link {path}"
+
+msgid "install.done.tree"
+msgstr "installed {path} (bytecode {tag})"
+
+msgid "install.done.account_new"
+msgstr "created the system account {name}"
+
+msgid "install.done.config_new"
+msgstr "wrote the starter config {path}"
+
+msgid "install.done.config_kept"
+msgstr "kept the existing config {path}"
+
+msgid "install.done.admin_group"
+msgstr "admin group: {group}"
+
+msgid "install.done.root_only"
+msgstr "admin group: none; admin details are for root only"
+
+msgid "install.done.admin_group_differs"
+msgstr "admin group: the config says {configured}, sudoers grant {found}; edit [visibility] admin_group to change it"
+
+msgid "install.done.units"
+msgstr "wrote and enabled the collector unit and timer"
+
+msgid "install.done.cron"
+msgstr "wrote the cron entry {path}"
+
+msgid "install.done.no_scheduler"
+msgstr "no scheduler: run motp collect --no-sandbox from your own scheduler"
+
+msgid "install.done.no_link"
+msgstr "no link {path}: the directory is not root's alone or the name is taken"
+
+msgid "install.done.manifest"
+msgstr "recorded {count} paths in the install manifest"
+
+msgid "install.done.first_run"
+msgstr "the first collector run finished"
+
+msgid "install.left.outside"
+msgstr "outside the installer's own paths"
+
+msgid "install.left.link_on_path"
+msgstr "a link or non-directory lies on the way"
+
+msgid "install.left.changed"
+msgstr "changed since install"
+
+msgid "install.left.not_empty"
+msgstr "directory not empty"
+
+msgid "install.left.failed"
+msgstr "could not be removed"
+
+msgid "install.left.account"
+msgstr "the account {name} no longer has the recorded ids"
+
+msgid "uninstall.not_installed"
+msgstr "no install manifest in {path}; nothing to remove"
+
+msgid "uninstall.would_remove"
+msgstr "would remove {path}"
+
+msgid "uninstall.outside"
+msgstr "would leave {path}: outside the installer's own paths"
+
+msgid "uninstall.would_remove_account"
+msgstr "would remove the account {name}"
+
+msgid "uninstall.account_removed"
+msgstr "removed the account {name}"
+
+msgid "uninstall.account_left"
+msgstr "left the account {name}: {reason}"
+
+msgid "uninstall.done"
+msgstr "removed {count} paths, left {left}"
+
+msgid "uninstall.config_kept"
+msgstr "the config in {path} stays; motp uninstall --purge removes the unchanged files the installer wrote"
+
+# --- motp doctor (install/doctor.py) ------------------------------------------------------
+
+msgid "cli.doctor.help"
+msgstr "check the installation, the cache and the terminal"
+
+msgid "doctor.level.ok"
+msgstr "ok"
+
+msgid "doctor.level.info"
+msgstr "info"
+
+msgid "doctor.level.warn"
+msgstr "warn"
+
+msgid "doctor.level.fail"
+msgstr "FAIL"
+
+msgid "doctor.mode"
+msgstr "mode: {mode}"
+
+msgid "doctor.hook"
+msgstr "login hook: {path}"
+
+msgid "doctor.hook_missing"
+msgstr "login hook missing or not root's alone: {path}; run motp install"
+
+msgid "doctor.other_mode_left"
+msgstr "{path} belongs to the other mode and would show the message twice; run motp install"
+
+msgid "doctor.static_unit"
+msgstr "{path} cannot write /run/motd.d (static mode); run motp install --mode static"
+
+msgid "doctor.static_missing"
+msgstr "static file missing or not root's alone: {path}; run sudo motp collect, then sudo motp doctor again"
+
+msgid "doctor.static_file"
+msgstr "static file: {path}, written {age} s ago"
+
+msgid "doctor.line"
+msgstr "[{level}] {text}"
+
+msgid "doctor.untrusted_fs"
+msgstr "{path} is on a {type} file system, whose owners the ownership check cannot trust; move it to a local disk"
+
+msgid "doctor.static_gap"
+msgstr "static mode: only logins through pam_motd (SSH, the console) show the message; su -, bash -l and tmux panes show none (hybrid mode has no such gap)"
+
+msgid "doctor.zsh_block"
+msgstr "zsh hook: the block in {path}"
+
+msgid "doctor.zsh_profile"
+msgstr "zsh hook: {path} runs /etc/profile, which runs the login hook"
+
+msgid "doctor.zsh_missing"
+msgstr "zsh hook missing in {path} (zsh installed after MOTP?); run motp install again"
+
+msgid "doctor.zsh_broken"
+msgstr "zsh hook markers in {path} are damaged; remove the motp lines by hand, then run motp install"
+
+msgid "doctor.zsh_unsafe"
+msgstr "zsh hook: {path} is not a regular file that only root can write, so motp install leaves it alone; make it root's alone (sudo chmod go-w FILE), then run sudo motp install"
+
+msgid "doctor.charset_line"
+msgstr "charset test: {sample}"
+
+msgid "doctor.version"
+msgstr "motp {version}"
+
+msgid "doctor.not_installed"
+msgstr "not installed: {path} is missing; the README says how to install"
+
+msgid "doctor.program"
+msgstr "program in {path}, owned by root, writable by root only"
+
+msgid "doctor.program_unsafe"
+msgstr "the installed program is not safe: {reason}; install again from a checked archive: sudo /usr/bin/python3 -I -S ./motp.pyz install"
+
+msgid "doctor.search_path"
+msgstr "Python search path: {count} entries, all writable by root only"
+
+msgid "doctor.search_path_bad"
+msgstr "Python search path entry {entry}: {reason}; make it root's alone and not writable by its group (sudo chmod g-w,o-w DIR)"
+
+msgid "doctor.root_program"
+msgstr "{program}: root probes may start it"
+
+msgid "doctor.root_programs_as_root"
+msgstr "programs that root probes start: run sudo motp doctor to check their Python import path"
+
+msgid "doctor.root_program_bad"
+msgstr "{program} is not started as root: {reason}. Next: look at what is there, make it root's alone (sudo chown -R root:root PATH; sudo chmod -R go-w PATH), then sudo motp collect"
+
+msgid "doctor.error.relative"
+msgstr "the current directory is on the search path"
+
+msgid "doctor.bytecode"
+msgstr "bytecode for Python {version}: {total} files current"
+
+msgid "doctor.bytecode_stale"
+msgstr "bytecode for Python {version}: {count} of {total} files missing or stale; run motp install"
+
+msgid "doctor.bytecode_skipped"
+msgstr "bytecode: not checked, this is not the installed program"
+
+msgid "doctor.config"
+msgid_plural "doctor.config"
+msgstr[0] "config: {count} file used, no problem"
+msgstr[1] "config: {count} files used, no problem"
+
+msgid "doctor.config_problems"
+msgid_plural "doctor.config_problems"
+msgstr[0] "config: {count} problem; run motp config check"
+msgstr[1] "config: {count} problems; run motp config check"
+
+msgid "doctor.config_warnings"
+msgid_plural "doctor.config_warnings"
+msgstr[0] "config: {count} setting has no effect; run motp config check"
+msgstr[1] "config: {count} settings have no effect; run motp config check"
+
+msgid "doctor.config_root_only"
+msgstr "config: only root can read {path}; run sudo motp doctor to check it"
+
+msgid "doctor.admin_group"
+msgstr "admin group: {group}"
+
+msgid "doctor.admin_root_only"
+msgstr "admin group: none; admin details are readable by root only; set [visibility] admin_group in /etc/motp/config.toml to share them"
+
+msgid "doctor.admin_group_missing"
+msgstr "admin group {group} does not exist locally; admin details are for root only; create the group, or set [visibility] admin_group in /etc/motp/config.toml, then run sudo motp collect"
+
+msgid "doctor.account"
+msgstr "account {name}: a locked system account with a group of its own"
+
+msgid "doctor.account_bad"
+msgstr "account {name}: {reason}; sudo motp install creates it or checks it again (it never takes over an account it did not create)"
+
+msgid "doctor.timer"
+msgstr "collector timer: {enabled}, {active}"
+
+msgid "doctor.timer_missing"
+msgstr "collector timer: the unit files are missing; run motp install"
+
+msgid "doctor.cron_no_sandbox"
+msgstr "collector: run by cron ({path}), without the systemd sandbox; with systemd, sudo motp install uses the sandboxed timer instead"
+
+msgid "doctor.no_scheduler"
+msgstr "collector: neither a systemd timer nor a cron entry runs it; run sudo motp install to set one up"
+
+msgid "doctor.hidepid"
+msgstr "/proc hides other users' processes; the collector cannot check its cleanup outside the unit; nothing to do while systemd runs the collector"
+
+msgid "doctor.hidepid_unit"
+msgstr "/proc hides other users' processes; the collector unit cleans up by its control group"
+
+msgid "doctor.cache_missing"
+msgstr "cache: {reason}; run sudo motp collect (the timer writes it every 5 minutes)"
+
+msgid "doctor.cache_age"
+msgstr "cache: written {age} s ago, {failed} modules failed"
+
+msgid "doctor.module_failed"
+msgstr "module {module} failed: {reason}; sudo motp collect runs it again, motp modules shows its state"
+
+msgid "doctor.plugin"
+msgstr "plugin {name}: runs as {user}; last run: {last}"
+
+msgid "doctor.plugin_refused"
+msgstr "plugin {name}: refused, it does not run: {reason}; fix what is named (docs/plugins.md), then run sudo motp collect"
+
+msgid "doctor.plugin_ignored"
+msgstr "plugins.d/{name}: ignored: {reason}"
+
+msgid "doctor.plugins_none"
+msgstr "plugins: none in {path}"
+
+msgid "doctor.plugins_root_only"
+msgstr "plugins: run motp doctor as root to list them"
+
+msgid "doctor.plugin_last_none"
+msgstr "not yet"
+
+msgid "doctor.plugin_last_ok"
+msgstr "ok, {age} s ago"
+
+msgid "doctor.plugin_last_failed"
+msgstr "failed: {reason}"
+
+msgid "doctor.terminal"
+msgstr "terminal: tty {tty}, TERM {term}, encoding {encoding}, charset {charset}, colour level {colors}"
+
+msgid "collect.log.crashed"
+msgstr "collect: stopped by an unexpected error ({kind}); run motp collect --no-sandbox as root to see it"
+
+msgid "install.error.source_writable"
+msgstr "the archive can be changed by users other than its owner"
+
+msgid "install.error.own_dir"
+msgstr "{path} exists but is not a directory of root that only root can write"
+
+msgid "install.error.busy"
+msgstr "a collector run did not finish in time; try again"
+
+msgid "install.waiting"
+msgstr "waiting for the running collection to finish ({seconds} s)"
+
+msgid "doctor.error.not_isolated"
+msgstr "this Python runs without -I -S; run /opt/motp/bin/motp doctor"
+
+msgid "doctor.error.link"
+msgstr "{path} is a link"
+
+# --- motp explain (explain.py) --------------------------------------------------------
+
+msgid "cli.explain.help"
+msgstr "explain a row or a warning of the message"
+
+msgid "cli.explain.topic_help"
+msgstr "the topic; without one, the topics are listed"
+
+msgid "explain.unknown_topic"
+msgstr "no topic named {topic}; motp explain lists the topics"
+
+msgid "explain.list.heading"
+msgstr "Topics (motp explain TOPIC):"
+
+msgid "explain.heading.warn"
+msgstr "Warnings"
+
+msgid "explain.heading.todo"
+msgstr "What to do"
+
+msgid "explain.heading.commands"
+msgstr "Commands the message suggests"
+
+msgid "explain.limits"
+msgstr "Limits here: warning from {warn}, critical from {crit} (setting thresholds.{rule})."
+
+msgid "explain.hostname.title"
+msgstr "Host name"
+
+msgid "explain.hostname.what"
+msgstr "The name this machine gives itself, as the kernel reports it. The large header shows the part before the first dot."
+
+msgid "explain.os.title"
+msgstr "Operating system"
+
+msgid "explain.os.what"
+msgstr "The distribution and release, read from /etc/os-release."
+
+msgid "explain.kernel.title"
+msgstr "Kernel"
+
+msgid "explain.kernel.what"
+msgstr "The version of the Linux kernel that is running now. After a kernel update the old one keeps running until the next restart (see reboot)."
+
+msgid "explain.address.title"
+msgstr "Local address"
+
+msgid "explain.address.what"
+msgstr "The addresses of this machine's own network interfaces, without loopback and link-local ones; at most four are shown. This is not the address the internet sees: MOTP contacts no outside service."
+
+msgid "explain.dns.title"
+msgstr "DNS servers"
+
+msgid "explain.dns.what"
+msgstr "The servers this machine asks to turn names into addresses, from systemd-resolved where it runs, else from /etc/resolv.conf."
+
+msgid "explain.uptime.title"
+msgstr "Uptime"
+
+msgid "explain.uptime.what"
+msgstr "The time since the machine started."
+
+msgid "explain.load.title"
+msgstr "Load"
+
+msgid "explain.load.what"
+msgstr "The load averages of the last 1, 5 and 15 minutes: how many processes were running or waiting. A load equal to the number of CPU cores means every core was busy."
+
+msgid "explain.load.warn"
+msgstr "The 5-minute value, divided by the number of cores, has reached a limit. Short peaks are normal during updates or builds."
+
+msgid "explain.load.todo"
+msgstr "Look for the process that uses the CPU or waits for the disk, for example with top or ps."
+
+msgid "explain.memory.title"
+msgstr "Memory"
+
+msgid "explain.memory.what"
+msgstr "The memory in use, out of all of it. Memory the kernel uses as a file cache and can free at once does not count as used."
+
+msgid "explain.memory.warn"
+msgstr "Little memory is left. The system may start to swap or to end processes."
+
+msgid "explain.memory.todo"
+msgstr "Find the largest processes, for example with top (press M), and stop or limit what is not needed."
+
+msgid "explain.swap.title"
+msgstr "Swap"
+
+msgid "explain.swap.what"
+msgstr "Space on a disk that holds memory pages when memory runs short. The row is shown only when the system has swap."
+
+msgid "explain.swap.warn"
+msgstr "Much of the swap is in use, a sign that memory has been short."
+
+msgid "explain.swap.todo"
+msgstr "See memory. Pages stay in swap until they are needed again, so the value can stay high after the shortage is over."
+
+msgid "explain.updates.title"
+msgstr "Updates"
+
+msgid "explain.updates.what"
+msgstr "Updates that are waiting to be installed, counted from the package lists this system downloaded; MOTP never refreshes them itself. Admins also see the package names. Rows below say how many packages are held back and, when the lists are older than seven days, their age."
+
+msgid "explain.updates.warn"
+msgstr "Security updates are pending, or this system cannot tell security updates from others, so any of them may be one. \"Unknown\" means no package lists were downloaded yet."
+
+msgid "explain.updates.todo"
+msgstr "Install the updates with the command below. Refresh old or missing lists first: sudo apt update on Debian and Ubuntu, sudo dnf makecache on Fedora and the RHEL family."
+
+msgid "explain.reboot.title"
+msgstr "Reboot"
+
+msgid "explain.reboot.what"
+msgstr "Whether updates wait for a restart: on Debian and Ubuntu by the file /run/reboot-required, on Fedora and the RHEL family when the kernel or a core library was installed after the system started. Admins see the packages."
+
+msgid "explain.reboot.warn"
+msgstr "A restart is needed. Until then the old versions keep running, with the faults the update fixes."
+
+msgid "explain.reboot.todo"
+msgstr "Restart when it suits the people and services that use the machine."
+
+msgid "explain.eol.title"
+msgstr "End of support"
+
+msgid "explain.eol.what"
+msgstr "The last day this release of the operating system gets security updates. It comes from the system itself (SUPPORT_END) or from a table that ships with MOTP; \"as of\" is the day that table was last checked."
+
+msgid "explain.eol.warn"
+msgstr "Support ends within 90 days, or it has ended. After the end new security holes in the system are no longer fixed."
+
+msgid "explain.eol.todo"
+msgstr "Back up your data and plan the upgrade to a newer release, following the distribution's guide. Some distributions sell or offer extended support."
+
+msgid "explain.firewall.title"
+msgstr "Firewall"
+
+msgid "explain.firewall.what"
+msgstr "Whether ufw, firewalld or nftables is active, judged by their systemd units and settings. Rules loaded in other ways, such as by a script or a container runtime, are not seen. Admins only."
+
+msgid "explain.firewall.warn"
+msgstr "No firewall is active, or one failed to start, which is critical. Without one, every service that listens on the network can be reached."
+
+msgid "explain.firewall.todo"
+msgstr "Turn a firewall on. Before that, allow SSH, or you can lock yourself out of a remote machine. If one failed, systemctl status and journalctl for its unit say why."
+
+msgid "explain.autoupdates.title"
+msgstr "Automatic updates"
+
+msgid "explain.autoupdates.what"
+msgstr "Whether updates are installed without anyone doing it: unattended-upgrades on Debian and Ubuntu, dnf-automatic on Fedora and the RHEL family. Downloading alone does not count. Admins only."
+
+msgid "explain.autoupdates.warn"
+msgstr "Automatic updates are off, not installed, or only download. \"APT::Periodic::Enable is 0\" means one line in /etc/apt/apt.conf.d switches the whole run off; \"Set apply_updates = yes\" means the timer runs but dnf is not told to install."
+
+msgid "explain.autoupdates.todo"
+msgstr "Use the command that stands with the warning. For APT::Periodic::Enable, remove the line the search finds. For apply_updates, set apply_updates = yes under [commands] in the file the command opens."
+
+msgid "explain.logins.title"
+msgstr "Failed logins"
+
+msgid "explain.logins.what"
+msgstr "How many login connections failed in the last 24 hours, from /var/log/btmp; several wrong passwords in one connection count once. \"More than\" means the count stopped at its limit. Admins see where most came from; user names are never read. Systems that no longer keep btmp, such as Debian 13, show \"not recorded on this system\"; the journal still lists failed logins (journalctl -u ssh)."
+
+msgid "explain.logins.todo"
+msgstr "On a machine reachable from the internet a steady stream of attempts is common. Log in to SSH with keys only and consider fail2ban."
+
+msgid "explain.fail2ban.title"
+msgstr "Fail2ban"
+
+msgid "explain.fail2ban.what"
+msgstr "How many addresses fail2ban blocks right now, over all its jails (sets of rules, one per service). Admins see jail names and addresses."
+
+msgid "explain.fail2ban.warn"
+msgstr "fail2ban is installed but its server is not running, so nothing gets blocked. \"Not checked\" means MOTP did not start fail2ban's client as root, because a directory its Python imports from can be changed by someone other than root; sudo motp doctor names it."
+
+msgid "explain.fail2ban.todo"
+msgstr "Start the service (sudo systemctl enable --now fail2ban). If it stops again, journalctl -u fail2ban says why."
+
+msgid "explain.login.title"
+msgstr "Last login"
+
+msgid "explain.login.what"
+msgstr "Your own previous login: when it was and, where known, the host and terminal it came from. It is shown at login only, and only to you."
+
+msgid "explain.login.todo"
+msgstr "If you do not recognise the time or the host, change your password and your SSH keys, and tell the admin."
+
+msgid "explain.sessions.title"
+msgstr "Sessions"
+
+msgid "explain.sessions.what"
+msgstr "How many terminal sessions are logged in now, as the command who counts them. Admins see who and from where. Systems without /run/utmp, such as Debian 13, show \"not recorded on this system\"; loginctl lists the sessions there."
+
+msgid "explain.disks.title"
+msgstr "Disk space"
+
+msgid "explain.disks.what"
+msgstr "How full each local file system is, counted like df. Network and temporary file systems are left out. Removable media and per-user mounts are for admins only."
+
+msgid "explain.disks.warn"
+msgstr "A file system is nearly full. When it is full, programs fail to write: logs, databases and updates first."
+
+msgid "explain.disks.todo"
+msgstr "Find what takes the space, for example with sudo du -xh --max-depth=1 on the mount point, and delete or move what is not needed."
+
+msgid "explain.inodes.title"
+msgstr "Inodes"
+
+msgid "explain.inodes.what"
+msgstr "Each file and directory needs one inode, and some file systems have a fixed number of them. The row appears once half of them are in use."
+
+msgid "explain.inodes.warn"
+msgstr "The inodes run out. Then no new file can be made, even though there is free space."
+
+msgid "explain.inodes.todo"
+msgstr "Look for directories with very many small files, such as mail queues, caches or sessions, and clean them up."
+
+msgid "explain.units.title"
+msgstr "Failed units"
+
+msgid "explain.units.what"
+msgstr "systemd units (services, mounts, timers and so on) in the state failed. The number is public, the names are for admins."
+
+msgid "explain.units.warn"
+msgstr "At least one unit failed: something that should run or have finished did not."
+
+msgid "explain.units.todo"
+msgstr "List them, read journalctl -u NAME for each, fix the cause and restart the unit. sudo systemctl reset-failed clears the state of one that no longer matters."
+
+msgid "explain.services.title"
+msgstr "Watched units"
+
+msgid "explain.services.what"
+msgstr "Rows the admin set up with [[rows.unit]] in the configuration, one per systemd unit. The value is the state systemd reports, in systemd's own words."
+
+msgid "explain.services.warn"
+msgstr "The unit is not active: failed is critical; inactive, activating, deactivating, maintenance, not found or masked is a warning. reloading and refreshing count as active. \"State unknown\" means systemd gave no answer MOTP understands."
+
+msgid "explain.services.todo"
+msgstr "systemctl status NAME shows what is wrong. For a unit that is not found, check its name in the configuration."
+
+msgid "explain.files.title"
+msgstr "Watched files"
+
+msgid "explain.files.what"
+msgstr "Rows the admin set up with [[rows.file_age]]: how long ago a file last changed, for example the stamp a backup writes when it succeeded."
+
+msgid "explain.files.warn"
+msgstr "The file is older than warn_after or crit_after, or it is missing. \"Unreadable\" means the user motp may not look at it."
+
+msgid "explain.files.todo"
+msgstr "Check the job that should update the file. For a file motp may not read, grant access or use a plugin that runs as root (docs/plugins.md)."
+
+msgid "explain.containers.title"
+msgstr "Containers"
+
+msgid "explain.containers.what"
+msgstr "Containers of Docker, and of Podman where podman.socket is enabled, counted by state. Admins see names and images."
+
+msgid "explain.containers.warn"
+msgstr "A container is unhealthy or keeps restarting, or the runtime did not answer. \"Service stopped\" means Docker is not running; MOTP does not start it."
+
+msgid "explain.containers.todo"
+msgstr "docker ps -a lists the containers (podman ps -a for Podman); docker logs NAME shows what one printed."
+
+msgid "explain.plugins.title"
+msgstr "Plugins"
+
+msgid "explain.plugins.what"
+msgstr "Rows from programs the admin put into /etc/motp/plugins.d. Each starts with [plugin NAME]. Their text comes from the plugin, not from MOTP, and a hint of theirs is only text, never a command MOTP vouches for."
+
+msgid "explain.plugins.todo"
+msgstr "motp doctor, run as root, lists each plugin, whether it may run and how its last run went. docs/plugins.md describes how to write one."
+
+msgid "explain.collector.title"
+msgstr "Collected data and modules"
+
+msgid "explain.collector.what"
+msgstr "A timer runs the collector, which gathers most values ahead of time; at login MOTP only reads them. Uptime, load and memory are read live."
+
+msgid "explain.collector.warn"
+msgstr "\"The collected data is old\": the collector has not written for three of its periods. \"No collected data\": it has not run yet, or its files cannot be read. \"Module failed\": a part could not be collected; its last values may still be shown. \"Config: 1 file ignored\" (admins only): a config file has a mistake, so the collector uses the defaults and the other files; sudo motp config check names the file, line and setting."
+
+msgid "explain.collector.todo"
+msgstr "Run motp doctor (as root for all details) and check the timer with the command below."
+
+msgid "explain.status.title"
+msgstr "Warnings and markers"
+
+msgid "explain.status.what"
+msgstr "Values are coloured by status: ok, warning or critical. Without colour a warning is marked [!] and a critical value [!!]. The block at the top collects them, worst first, with a command where one helps."
+
+msgid "explain.status.warn"
+msgstr "An age in brackets, such as (45 minutes old), means the value was not refreshed lately. \"Unknown\" means MOTP has no value it can trust, for example because the data is too old."
+
+msgid "explain.status.todo"
+msgstr "motp explain TOPIC explains a single row. The limits for warnings can be changed under [thresholds] in /etc/motp/config.toml."
+
+# --- tips (core/tips.py) --------------------------------------------------------------
+
+msgid "tip.explain"
+msgstr "motp explain TOPIC says what a row or a warning means."
+
+msgid "tip.doctor"
+msgstr "motp doctor checks the installation and says what is wrong."
+
+msgid "tip.modules"
+msgstr "motp modules shows which modules run, and why others do not."
+
+msgid "tip.preview"
+msgstr "motp preview --demo shows the message with example data."
+
+msgid "tip.plugins"
+msgstr "A small program in /etc/motp/plugins.d adds rows of your own."
+
+msgid "tip.unit_rows"
+msgstr "A [[rows.unit]] entry in the configuration watches a service."
+
+msgid "tip.file_rows"
+msgstr "A [[rows.file_age]] entry warns when your last backup gets old."
+
+msgid "tip.config_check"
+msgstr "After editing /etc/motp, run sudo motp config check."
+
+msgid "tip.no_color"
+msgstr "Set NO_COLOR=1 in your environment to see MOTP without colour."
+
+msgid "tip.shell_init"
+msgstr "motp shell-init bash prints the lines that add MOTP to new terminals."
+
+msgid "tip.classic"
+msgstr "preset = \"classic\" under [theme] brings back the look of 2019."
+
+msgid "tip.off"
+msgstr "These tips are switched by tips under [layout] in the configuration."
