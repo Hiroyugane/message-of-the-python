@@ -11,7 +11,9 @@ snippet together print the message once.
 
 Checks (each prints ``CHECK <name> PASS|FAIL <detail>``; the host counts them):
 
-- before install: a baseline login per user (time, output);
+- before install: a baseline login per user (time, output); the first one that fails
+  prints the output of ssh and sshd's journal, and when none reaches a prompt the run
+  ends there;
 - package modules (phase 9): with a pending update, every user sees the count and only the
   admin a package name; after ``/run/reboot-required`` is created, the timer's own next run
   puts the reboot line into the attention block of a login;
@@ -84,6 +86,7 @@ TIMER_LIMIT = 420.0  # one timer period of 5 minutes, its accuracy and the run
 ERROR_WORDS = ("Traceback", "rror", "No such file", "not found", "denied", "motp:")
 DELAY_LIMIT = 0.3  # seconds a robustness login may take beyond a normal one
 RUNS = 3
+REPORT_LINES = 8  # of a failed login's output
 SSH_OPTS = (
     "-i", str(KEY), "-o", "BatchMode=yes", "-o", "StrictHostKeyChecking=yes",
     "-o", f"UserKnownHostsFile={KNOWN}", "-o", "LogLevel=ERROR", "-o", "ConnectTimeout=10",
@@ -170,11 +173,15 @@ def setup() -> None:
 
     stage("users")
     group = admin_group()
+    refused: list[str] = []  # an account that was not made explains every failed login
     for user, shell in USERS.items():
         path = shutil.which(shell) or f"/bin/{shell}"
         extra = ["-G", group] if user == "motp-admin" else []
-        sh("useradd", "-m", "-s", path, *extra, user)
-        sh("usermod", "-p", "*", user)  # no password, not locked: key login only
+        # usermod: no password, not locked: key login only
+        for argv in (["useradd", "-m", "-s", path, *extra, user], ["usermod", "-p", "*", user]):
+            done = sh(*argv)
+            if done.returncode != 0:
+                refused.append(f"{argv[0]} {user}: exit {done.returncode} {done.stderr.strip()}")
         home = Path(f"/home/{user}")
         ssh_dir = home / ".ssh"
         ssh_dir.mkdir(mode=0o700, exist_ok=True)
@@ -187,6 +194,7 @@ def setup() -> None:
         else:
             rc_path.write_text("")
         sh("chown", "-R", f"{user}:{user}", str(home))
+    check("test_setup_users", not refused, "; ".join(refused))
     # login_test.py mounts a Podman volume on an ext4 image there: a per-user mount. It
     # must be a file system of its own, because hw_disks lists one only once, under its
     # shortest mount point (on a CI runner /src is on the same disk as a plain volume).
@@ -391,16 +399,58 @@ baseline: dict[str, Login] = {}
 base_time: dict[str, float] = {}
 
 
-def before_install() -> None:
+def account_state(user: str) -> str:
+    """What the shadow file says about the account, without its password field (the
+    AlmaLinux images have no ``passwd`` to ask)."""
+    try:
+        lines = Path("/etc/shadow").read_text().splitlines()
+    except OSError as exc:
+        return f"unknown ({exc.strerror})"
+    for line in lines:
+        name, _, rest = line.partition(":")
+        if name == user:
+            field = rest.split(":")[0]
+            if field.startswith("!"):
+                return "locked"
+            return "without a password" if field in ("", "*") else "with a password"
+    return "missing"
+
+
+def login_report(user: str, last: Login) -> None:
+    """Why a login did not reach a prompt: what ssh printed, sshd's own account of it,
+    and the two states that refuse every user (a boot that has not ended, a locked
+    account)."""
+    for line in last.out.splitlines()[-REPORT_LINES:]:
+        print(f"  ssh {user}: {line[:200]}", flush=True)
+    log = sh("journalctl", "-u", "ssh.service", "-u", "sshd.service", "-n", "40", "--no-pager")
+    for line in (log.stdout + log.stderr).splitlines():
+        print(f"  journal sshd: {line[:200]}", flush=True)
+    state = sh("systemctl", "is-system-running").stdout.strip()
+    print(
+        f"  state: system {state}, /run/nologin {Path('/run/nologin').exists()}, "
+        f"account {account_state(user)}",
+        flush=True,
+    )
+
+
+def before_install() -> bool:
+    """A baseline login per user; false when no user reached a prompt (nothing after this
+    can pass then, and the timer checks alone would wait for minutes)."""
     stage("baseline")
+    reached, reported = 0, False
     for user in USERS:
         last, median = logins(user)
         baseline[user], base_time[user] = last, median
-        check(
+        ok = check(
             f"baseline_login_{user}",
             last.prompt and last.motd_count == 0,
             f"{median:.2f}s exit={last.code}",
         )
+        reached += last.prompt
+        if not ok and not reported:
+            reported = True  # the first failure: later ones may only show sshd's penalty
+            login_report(user, last)
+    return reached > 0
 
 
 def install_hybrid() -> None:
@@ -1110,7 +1160,10 @@ def security_modules() -> None:
 def main() -> int:
     setup()
     pending_update()
-    before_install()
+    if not before_install():
+        check("ssh_logins_work", False, "no user reached a prompt before MOTP was installed")
+        print(f"CHECKS-DONE failures={failures}", flush=True)
+        return 1
     install_hybrid()
     package_health()
     service_and_login()
